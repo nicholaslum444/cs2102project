@@ -1,9 +1,9 @@
 # NUSMaids
 ---
 
-**1. secrets.php**
+**1. Repository Secrets**
 
-The file `secrets.php` is where secrets are stored i.e. the database name, username and password for the php database connection. It is gitignored so the repo will not have the exact file `secrets.php`. 
+The file `secrets.php` is where repository secrets are stored i.e. the database name, username and password for the php database connection. It is gitignored so the repo will not have the exact file `secrets.php`. 
 
 An example file `secrets.php.example` is provided. This file is laid out exactly like the actual `secrets.php`, except that it does not have sensitive data.
 
