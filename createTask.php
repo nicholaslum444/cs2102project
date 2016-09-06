@@ -3,7 +3,7 @@
 <html>
 <style type="text/css">
 <!--
-@import url("main.css");
+@import url("css/main.css");
 -->
 </style>
 <head>
@@ -91,7 +91,7 @@ function test_input($data) {
 ?>
 
 <div id="wrapper">
-	<div id="Navi"> <a href="index.php"><img src="homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
+	<div id="Navi"> <a href="index.php"><img src="img\homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
 	</div>
 </div>
 

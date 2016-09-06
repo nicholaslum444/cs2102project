@@ -3,7 +3,7 @@
 <html>
 <style type="text/css">
 <!--
-@import url("main.css");
+@import url("css/main.css");
 -->
 </style>
 <head>
@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <?php
+ <?php
         $dbconn = pg_connect('host=localhost 
                                 port=5432 
                                 dbname='.$DATABASE_NAME.' 
@@ -48,7 +48,7 @@ function test_input($data) {
 ?>
 
 <div id="wrapper">
-  <div id="Navi"> <a href="index.php"><img src="homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
+  <div id="Navi"> <a href="index.php"><img src="img\homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
   </div>
 </div>
 
@@ -67,6 +67,7 @@ function test_input($data) {
     <input name="signIn" type="submit" class="alignSignInButton" value="Sign In"/>
 </form>
 
+<!--testing-->
 <?php
 echo $username;
 echo "<br>";
