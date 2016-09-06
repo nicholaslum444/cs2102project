@@ -82,6 +82,7 @@ function test_input($data) {
 	<a class="item" href="index.php">Home</a> | <a class="item" href="profile.php">My Profile</a> | <a class="item" href="product.php"> Task</a>
 	<?php } ?>
 		<div id="userbar">
+			<!--only needed if session is used-->
 			<?php
 			if (isset($_SESSION["MM_Username"]))
 			{   
@@ -92,7 +93,7 @@ function test_input($data) {
 			{   
 				echo '<a href="login.php">Sign In</a>';   
 			}   
-   ?>
+	?>
 		</div>
 	</div>
 </div>
@@ -128,13 +129,12 @@ function test_input($data) {
     </form>
     </div>
 </div>
-	<span class="errorValidation"><?php 
-	  echo $username; 
-	  echo $email;
-	 ?> </span>
-</body>
-	<div id="footer"><br />&copy; All rights reserved 2016. NUS Maids. </div>
-</html>
+	<!-- testing -->
+	<span class="errorValidation"><?php echo $username; echo $email;?> </span> 
 <?php
 pg_close($dbconn);
 ?>
+</body>
+	<div id="footer"><br />&copy; All rights reserved 2016. NUS Maids. </div>
+</html>
+
