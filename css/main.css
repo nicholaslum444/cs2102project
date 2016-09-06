@@ -3,12 +3,10 @@ a:link {
 	color: #000;
 	font-family: Verdana, Geneva, sans-serif;
 }
-
 a:hover {
 	text-decoration: none;
 	font-weight: bold;
 }
-
 a:active {
 	text-decoration: none;
 	color: #000;
@@ -49,7 +47,6 @@ a:visited {
 	margin-top: 50px;
 	color: #fff;
 	border-radius: 4px;
- 
 	text-align: center;
 }
 #Navi {
@@ -75,7 +72,6 @@ a:visited {
 	width: 200px;
 	font-size: 14px;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-	
 }   
 #footer  {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -96,14 +92,12 @@ a:visited {
 	font-size: 14px;
 	font-weight: bold;
 }
-
 body {
 	background-color: #FFF;         /* make sure IE centers the page too */
     	background-repeat: no-repeat;
     	background-attachment: fixed;
 	background-position: center; 
 }   
-
 regBody {
 	background-color: #FFF;         /* make sure IE centers the page too */
 	background-image: url('fuji.jpg');
@@ -201,10 +195,8 @@ hr {
 h1 {
 	text-align: center;
 }
-
 u {
 	text-decoration: underline;
-	
 }
 .alignLeft {
 	float: left;
@@ -214,34 +206,21 @@ u {
 	margin-top: 50px;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
-
 .alignTermsAndService {
 	margin-left: 40px; 
 }
-.form-control {
-    
+.form-control {   
 	display: block;
-   
 	margin: auto; width: 300px;
-    
 	height: 20px;
-    
 	padding: 6px 12px;
-    
 	font-size: 14px;
-    
 	line-height: 1.42857143;
-    
 	color: #555;
-    
 	background-color: #fff;
-    
 	background-image: none;
-    
 	border: 1px solid #ccc;
-    
 	border-radius: 4px;
- 
 }   
 .errorValidation {
 	color: #FF0000;	
