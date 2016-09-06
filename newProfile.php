@@ -6,7 +6,7 @@
 <title>NUS Maids - Create Your Account</title>
 <style type="text/css">
 <!--
-@import url("main.css");
+@import url("css/main.css");
 -->
 </style>
 </head>
@@ -77,7 +77,7 @@ function test_input($data) {
 
 ?>
 <div id="wrapper">
-	<div id="Navi"><a href="index.php"><img src="homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
+	<div id="Navi"><a href="index.php"><img src="img\homeLogo.jpg" width="70" height="70" href="index.php" alt="Navi" /></a>
 	<?php if (isset($_SESSION["MM_Username"])){?>
 	<a class="item" href="index.php">Home</a> | <a class="item" href="profile.php">My Profile</a> | <a class="item" href="product.php"> Task</a>
 	<?php } ?>
