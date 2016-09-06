@@ -39,11 +39,9 @@
     });
 });
   </script>
-
 </head>
 
 <body>
-<!--
   <?php
         $dbconn = pg_connect('host=localhost 
                                 port=5432 
@@ -51,7 +49,7 @@
                                 user='.$DB_USERNAME.' 
                                 password='.$DB_PASSWORD
         ) or die('Could not connect: ' . pg_last_error());
-    ?>-->
+    ?>
 
 <?php
 // define variables and set to empty values
@@ -117,6 +115,7 @@ function test_input($data) {
     <input name="create" type="submit" class="alignSignInButton" value="Create"/>
 </form>
 
+<!--testing-->
 <?php
 echo $description;
 echo "<br>";
@@ -128,29 +127,12 @@ echo $price;
 echo "<br>";
 ?>
 
-<!--
-  <?php    
-        $query = 'SELECT * FROM task';
-        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
-        echo '<b>SQL: </b>'.$query.'<br>';
-        while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-            foreach ($line as $col_value) {
-                echo '| '.$col_value.' ';
-            }
-            echo '|';
-            echo '<br>';
-        }
-        pg_free_result($result);
-    ?>
-    
-    <p>Done!</p>
-    
-    <?php pg_close($dbconn); ?>
--->
 	</div>
 </div>
 
 <br/><br/><br/><br/><br/>
+
+<?php pg_close($dbconn); ?>
 </body>
     
 <div id="footer"><br />&copy; All rights reserved 2016. NUS Maids. </div>
