@@ -1,75 +1,56 @@
+DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS task CASCADE;
+DROP TABLE IF EXISTS offer CASCADE;
 DROP TABLE IF EXISTS contract;
-DROP TABLE IF EXISTS offer;
-DROP TABLE IF EXISTS submit;
-DROP TABLE IF EXISTS task;
-DROP TABLE IF EXISTS account;
-DROP TABLE IF EXISTS admin;
+DROP TYPE IF EXISTS status_type;
 
-CREATE TABLE IF NOT EXISTS admin (
+CREATE TABLE IF NOT EXISTS person (
     id SERIAL NOT NULL,
     email VARCHAR(256) NOT NULL,
-    password_hash VARCHAR(256) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS account (
-    id SERIAL NOT NULL,
-    email VARCHAR(256) NOT NULL,
+    username VARCHAR(256) NOT NULL,
     password_hash VARCHAR(256) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS task (
     id SERIAL NOT NULL,
-    title VARCHAR(256) NOT NULL,
+    title VARCHAR(512) NOT NULL,
     description TEXT,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS submit (
-    id SERIAL NOT NULL,
+    start_datetime TIMESTAMP NOT NULL,
+    end_datetime TIMESTAMP NOT NULL,
     creator_id INTEGER NOT NULL,
-    task_id INTEGER NOT NULL,
+    created_datetime TIMESTAMP NOT NULL,
+    last_updated_datetime TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE (creator_id, task_id),
-    FOREIGN KEY (creator_id)
-        REFERENCES account(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (task_id)
-        REFERENCES task(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    FOREIGN KEY (creator_id) REFERENCES person(id) 
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS offer (
     id SERIAL NOT NULL,
-    offerer_id INTEGER NOT NULL,
+    acceptee_id INTEGER NOT NULL,
     task_id INTEGER NOT NULL,
+    price INTEGER CHECK (price > 0),
     PRIMARY KEY (id),
-    UNIQUE (offerer_id, task_id),
-    FOREIGN KEY (offerer_id)
-        REFERENCES account(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (task_id)
-        REFERENCES task(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    FOREIGN KEY (acceptee_id) REFERENCES person(id)
+        ON DELETE RESTRICT
+);
+
+CREATE TYPE status_type AS ENUM (
+    'pending', 
+    'ongoing', 
+    'completed', 
+    'cancelled'
 );
 
 CREATE TABLE IF NOT EXISTS contract (
     id SERIAL NOT NULL,
-    contractor_id INTEGER NOT NULL,
-    task_id INTEGER NOT NULL,
+    offer_id INTEGER NOT NULL,
+    created_datetime TIMESTAMP NOT NULL,
+    last_updated_datetime TIMESTAMP NOT NULL,
+    accepted_conditions BOOLEAN NOT NULL,
+    status status_type NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE (contractor_id, task_id),
-    FOREIGN KEY (contractor_id)
-        REFERENCES account(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (task_id)
-        REFERENCES task(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    FOREIGN KEY (offer_id) REFERENCES offer(id)
+        ON DELETE RESTRICT
 );
