@@ -12,6 +12,7 @@ class Home extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['user_id'] = $session_data['user_id'];
             $data['tasks'] = $this->task_model->get_tasks();
             $data['header'] = 'NUSMaids Home';
             
@@ -23,10 +24,5 @@ class Home extends CI_Controller {
             redirect('login', 'refresh');
         }
 	}
-    
-    public function logout() {
-        $this->session->unset_userdata('logged_in');
-        session_destroy();
-        redirect('home', 'refresh');
-    }
 }
+?>

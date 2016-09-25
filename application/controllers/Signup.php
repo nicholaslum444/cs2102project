@@ -10,7 +10,7 @@ class Signup extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata('logged_in')) {
-            redirect('home', 'refresh');
+            redirect('', 'refresh');
         }
         $data['view'] = 'signup_view';
         $this->load->view('application_view', $data);
@@ -18,7 +18,7 @@ class Signup extends CI_Controller {
     
     public function validate() {
         if ($this->session->userdata('logged_in')) {
-            redirect('home', 'refresh');
+            redirect('', 'refresh');
         }
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[person.email]');
@@ -45,7 +45,7 @@ class Signup extends CI_Controller {
     
     private function success() {
         if ($this->session->userdata('logged_in')) {
-            redirect('home', 'refresh');
+            redirect('', 'refresh');
         }
         
         $data['view'] = 'signup_success_view';
@@ -54,7 +54,7 @@ class Signup extends CI_Controller {
     
     private function failure() {
         if ($this->session->userdata('logged_in')) {
-            redirect('home', 'refresh');
+            redirect('', 'refresh');
         }
         
         $data['view'] = 'signup_failure_view';
@@ -62,3 +62,4 @@ class Signup extends CI_Controller {
     }
  
 }
+?>

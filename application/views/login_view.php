@@ -3,7 +3,7 @@
         <h1>Login to NUSMaids</h1>
         <span class="errorValidation"><?php echo validation_errors(); ?></span>
         
-        <?php echo form_open('verifylogin'); ?>
+        <?php echo form_open('login/validate'); ?>
             <label for="username">Username:</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
             <br/>
