@@ -1,7 +1,7 @@
 -------------------- PERSONS --------------------
-INSERT INTO person (email, password_hash) VALUES
-    ('Tampopo@live.com', '1985-02-10Comedy'),
-    ('HG120@mail.com', 'The Dinner GameComedy');
+INSERT INTO person (email, username, password_hash) VALUES
+    ('Tampopo@live.com', 'gary', '1985-02-10Comedy'),
+    ('HG120@mail.com', 'jihyo', 'The Dinner GameComedy');
 
 -------------------- TASKS --------------------
 INSERT INTO task (
@@ -10,8 +10,6 @@ INSERT INTO task (
     start_datetime,
     end_datetime,
     creator_id,
-    workers_needed,
-    price,
     created_datetime,
     last_updated_datetime
 ) VALUES (
@@ -20,8 +18,6 @@ INSERT INTO task (
     now(),
     now(),
     1,
-    1,
-    10,
     now(),
     now()
 );
@@ -32,8 +28,6 @@ INSERT INTO task (
     start_datetime,
     end_datetime,
     creator_id,
-    workers_needed,
-    price,
     created_datetime,
     last_updated_datetime
 ) VALUES (
@@ -42,26 +36,34 @@ INSERT INTO task (
     now(),
     now(),
     1,
-    1,
-    10,
     now(),
     now()
 );
 
+-------------------- OFFER -----------------------
+INSERT INTO offer (
+    acceptee_id,
+    task_id,
+    price
+) VALUES (
+    2,
+    1,
+    20
+);
+-------------------- ENDOFFER -----------------------
+
 -------------------- CONTRACTS --------------------
 INSERT INTO contract (
-	creator_id,
-	task_id,
-	start_datetime,
-	end_datetime,
-	accepted_conditions,
-	status
+	offer_id,
+    created_datetime,
+    last_updated_datetime,
+    accepted_conditions,
+    status
 ) VALUES (
-	1,
 	1,
 	now(),
 	now(),
 	TRUE,
-	'pending'
+	'ongoing'
 );
 -------------------- ENDTASKS -----------------
