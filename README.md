@@ -2,9 +2,11 @@
 ---
 
 **0. IMPORTANT!**
+
 Read this document before you clone the repo. Follow the steps here to set up your repo. If you don't, bad things may happen.
 
 **1. Repository Secrets**
+
 The file `database.php` is where the database login information are stored i.e. the database name, username and password for the php database connection. It is gitignored so the repo will not have the exact file `database.php`. 
 
 An example file `database.php.example` is provided. This file is laid out exactly like the actual `database.php`, except that it does not have sensitive data.
@@ -15,6 +17,7 @@ When committing code, ensure that sensitive data is not committed as well. Alway
 
 
 **2. Schema and Seed Data**
+
 The database schema and seed data are stored in the `sql` directory in the repository root.
 
 This is how to set the schema in `schema.sql`.
