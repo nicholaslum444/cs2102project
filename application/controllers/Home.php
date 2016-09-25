@@ -25,7 +25,6 @@ class Home extends CI_Controller {
 	}
     
     public function logout() {
-        echo "Logging out... Please wait...";
         $this->session->unset_userdata('logged_in');
         session_destroy();
         redirect('home', 'refresh');

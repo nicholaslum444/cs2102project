@@ -11,10 +11,6 @@ class VerifyLogin extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             redirect('', 'refresh');
         }
-        echo "<span id=\"pw\">Logging in... Please wait...</span>";
-        
-		//This method will have the credentials validation
-		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
@@ -48,7 +44,7 @@ class VerifyLogin extends CI_Controller {
             
 		} else { // $person is false if login is NOT valid.
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
-			return false;
+			return FALSE;
 		}
 	}
 }

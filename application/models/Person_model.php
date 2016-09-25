@@ -19,4 +19,12 @@ class Person_model extends CI_Model {
             return false;
         }
     }
+    
+    public function create($email, $username, $password) {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        
+        $create_SQL = "INSERT INTO person (email, username, password_hash) VALUES (?, ?, ?)";
+        
+        return $this->db->query($create_SQL, [$email, $username, $password_hash]);
+    }
 }

@@ -29,6 +29,8 @@
             <a href="/"><img src="/assets/img/homeLogo.jpg" width="70" height="70" href="/" alt="Navi" /></a>
         </div>
     </div>
+    <br>
+    <br>
     
     <?php 
         /** 
