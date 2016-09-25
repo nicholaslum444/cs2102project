@@ -39,10 +39,12 @@ This is how to seed the database with `seeds.sql` after the schema is created.
 When schema or seeds are updated, you'll have to run both `schema.sql` and `seeds.sql` again to update the local copy.
 Please inform the other developers if either file is updated.
 
+_**Note:** In the scenario you encounter PHP Startup: Unable to load dynamic library /Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll' - dlopen(/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll, 9): error message, go to your bitnami php folder, php/etc/php.ini and comment out extension=php_pdo_mysql.dll by removing the ";" at the front. Then restart your apache server._
+
 ## 3. Usage
 
 The website now requires user login to access. There are two default user accounts provided in the database seed file:
 1. Username: "asd", Password: "asd"
 2. Username: "qwe", Password: "qwe"
 
-Log in to the website using either one of these accounts. _Note: Login credentials do not include quotemarks._
+Log in to the website using either one of these accounts. _**Note:** Login credentials do not include quotemarks._
