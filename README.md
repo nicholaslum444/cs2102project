@@ -35,3 +35,7 @@ This is how to seed the database with `seeds.sql` after the schema is created.
 
 1. Open the SQL input window in phppgadmin as above.
 2. Copy and paste all text in `seeds.sql` in the input field and execute on the "nusmaids" database.
+
+In the scenario you encounter PHP Startup: Unable to load dynamic library '/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll' - dlopen(/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll, 9): error message, go to your bitnami php folder, php/etc/php.ini and comment out extension=php_pdo_mysql.dll by removing the ";" at the front.
+
+Then restart your apache server.
