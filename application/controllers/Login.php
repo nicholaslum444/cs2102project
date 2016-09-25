@@ -11,7 +11,8 @@ class Login extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             redirect('home', 'refresh');
         } else {
-            $this->load->view('login_view');
+            $data['view'] = 'login_view';
+            $this->load->view('application_view', $data);
         }
     }
  

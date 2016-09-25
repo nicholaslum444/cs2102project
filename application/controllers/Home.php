@@ -13,8 +13,12 @@ class Home extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
             $data['tasks'] = $this->task_model->get_tasks();
-            $data['title'] = 'Hello World CS2102 Project';
-            $this->load->view('home_view', $data);
+            $data['header'] = 'NUSMaids Home';
+            
+            $data['view'] = 'home_view';
+            $data['page_title'] = 'Home';
+            $this->load->view('application_view', $data);
+            
         } else {
             redirect('login', 'refresh');
         }

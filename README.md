@@ -1,13 +1,10 @@
 # NUSMaids README
----
 
 ## 0. IMPORTANT!
-
-Read this document before you clone the repo. Follow the steps here to set up your repo. If you don't, bad things may happen.
+Read this document before you clone the repo. Follow the steps here to set up your repo. If you don't, bad things may happen. We are using the **CodeIgniter** framework to help us with development.
 
 ## 1. Repository Secrets
-
-The file `database.php` is where the database login information are stored i.e. the database name, username and password for the php database connection. It is gitignored so the repo will not have the exact file `database.php`. 
+The file `database.php` is where the database login information are stored i.e. the database name, username and password for the php database connection. It is found in the `/application/config/` folder. It is gitignored so the repo will not have the exact file `database.php`. 
 
 An example file `database.php.example` is provided. This file is laid out exactly like the actual `database.php`, except that it does not have sensitive data.
 
@@ -15,14 +12,15 @@ First copy the contents of `database.php.example` to a new file called `database
 
 When committing code, ensure that sensitive data is not committed as well. Always check that the `database.php` file is NOT in the repository. If sensitive data is leaked, change passwords immediately.
 
+_**Note:** In the scenario you encounter PHP Startup: Unable to load dynamic library /Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll' - dlopen(/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll, 9): error message, go to your bitnami php folder, php/etc/php.ini and comment out extension=php_pdo_mysql.dll by removing the ";" at the front. Then restart your apache server._
+
 
 ## 2. Schema and Seed Data
-
 The database schema and seed data are stored in the `sql` directory in the repository root.
 
 This is how to set the schema in `schema.sql`.
 
-1. Visit your local phppgadmin and log in to pgadmin
+1. Visit your local phppgadmin and log in
 2. Top left corner of the page, click on "SQL"
 3. SQL input window will pop up
 4. Top left corner of the window, select database "nusmaids"
@@ -39,12 +37,35 @@ This is how to seed the database with `seeds.sql` after the schema is created.
 When schema or seeds are updated, you'll have to run both `schema.sql` and `seeds.sql` again to update the local copy.
 Please inform the other developers if either file is updated.
 
-_**Note:** In the scenario you encounter PHP Startup: Unable to load dynamic library /Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll' - dlopen(/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll, 9): error message, go to your bitnami php folder, php/etc/php.ini and comment out extension=php_pdo_mysql.dll by removing the ";" at the front. Then restart your apache server._
-
 ## 3. Usage
-
 The website now requires user login to access. There are two default user accounts provided in the database seed file:
 1. Username: "asd", Password: "asd"
 2. Username: "qwe", Password: "qwe"
 
 Log in to the website using either one of these accounts. _**Note:** Login credentials do not include quotemarks._
+
+## 4. Development
+
+### 4.1 CodeIgniter
+The CodeIgniter framework is built on PHP and should not require additional installation. Following the steps above is sufficient to get a running copy of the website on your local host. Please read on for more information on the development of the website.
+
+### 4.2 MVC Architecture
+CodeIgniter is an MVC framework. The controllers, views and models can be found in the respective folders inside the `/application/` folder. When writing code, please stick to the MVC architecture.
+
+### 4.3 Views
+We improve upon the CodeIgniter way of loading views. There is a "master" view file called `application_view.php` that contains all the static code that every page should have. This view also contains a line of code that can load an additional view. This additional view is intended to be the actual view that a controller would want to load.
+
+**Example**: The Home controller wants to load its view called `home_view.php`. 
+
+We replace:
+```php
+$this->load->view('home_view');
+```
+with:
+```php
+$data['view'] = 'home_view';
+$this->load->view('application_view', $data);
+```
+This also means that the `'view'` key in the `$data` array is now reserved. Do not use that key for any other value aside from the view that you intend to load.
+
+An additional reserved key is `'page_title'`, which allows you to change the title of the page by appending the value of `'page_title'` to "NUSMaids" i.e. "NUSMaids | Home Page".

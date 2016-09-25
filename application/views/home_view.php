@@ -1,27 +1,16 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<title>NUSMaids</title>
-</head>
-
-<body>
-
-<div id="container">
-    <h1><?php echo $title ?></h1>
+<div>
+    <h1><?php echo $header ?></h1>
     <hr>
-    <p>This is a test page. Welcome to CS2102 NUS Maids, Mr. <strong><?php echo $username ?></strong>.</p>
-
-	<div id="body">
+    <p>This is a test page. Welcome to CS2102 NUS Maids.</p>
+    <p>Your username is <strong><?php echo $username ?></strong></p>
+    
+	<div>
+        <p>This is a listing of all the tasks in the system:</p>
         <?php foreach ($tasks as $task) { ?>
             <p><?php echo json_encode($task) ?></p>
         <?php } ?>
+        <p>Thank you for your time.</p>
 	</div>
     
-    <a href="home/logout">LOGOUT</a>
+    <a href="home/logout">CLICK ME TO LOGOUT</a>
 </div>
-
-</body>
-</html>

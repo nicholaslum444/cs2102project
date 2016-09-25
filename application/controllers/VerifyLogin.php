@@ -8,7 +8,10 @@ class VerifyLogin extends CI_Controller {
 	}
 
 	public function index() {
-        echo "Logging in... Please wait...";
+        if ($this->session->userdata('logged_in')) {
+            redirect('', 'refresh');
+        }
+        echo "<span id=\"pw\">Logging in... Please wait...</span>";
         
 		//This method will have the credentials validation
 		$this->load->library('form_validation');
@@ -18,7 +21,8 @@ class VerifyLogin extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE) {
 			//Field validation failed.  User redirected to login page
-			$this->load->view('login_view');
+            $data['view'] = 'login_view';
+			$this->load->view('application_view', $data);
 		} else {
 			//Go to private area
 			redirect('', 'refresh');
@@ -26,6 +30,9 @@ class VerifyLogin extends CI_Controller {
 	}
 
 	public function check_database($password) {
+        if ($this->session->userdata('logged_in')) {
+            redirect('', 'refresh');
+        }
 		//Field validation succeeded.  Validate against database
 		$username = $this->input->post('username');
 
@@ -40,7 +47,7 @@ class VerifyLogin extends CI_Controller {
 			return TRUE;
             
 		} else { // $person is false if login is NOT valid.
-			$this->form_validation->set_message('check_database', 'Invalid username or password'.$result->length());
+			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return false;
 		}
 	}
