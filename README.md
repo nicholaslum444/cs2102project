@@ -1,11 +1,11 @@
 # NUSMaids README
 ---
 
-**0. IMPORTANT!**
+## 0. IMPORTANT!
 
 Read this document before you clone the repo. Follow the steps here to set up your repo. If you don't, bad things may happen.
 
-**1. Repository Secrets**
+## 1. Repository Secrets
 
 The file `database.php` is where the database login information are stored i.e. the database name, username and password for the php database connection. It is gitignored so the repo will not have the exact file `database.php`. 
 
@@ -16,13 +16,13 @@ First copy the contents of `database.php.example` to a new file called `database
 When committing code, ensure that sensitive data is not committed as well. Always check that the `database.php` file is NOT in the repository. If sensitive data is leaked, change passwords immediately.
 
 
-**2. Schema and Seed Data**
+## 2. Schema and Seed Data
 
 The database schema and seed data are stored in the `sql` directory in the repository root.
 
 This is how to set the schema in `schema.sql`.
 
-1. Visit localhost/phppgadmin and log in to pgadmin
+1. Visit your local phppgadmin and log in to pgadmin
 2. Top left corner of the page, click on "SQL"
 3. SQL input window will pop up
 4. Top left corner of the window, select database "nusmaids"
@@ -35,3 +35,14 @@ This is how to seed the database with `seeds.sql` after the schema is created.
 
 1. Open the SQL input window in phppgadmin as above.
 2. Copy and paste all text in `seeds.sql` in the input field and execute on the "nusmaids" database.
+
+When schema or seeds are updated, you'll have to run both `schema.sql` and `seeds.sql` again to update the local copy.
+Please inform the other developers if either file is updated.
+
+## 3. Usage
+
+The website now requires user login to access. There are two default user accounts provided in the database seed file:
+1. Username: "asd", Password: "asd"
+2. Username: "qwe", Password: "qwe"
+
+Log in to the website using either one of these accounts. _Note: Login credentials do not include quotemarks._
