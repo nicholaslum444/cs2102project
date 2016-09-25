@@ -1,7 +1,17 @@
 -------------------- PERSONS --------------------
-INSERT INTO person (email, username, password_hash) VALUES
-    ('Tampopo@live.com', 'gary', '1985-02-10Comedy'),
-    ('HG120@mail.com', 'jihyo', 'The Dinner GameComedy');
+INSERT INTO person (
+    email, 
+    username, 
+    password_hash
+) VALUES (
+    'asd@asd.asd', 
+    'asd', 
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6' -- password is "asd" 
+), (
+    'qwe@qwe.qwe',
+    'qwe',
+    '$2y$10$3mSKzPDzzGSL7hHBxYR6pufyx/YGtd3vQb9qRLGtIwY/cBnmhBCzK' -- password is "qwe"
+);
 
 -------------------- TASKS --------------------
 INSERT INTO task (
