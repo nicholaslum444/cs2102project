@@ -10,6 +10,8 @@
             <p><?php echo json_encode($task) ?></p>
         <?php } ?>
         <p>Thank you for your time.</p>
+
+        <a href="task/create">Add Task</a>
 	</div>
     
     <a href="logout">CLICK ME TO LOGOUT</a>
