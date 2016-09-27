@@ -7,9 +7,11 @@
     <p>Your username is <strong><?php echo $username ?></strong> and your user id is <?php echo $user_id ?></p>
     
 	<div>
-        <p>This is a listing of all the tasks in the system:</p>
+        <p>This is a listing of all of your tasks:</p>
         <?php foreach ($tasks as $task) { ?>
             <p><?php echo json_encode($task) ?></p>
+            <p><a href="task/update/<?php echo $task['id'] ?>">Update</a></p>
+             <p><a href="task/delete/<?php echo $task['id'] ?>">Delete</a></p>
         <?php } ?>
         <p>Thank you for your time.</p>
 

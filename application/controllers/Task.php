@@ -22,6 +22,7 @@ class Task extends CI_Controller {
         $this->load->view('application_view', $data);
     }
 
+    // Check that start_datetime <= end_datetime
     public function validate() {
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
@@ -40,6 +41,7 @@ class Task extends CI_Controller {
             
             $session_data = $this->session->userdata('logged_in');
             $user_id = $session_data['user_id'];
+
             $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime];
 
             if ($this->task_model->create($create_task_arr)) {
@@ -48,6 +50,80 @@ class Task extends CI_Controller {
             } else {
                 $this->failure();
             }
+        }
+    }
+
+    public function validate_update() {
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            show_error('Please fill up the relevant fields!');
+
+        } else {
+            $title = $this->input->post('title');
+            $description = $this->input->post('description');
+            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
+            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+            $id = $this->input->post('id');
+
+            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
+
+            if ($this->task_model->update($update_task_arr)) {
+                $this->success();
+            
+            } else {
+                $this->failure();
+            }
+        }
+    }
+
+    // Check that creator_id is updating this task
+    public function update($task_id) {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+
+            if ($data['tasks'] = $this->task_model->get($task_id)) {
+                // Set start and end date and time input fields 
+                // in data array
+                $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
+                $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
+                $data['tasks']['start_date'] = $start_datetime_arr[0];
+                $data['tasks']['start_time'] = $start_datetime_arr[1];
+                $data['tasks']['end_date'] = $end_datetime_arr[0];
+                $data['tasks']['end_time'] = $end_datetime_arr[1];
+
+                $data['header'] = 'Update Task';   
+                $data['view'] = 'task_update_view';
+                $data['page_title'] = 'Task';
+                $this->load->view('application_view', $data);
+            
+            } else {
+                redirect('login', 'refresh');
+            }
+
+        } else {
+            redirect('login', 'refresh');
+        }
+    }
+
+    // Check that creator_id is deleting this task
+    public function delete($task_id) {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $user_id = $session_data['user_id'];
+
+            if ($this->task_model->delete($user_id, $task_id)) {
+                $this->success();
+
+            } else {
+                $this->failure();
+            }
+
+        } else {
+            redirect('login', 'refresh');
         }
     }
 
