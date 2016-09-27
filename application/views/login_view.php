@@ -8,7 +8,7 @@
             <br/>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
             <br/>
-            <input type="submit" class="alignSignInButton" value="Login"/>
+            <input type="submit" class="alignSignUpButton" value="Login"/>
         <?php echo form_close('<br>'); ?>
     </div>
     <p><a href="/signup">No account? Click here to signup instead!</a></p>
