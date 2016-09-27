@@ -27,6 +27,15 @@
     <div id="wrapper">
         <div id="Navi">
             <a href="/"><img src="/assets/img/homeLogo.jpg" width="70" height="70" href="/" alt="Navi" /></a>
+        <div id="userbar">
+            <?php
+            if ($this->session->userdata('logged_in'))
+            {
+              echo "You are logged in as " . '<b>'. $username . '</b>';
+              echo  '| <a href="logout">Sign Out</a>';  
+            }
+            ?>
+        </div>
         </div>
     </div>
     <br>

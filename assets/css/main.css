@@ -65,7 +65,7 @@ a:visited {
 	font-weight: normal;
 }
 #userbar {
-	float: right; width: 200px; font-size: 14px; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	float: right; width: auto; font-size: 14px; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }   
 #footer  {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;

@@ -16,10 +16,17 @@ class Task extends CI_Controller {
 	}
 
     public function create() {
-        $data['header'] = 'Create Task';   
-        $data['view'] = 'task_create_view';
-        $data['page_title'] = 'Task';
-        $this->load->view('application_view', $data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['header'] = 'Create Task';   
+            $data['view'] = 'task_create_view';
+            $data['page_title'] = 'Task';
+            $this->load->view('application_view', $data);
+        }
+        else {
+            redirect('login', 'refresh');
+        }
     }
 
     // Check that start_datetime <= end_datetime
@@ -84,6 +91,7 @@ class Task extends CI_Controller {
     public function update($task_id) {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
 
             if ($data['tasks'] = $this->task_model->get($task_id)) {
                 // Set start and end date and time input fields 
