@@ -144,13 +144,26 @@ class Task extends CI_Controller {
     }
 
     private function success() {
-        $data['view'] = 'task_success_view';
-        $this->load->view('application_view', $data);
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['view'] = 'task_success_view';
+            $this->load->view('application_view', $data);
+        }
+        else {
+        redirect('login', 'refresh');
+        }
     }
 
     private function failure() {
-        $data['view'] = 'task_failure_view';
-        $this->load->view('application_view', $data);
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['view'] = 'task_failure_view';
+            $this->load->view('application_view', $data);
+         }
+        else {
+        redirect('login', 'refresh');
+        }
     }
 }
 ?>
