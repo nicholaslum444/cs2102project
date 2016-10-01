@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS task (
     last_updated_datetime TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id) REFERENCES person(id) 
-        ON DELETE RESTRICT
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS offer (
@@ -33,7 +33,9 @@ CREATE TABLE IF NOT EXISTS offer (
     price NUMERIC(1000, 2) CHECK (price > 0),
     PRIMARY KEY (id),
     FOREIGN KEY (acceptee_id) REFERENCES person(id)
-        ON DELETE RESTRICT
+        ON DELETE CASCADE,
+    FOREIGN KEY (task_id) REFERENCES task(id)
+        ON DELETE CASCADE
 );
 
 CREATE TYPE status_type AS ENUM (
@@ -52,5 +54,5 @@ CREATE TABLE IF NOT EXISTS contract (
     status status_type NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (offer_id) REFERENCES offer(id)
-        ON DELETE RESTRICT
+        ON DELETE CASCADE
 );

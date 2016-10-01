@@ -10,20 +10,19 @@ class Offer extends CI_Controller {
     }
 
 	public function index() {
-        // if ($this->session->userdata('logged_in')) {
-        //     $session_data = $this->session->userdata('logged_in');
-        //     $data['username'] = $session_data['username'];
-        //     $data['user_id'] = $session_data['user_id'];
-        //     $data['tasks'] = $this->task_model->get_user_tasks($session_data['user_id']);
-        //     $data['header'] = 'NUSMaids Home';
-            
-        //     $data['view'] = 'home_view';
-        //     $data['page_title'] = 'Home';
-        //     $this->load->view('application_view', $data);
-            
-        // } else {
-        //     redirect('login', 'refresh');
-        // }
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['user_id'] = $session_data['user_id'];
+            $data['offers'] = $this->offer_model->get_offers_by_acceptee($session_data['user_id']);
+            $data['header'] = 'My Pending Offers';   
+            $data['view'] = 'offer_view';
+            $data['page_title'] = 'My Offers';
+            $this->load->view('application_view', $data);
+        }
+        else {
+            redirect('login', 'refresh');
+        }
 	}
 
     public function create($task_id) {
@@ -78,8 +77,66 @@ class Offer extends CI_Controller {
         }
     }
 
-    public function cancel($task_id) {
+    public function validate_update() {
+        $this->form_validation->set_rules('price', 'Price', 'required');
 
+        if ($this->form_validation->run() === FALSE) {
+            show_error('Please fill up the relevant fields!');
+
+        } else {
+            $session_data = $this->session->userdata('logged_in');
+            $user_id = $session_data['user_id'];
+            $offer_id = $this->input->post('id');
+            $price = $this->input->post('price');
+
+            $update_offer_arr = [$price, $offer_id];
+
+            if ($this->offer_model->update($update_offer_arr)) {
+                $this->success();
+
+            } else {
+                $this->failure();
+            }
+        }
+    }
+
+    public function update($offer_id = -1) {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+
+            if ($data['offers'] = $this->offer_model->get($offer_id)) {
+                $start_datetime_arr = explode(" ",$data['offers']['start_datetime']);
+                $end_datetime_arr = explode(" ", $data['offers']['end_datetime']);
+                $data['offers']['start_date'] = $start_datetime_arr[0];
+                $data['offers']['start_time'] = $start_datetime_arr[1];
+                $data['offers']['end_date'] = $end_datetime_arr[0];
+                $data['offers']['end_time'] = $end_datetime_arr[1];
+
+                $data['header'] = 'Update Offer';   
+                $data['view'] = 'offer_update_view';
+                $data['page_title'] = 'Offer';
+                $this->load->view('application_view', $data);
+            }
+        } else {
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function cancel($offer_id = -1) {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $user_id = $session_data['user_id'];
+
+            if ($this->offer_model->delete($user_id, $offer_id)) {
+                $this->success();
+
+            } else {
+                $this->failure();
+            }
+        } else {
+            redirect('login', 'refresh');
+        }
     }
 
     private function success() {
