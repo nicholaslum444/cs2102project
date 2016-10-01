@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS offer (
     id SERIAL NOT NULL,
     acceptee_id INTEGER NOT NULL,
     task_id INTEGER NOT NULL,
-    price INTEGER CHECK (price > 0),
+    price NUMERIC(1000, 2) CHECK (price > 0),
     PRIMARY KEY (id),
     FOREIGN KEY (acceptee_id) REFERENCES person(id)
         ON DELETE RESTRICT

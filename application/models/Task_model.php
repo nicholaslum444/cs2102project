@@ -9,6 +9,19 @@ class Task_model extends CI_Model {
         return $this->db->query($task_sql, [$user_id])->result_array();  
     }
 
+    public function get_available_tasks($user_id = -1) {
+        $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, p.username
+                    FROM task t, person p
+                    WHERE t.creator_id = p.id
+                    AND t.creator_id != ?
+                    AND t.id NOT IN (
+                        SELECT task_id
+                        FROM offer
+                        WHERE acceptee_id = ?)";
+
+        return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
+    }
+
     public function get($task_id) {
         $task_sql = "SELECT id, title, description, start_datetime, end_datetime
             FROM task

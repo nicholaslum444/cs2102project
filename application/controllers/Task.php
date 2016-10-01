@@ -135,6 +135,23 @@ class Task extends CI_Controller {
         }
     }
 
+    public function available() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $user_id = $session_data['user_id'];
+            $data['available_tasks'] = $this->task_model->get_available_tasks($user_id);
+
+            $data['header'] = 'NUSMaids Available Tasks';
+            $data['view'] = 'task_available_view';
+            $data['page_title'] = 'Available Tasks';
+            $this->load->view('application_view', $data);
+
+        } else {
+            redirect('login', 'refresh');
+        }
+    }
+
     private function get_datetime($date, $time) {
         if (empty($time)) {
             return $date . ' ' . '00:00';

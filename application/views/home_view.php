@@ -17,6 +17,10 @@
 
         <hr><br/>
         <a href="task/create">Add Task</a>
+        <!-- My offer to help other's tasks -->
+        <a href="offer">My Offers</a> 
+        <!-- View other's Tasks -->
+        <a href="task/available">Help Others</a>
 	</div>
     </div>
 </div>
