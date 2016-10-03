@@ -1,2 +1,5 @@
-<h3>Success! :)</h3>
-<p>Your account has been created. Please log in <a href="/login">HERE</a></p>
+<div class="content">
+	<h1>Account Creation Successful</h1>
+	<hr>
+	<p>Your account has been created. Please click <a href="/login">here</a> to log in.</p>
+</div>

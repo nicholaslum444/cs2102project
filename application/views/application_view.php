@@ -8,15 +8,11 @@
     
     <!-- If $page_title is set, the title will be "NUSMaids | Page Title", 
     otherwise it's just the normal "NUSMaids" title -->
-    <title>
-    NUSMaids<?php if (isset($page_title)) echo " | ".$page_title; ?>
-    </title>
+    <title>NUSMaids<?php if (isset($page_title)) echo " | ".$page_title; ?></title>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/main.css">
-    
-    <!-- Javascript -->
-    <script src="/assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
     
     <!-- Favicon -->
     <link rel="icon" href="/assets/img/homeLogo.jpg">
@@ -24,23 +20,60 @@
 
 <body>
     <!-- Navbar can go here, or anything persistent -->
-    <div id="wrapper">
-        <div id="Navi">
-            <a href="/"><img src="/assets/img/homeLogo.jpg" width="70" height="70" href="/" alt="Navi" /></a>
-        <div id="userbar">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/"><img src="/assets/img/homeLogo.jpg" width="50" height="50"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          <?php
+            if ($this->session->userdata('logged_in'))
+            {
+            echo '<li><a href="/task/create">Create Task</a></li>';
+            echo '<li><a href="/offer">My Offers</a></li>';
+            echo '<li><a href="/task/available">Help Others</a>';
+            }
+            ?>
+            <li class="dropdown">
+            <?php
+            if ($this->session->userdata('logged_in'))
+            { 
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>';
+                echo '<ul class="dropdown-menu">';
+                echo '<li><a href="#">Action</a></li>';
+                echo '<li><a href="#">Another action</a></li>';
+                echo '<li><a href="#">Something else here</a></li>';
+                echo '<li role="separator" class="divider"></li>';
+                echo '<li class="dropdown-header">Nav header</li>';
+                echo '<li><a href="#">Separated link</a></li>';
+                echo '<li><a href="#">One more separated link</a></li>';
+                echo '</ul>';
+                }
+               ?>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="alignUserbar">
             <?php
             if ($this->session->userdata('logged_in'))
             {
               echo "You are logged in as " . '<b>'. $username . '</b>';
-              echo  '| <a href="logout">Sign Out</a>';  
+              echo  '| <a href="/logout">Sign Out</a>';  
             }
             ?>
-        </div>
-        </div>
     </div>
-    <br>
-    <br>
-    
     <?php 
         /** 
         This line below loads the main view that appears in the body.
@@ -56,10 +89,22 @@
         */
         $this->load->view($view); 
     ?>
-
+    
+    
     <!-- Persistent footer goes here -->
-    <div id="footer">
-        <br>&copy; All rights reserved 2016. NUS Maids.
-    </div>
+     <div class="footer">
+        <hr> 
+        <p>&copy; NUS Maids. All rights reserved.</p>
+      </div>
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+    <!-- Javascript -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
 </body>
 </html>

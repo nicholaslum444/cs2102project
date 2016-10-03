@@ -1,4 +1,6 @@
-<div>
+<div class="content">
+    <h1><?php echo $header ?></h1>
+    <hr>
     <?php
     if (empty($offers)) {
     ?>

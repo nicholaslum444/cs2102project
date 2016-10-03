@@ -1,2 +1,5 @@
-<h3>Something Went Wrong :(</h3>
-<p>Your account has NOT been created. Please sign up again <a href="/signup">HERE</a></p>
+<div class="content">
+	<h1>Account Creation Unsuccessful</h1>
+	<hr>
+	<p>Your account has not been created. Please click <a href="/signup">here</a> to sign up again.</p>
+</div>

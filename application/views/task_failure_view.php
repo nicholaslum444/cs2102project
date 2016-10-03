@@ -1,6 +1,5 @@
-<div id="regHeader">
-    <div id="mainBody">
-		<h3>Something Went Wrong :(</h3>
-		<p>Your Task has NOT been created. Click <a href="<?php echo base_url() ?>">HERE</a> to go back to home page!</p>
-	</div>
+<div class="content">
+		<h1>Task Unsuccessful</h1>
+		<hr>
+		<p>Your Task has not been created. Click <a href="<?php echo base_url() ?>">here</a> to go back to home page.</p>
 </div>
