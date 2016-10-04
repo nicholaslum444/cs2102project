@@ -1,23 +1,38 @@
 <div class="content">
 	<h1>Available Tasks</h1>
+	<hr>
 	<?php 
     if (!empty($available_tasks)) {
 	?>
-	
-	<p>Here is a list of available tasks:</p>
+	 <div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>   
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              	<?php foreach ($available_tasks as $task) { ?>
+                <td><?php echo $task['id']?></td>
+                <td><?php echo $task['title']?></td>
+                <td><?php echo $task['description']?></td>
+                <td><?php echo $task['start_datetime']?></td>
+                <td><?php echo $task['end_datetime']?></td>
+                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>">Accept</a></td>
+              </tr> 
+            <?php } ?>
+            </tbody>
+          </table>
+    </div>
 
-	<?php 	
-		foreach ($available_tasks as $task) { ?>
-		<hr>
-        <p><?php echo json_encode($task) ?></p>
-        <p><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>">Accept</a></p>
 	<?php
-	} 
-
-	} else {
-	?>
-		<p>There are no available at the moment tasks.</p>
+	} else { ?>
+		<p>There are no tasks available at the moment. Please check back again soon!</p>
 	<?php	
-	} 
-	?>     
+	} ?>     
 </div>

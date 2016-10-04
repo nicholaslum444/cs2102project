@@ -2,19 +2,40 @@
     <h1><?php echo $header ?></h1>
     <hr>
     <?php
-    if (empty($offers)) {
+    if (!empty($offers)) {
     ?>
-        You have not offered to help any tasks.
+     <div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>  
+                <th>Price</th>  
+              </tr>
+            </thead>
+            <tbody>
+              <tr>        
+                <?php foreach ($offers as $offer) { ?>
+                <td><?php echo $offer['offer_id']?></td>
+                <td><?php echo $offer['title']?></td>
+                <td><?php echo $offer['description']?></td>
+                <td><?php echo $offer['start_datetime']?></td>
+                <td><?php echo $offer['end_datetime']?></td>
+                <td><?php echo $offer['price']?></td>
+                <td><a href="offer/update/<?php echo $offer['offer_id'] ?>">Update</a></td>
+                <td><a href="offer/cancel/<?php echo $offer['offer_id'] ?>">Cancel</a></td>
+              </tr> 
+         <?php } ?>
+         </tbody>
+          </table>
+    </div>
     <?php
-    } else {
-        foreach ($offers as $offer) {
-    ?>
-        <hr>
-        <p><?php echo json_encode($offer) ?></p>
-        <p><a href="offer/update/<?php echo $offer['offer_id'] ?>">Update</a></p>
-        <p><a href="offer/cancel/<?php echo $offer['offer_id'] ?>">Cancel</a></p>
-    <?php
-        }
-    }
-    ?>
+    } 
+    else { ?>
+        <p>You have not offered to help any tasks.</p
+    <?php  
+    } ?> 
 </div>
