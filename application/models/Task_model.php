@@ -11,7 +11,7 @@ class Task_model extends CI_Model {
 
     public function get_available_tasks($user_id = -1) {
         $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, p.username
-                    FROM task t, person p
+                    FROM task t, account p
                     WHERE t.creator_id = p.id
                     AND t.creator_id != ?
                     AND t.id NOT IN (

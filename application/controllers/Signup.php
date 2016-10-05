@@ -5,7 +5,7 @@ class Signup extends CI_Controller {
  
     public function __construct() {
         parent::__construct();
-        $this->load->model('person_model');
+        $this->load->model('account_model');
     }
 
     public function index() {
@@ -21,8 +21,8 @@ class Signup extends CI_Controller {
             redirect('', 'refresh');
         }
 
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[person.email]');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[person.username]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email[account.email]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[account.username]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('passwordconf', 'Confirm Password', 'trim|required|matches[password]');
 
@@ -33,7 +33,7 @@ class Signup extends CI_Controller {
             $email = $this->input->post('email');
             $username = $this->input->post('username');
             $password = $this->input->post('password');
-            if ($this->person_model->create($email, $username, $password)) {
+            if ($this->account_model->create($email, $username, $password, ROLE_USER)) {
                 // Go to success page
                 $this->success();
             } else {

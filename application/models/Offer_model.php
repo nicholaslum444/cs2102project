@@ -3,7 +3,7 @@ class Offer_model extends CI_Model {
 
 	public function get_offers_by_acceptee($acceptee_id = -1) {
 		$offer_sql = "SELECT t.id as task_id, t.title, t.description, t.start_datetime, t.end_datetime, p.username, o.price, o.id as offer_id
-		FROM task t, offer o, person p
+		FROM task t, offer o, account p
 		WHERE t.id = o.task_id
 		AND p.id = t.creator_id
 		AND o.acceptee_id = ?";

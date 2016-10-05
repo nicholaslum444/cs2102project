@@ -1,17 +1,36 @@
-DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS account CASCADE;
 DROP TABLE IF EXISTS task CASCADE;
 DROP TABLE IF EXISTS offer CASCADE;
-DROP TABLE IF EXISTS contract;
+DROP TABLE IF EXISTS contract CASCADE;
+
+DROP TYPE IF EXISTS role_type CASCADE;
 DROP TYPE IF EXISTS status_type;
 
-CREATE TABLE IF NOT EXISTS person (
+-- ENUMS --
+CREATE TYPE status_type AS ENUM (
+    'PENDING', 
+    'ONGOING', 
+    'COMPLETED', 
+    'CANCELLED'
+);
+CREATE TYPE role_type AS ENUM (
+    'ADMIN',
+    'USER'
+);
+-- END ENUMS --
+
+-- ACCOUNT AND ROLE --
+CREATE TABLE IF NOT EXISTS account (
     id SERIAL NOT NULL,
     email VARCHAR(256) NOT NULL,
     username VARCHAR(256) NOT NULL,
     password_hash VARCHAR(256) NOT NULL,
+    role role_type NOT NULL,
     PRIMARY KEY (id)
 );
+-- END ACCOUNT AND ROLE --
 
+-- TASKS, OFFERS AND CONTRACTS --
 CREATE TABLE IF NOT EXISTS task (
     id SERIAL NOT NULL,
     title VARCHAR(512) NOT NULL,
@@ -22,7 +41,7 @@ CREATE TABLE IF NOT EXISTS task (
     created_datetime TIMESTAMP NOT NULL,
     last_updated_datetime TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (creator_id) REFERENCES person(id) 
+    FOREIGN KEY (creator_id) REFERENCES account(id) 
         ON DELETE CASCADE
 );
 
@@ -32,17 +51,10 @@ CREATE TABLE IF NOT EXISTS offer (
     task_id INTEGER NOT NULL,
     price NUMERIC(1000, 2) CHECK (price > 0),
     PRIMARY KEY (id),
-    FOREIGN KEY (acceptee_id) REFERENCES person(id)
+    FOREIGN KEY (acceptee_id) REFERENCES account(id)
         ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES task(id)
         ON DELETE CASCADE
-);
-
-CREATE TYPE status_type AS ENUM (
-    'pending', 
-    'ongoing', 
-    'completed', 
-    'cancelled'
 );
 
 CREATE TABLE IF NOT EXISTS contract (
@@ -56,3 +68,4 @@ CREATE TABLE IF NOT EXISTS contract (
     FOREIGN KEY (offer_id) REFERENCES offer(id)
         ON DELETE CASCADE
 );
+-- END TASKS, OFFERS AND CONTRACTS --

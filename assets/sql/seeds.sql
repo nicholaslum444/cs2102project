@@ -1,18 +1,26 @@
--------------------- PERSONS --------------------
-INSERT INTO person (
+-------------------- ACCOUNTS --------------------
+INSERT INTO account (
     email, 
     username, 
-    password_hash
+    password_hash,
+    role
 ) VALUES (
     'asd@asd.asd', 
     'asd', 
-    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6' -- password is "asd" 
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd" 
+    'USER'
 ), (
     'qwe@qwe.qwe',
     'qwe',
-    '$2y$10$3mSKzPDzzGSL7hHBxYR6pufyx/YGtd3vQb9qRLGtIwY/cBnmhBCzK' -- password is "qwe"
+    '$2y$10$3mSKzPDzzGSL7hHBxYR6pufyx/YGtd3vQb9qRLGtIwY/cBnmhBCzK', -- password is "qwe"
+    'USER'
+), (
+    'admin@admin.asd',
+    'admin',
+    '$2y$10$PfriHQjK7cQnj98IIpmf0eoo4yEiVxfwMO9wNjaVbtaKP9lTPcjm6', -- password is "admin"
+    'ADMIN'
 );
------------------- ENDPERSONS ------------------
+------------------ ENDACCOUNTS ------------------
 
 -------------------- TASKS --------------------
 INSERT INTO task (
@@ -31,17 +39,7 @@ INSERT INTO task (
     1,
     now(),
     now()
-);
-
-INSERT INTO task (
-    title, 
-    description,
-    start_datetime,
-    end_datetime,
-    creator_id,
-    created_datetime,
-    last_updated_datetime
-) VALUES (
+), (
     'Clean Car', 
     'Clean my car for good karma. Satisfaction guaranteed.',
     now(),
@@ -49,17 +47,7 @@ INSERT INTO task (
     1,
     now(),
     now()
-);
-
-INSERT INTO task (
-    title, 
-    description,
-    start_datetime,
-    end_datetime,
-    creator_id,
-    created_datetime,
-    last_updated_datetime
-) VALUES (
+), (
     'Sweep Floor', 
     'When your CAP hits the floor, sweep it up together with your future.',
     now(),
@@ -67,17 +55,7 @@ INSERT INTO task (
     1,
     now(),
     now()
-);
-
-INSERT INTO task (
-    title, 
-    description,
-    start_datetime,
-    end_datetime,
-    creator_id,
-    created_datetime,
-    last_updated_datetime
-) VALUES (
+), (
     'Fail your midterms?', 
     'No worries! Just cry and try harder next time ;)',
     now(),
@@ -85,17 +63,7 @@ INSERT INTO task (
     1,
     now(),
     now()
-);
-
-INSERT INTO task (
-    title, 
-    description,
-    start_datetime,
-    end_datetime,
-    creator_id,
-    created_datetime,
-    last_updated_datetime
-) VALUES (
+), (
     'Try and Try and Cry and Cry', 
     'Crying and trying and bleeding and dying. For user 2',
     now(),
@@ -130,6 +98,6 @@ INSERT INTO contract (
 	now(),
 	now(),
 	TRUE,
-	'ongoing'
+	'ONGOING'
 );
 ------------------ ENDCONTRACTS -----------------

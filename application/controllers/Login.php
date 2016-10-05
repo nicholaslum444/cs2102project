@@ -5,13 +5,14 @@ class Login extends CI_Controller {
  
     public function __construct() {
         parent::__construct();
-		$this->load->model('person_model');
+		$this->load->model('account_model');
     }
 
     public function index() {
         if ($this->session->userdata('logged_in')) {
             redirect('', 'refresh');
         }
+        
         $data['view'] = 'login_view';
         $this->load->view('application_view', $data);
     }
@@ -41,22 +42,22 @@ class Login extends CI_Controller {
 		$username = $this->input->post('username');
 
 		// query the database
-		$person = $this->person_model->login($username, $password);
+		$account = $this->account_model->login($username, $password);
 
-		if($person) { // $person is not false if login is valid.
-            $this->set_session($person);
+		if($account) { // $account is not false if login is valid.
+            $this->set_session($account);
 			return TRUE;
             
-		} else { // $person is false if login is NOT valid.
+		} else { // $account is false if login is NOT valid.
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return FALSE;
 		}
 	}
     
-    private function set_session($person) {
+    private function set_session($account) {
         $sess_array = [];
-        $sess_array['user_id'] = $person->id;
-        $sess_array['username'] = $person->username;        
+        $sess_array['user_id'] = $account->id;
+        $sess_array['username'] = $account->username;        
         $this->session->set_userdata('logged_in', $sess_array);
     }
  
