@@ -87,7 +87,7 @@
             $data['view'] = 'home_view';
             $this->load->view('application_view', $data);
         */
-        $this->load->view($view); 
+        $this->load->view($view);
     ?>
     
     

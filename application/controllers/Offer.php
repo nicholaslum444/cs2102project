@@ -40,9 +40,9 @@ class Offer extends CI_Controller {
                 $data['tasks']['end_date'] = $end_datetime_arr[0];
                 $data['tasks']['end_time'] = $end_datetime_arr[1];
 
-                $data['header'] = 'Offer Details';   
+                $data['header'] = 'Make An Offer';
                 $data['view'] = 'offer_create_view';
-                $data['page_title'] = 'Offer Details';
+                $data['page_title'] = 'Make An Offer';
                 $this->load->view('application_view', $data);
             
             } else {

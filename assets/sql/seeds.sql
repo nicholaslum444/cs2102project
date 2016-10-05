@@ -12,6 +12,7 @@ INSERT INTO person (
     'qwe',
     '$2y$10$3mSKzPDzzGSL7hHBxYR6pufyx/YGtd3vQb9qRLGtIwY/cBnmhBCzK' -- password is "qwe"
 );
+------------------ ENDPERSONS ------------------
 
 -------------------- TASKS --------------------
 INSERT INTO task (
@@ -103,6 +104,8 @@ INSERT INTO task (
     now(),
     now()
 );
+------------------- ENDTASKS --------------------
+
 -------------------- OFFER -----------------------
 INSERT INTO offer (
     acceptee_id,
@@ -129,4 +132,4 @@ INSERT INTO contract (
 	TRUE,
 	'ongoing'
 );
--------------------- ENDTASKS -----------------
+------------------ ENDCONTRACTS -----------------
