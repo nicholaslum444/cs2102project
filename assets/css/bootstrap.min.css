@@ -4680,7 +4680,8 @@ fieldset[disabled] .navbar-default .btn-link:hover {
 }
 .navbar-inverse {
     background-color: #222;
-    border-color: #080808
+    border-color: #080808;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 .navbar-inverse .navbar-brand {
     color: #9d9d9d

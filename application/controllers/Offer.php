@@ -126,13 +126,14 @@ class Offer extends CI_Controller {
     public function cancel($offer_id = -1) {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
             $user_id = $session_data['user_id'];
 
             if ($this->offer_model->delete($user_id, $offer_id)) {
-                $this->success();
+                $this->offer_delete_success();
 
             } else {
-                $this->failure();
+                $this->offer_delete_failure();
             }
         } else {
             redirect('login', 'refresh');
@@ -154,7 +155,32 @@ class Offer extends CI_Controller {
     private function failure() {
          if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
             $data['view'] = 'offer_failure_view';
+            $this->load->view('application_view', $data);
+         }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
+    private function offer_delete_success() {
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['view'] = 'offer_deleted_success_view';
+            $this->load->view('application_view', $data);
+         }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
+    private function offer_delete_failure() {
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['view'] = 'offer_deleted_failure_view';
             $this->load->view('application_view', $data);
          }
         else {

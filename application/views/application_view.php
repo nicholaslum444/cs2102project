@@ -36,9 +36,9 @@
           <?php
             if ($this->session->userdata('logged_in'))
             {
-            echo '<li><a href="/task/create">Create Task</a></li>';
-            echo '<li><a href="/offer">My Offers</a></li>';
-            echo '<li><a href="/task/available">Help Others</a>';
+            echo '<li><a href="/task/create">Create task</a></li>';
+            echo '<li><a href="/offer">My offers</a></li>';
+            echo '<li><a href="/task/available">Make an offer</a>';
             }
             ?>
             <li class="dropdown">

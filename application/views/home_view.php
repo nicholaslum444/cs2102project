@@ -1,14 +1,14 @@
 <div class="content">
     <h1><?php echo $header ?></h1>
     <hr>
-    <br/>
-    <p>Welcome to CS2102 NUS Maids.</p>
     
+    <?php
+    if (!empty($tasks)) {
+    ?>
     <div class="col-md-6">
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>#</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Start Date</th>
@@ -18,7 +18,6 @@
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
-                <td><?php echo $task['id']?></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['start_datetime']?></td>
@@ -30,5 +29,11 @@
             </tbody>
           </table>
     </div>
+    <?php
+    } 
+    else { ?>
+        <p>You have no tasks at the moment. Please create one.</p>
+    <?php  
+    } ?> 
 </div>
 
