@@ -1,5 +1,7 @@
+<meta http-equiv="Refresh" content="1; url=/task/available">
 <div class="content">
-		<h1>Offer Unsuccessful</h1>
+		<h1>Error encountered!</h1>
 		<hr>
-		<p>Your Offer has not been created. Click <a href="<?php echo base_url() ?>">here</a> to go back to home page.</p>
+		<p>Your offer has not been accepted. Please wait while we redirect you back.</p>
+		<p>If you are not redirected automatically, click <a href="/task/available">here</a>.</p>
 </div>

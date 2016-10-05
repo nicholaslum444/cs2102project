@@ -8,7 +8,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>#</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Start Date</th>
@@ -19,7 +18,6 @@
             <tbody>
               <tr>        
                 <?php foreach ($offers as $offer) { ?>
-                <td><?php echo $offer['offer_id']?></td>
                 <td><?php echo $offer['title']?></td>
                 <td><?php echo $offer['description']?></td>
                 <td><?php echo $offer['start_datetime']?></td>
@@ -35,7 +33,7 @@
     <?php
     } 
     else { ?>
-        <p>You have not offered to help any tasks.</p
+        <p>You have not offered to help any tasks.</p>
     <?php  
     } ?> 
 </div>

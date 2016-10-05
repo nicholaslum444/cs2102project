@@ -8,7 +8,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>#</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Start Date</th>
@@ -18,7 +17,6 @@
             <tbody>
               <tr>
               	<?php foreach ($available_tasks as $task) { ?>
-                <td><?php echo $task['id']?></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['start_datetime']?></td>

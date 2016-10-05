@@ -20,6 +20,6 @@
 	    <center><label for="text">My Price</label></center>
 	    <input type="number" step="0.01" class="form_control" name="price" ><br/>
 	    <input type="hidden" name="id" value="<?php echo $tasks['id'] ?>">
-	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Task" /></center>
+	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Make an offer!" /></center>
 	    <?php echo form_close('<br>'); ?>
 </div>
