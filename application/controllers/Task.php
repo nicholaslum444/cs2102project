@@ -79,10 +79,10 @@ class Task extends CI_Controller {
             $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
 
             if ($this->task_model->update($update_task_arr)) {
-                $this->success();
+                $this->update_success();
             
             } else {
-                $this->failure();
+                $this->update_failure();
             }
         }
     }
@@ -124,10 +124,10 @@ class Task extends CI_Controller {
             $user_id = $session_data['user_id'];
 
             if ($this->task_model->delete($user_id, $task_id)) {
-                $this->success();
+                $this->delete_success();
 
             } else {
-                $this->failure();
+                $this->delete_failure();
             }
 
         } else {
@@ -172,10 +172,56 @@ class Task extends CI_Controller {
         }
     }
 
+    private function update_success() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['view'] = 'task_update_success_view';
+            $this->load->view('application_view', $data);
+        }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
+    private function delete_success() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['view'] = 'task_delete_success_view';
+            $this->load->view('application_view', $data);
+        }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
     private function failure() {
          if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['view'] = 'task_failure_view';
+            $this->load->view('application_view', $data);
+         }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
+    private function update_failure() {
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['view'] = 'task_update_failure_view';
+            $this->load->view('application_view', $data);
+         }
+        else {
+        redirect('login', 'refresh');
+        }
+    }
+
+    private function delete_failure() {
+         if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['view'] = 'task_delete_failure_view';
             $this->load->view('application_view', $data);
          }
         else {

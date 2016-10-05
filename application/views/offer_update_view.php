@@ -18,7 +18,7 @@
 	    <br/>
 	    
 	    <center><label for="text">My Price</label></center>
-	    <input type="number" step="0.01" class="form-control" name="price" value="<?php echo $offers['price'] ?>"><br/>
+	    <input type="number" step="0.01" class="form_control" name="price" value="<?php echo $offers['price'] ?>"><br/>
 	    <input type="hidden" name="id" value="<?php echo $offers['id'] ?>">
 	    
 	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Offer" /></center>
