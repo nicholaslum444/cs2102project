@@ -38,7 +38,7 @@ class Task extends CI_Controller {
 
 
         if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
+            $this->create();
 
         } else {
             $title = $this->input->post('title');

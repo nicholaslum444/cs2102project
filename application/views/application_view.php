@@ -34,29 +34,22 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
           <?php
-            if ($this->session->userdata('logged_in'))
+            $session_data = $this->session->userdata('logged_in');
+            if ($session_data)
             {
-            echo '<li><a href="/offer">My offers</a></li>';
-            echo '<li><a href="/task/available">Make an offer</a>';
+                if ($session_data['user_role'] != ROLE_ADMIN) 
+                {
+                    echo '<li><a href="/offer">My offers</a></li>';
+                    echo '<li><a href="/task/available">Make an offer</a>';
+                }
+                else 
+                {
+                    echo '<li><a href="/admin">All Tasks</a></li>';
+                    echo '<li><a href="/admin/offer">All Offers</a></li>';
+                    echo '<li><a href="/admin/contract">All Contracts</a>';
+                }
             }
             ?>
-            <li class="dropdown">
-            <?php
-            if ($this->session->userdata('logged_in'))
-            { 
-                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>';
-                echo '<ul class="dropdown-menu">';
-                echo '<li><a href="#">Action</a></li>';
-                echo '<li><a href="#">Another action</a></li>';
-                echo '<li><a href="#">Something else here</a></li>';
-                echo '<li role="separator" class="divider"></li>';
-                echo '<li class="dropdown-header">Nav header</li>';
-                echo '<li><a href="#">Separated link</a></li>';
-                echo '<li><a href="#">One more separated link</a></li>';
-                echo '</ul>';
-                }
-               ?>
-            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
