@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata('logged_in')) {
-            redirect('', 'refresh');
+            $this->go_to_home($this->session->userdata('logged_in')['user_role']);
         }
         
         $data['view'] = 'login_view';
@@ -19,7 +19,7 @@ class Login extends CI_Controller {
     
     public function validate() {
         if ($this->session->userdata('logged_in')) {
-            redirect('', 'refresh');
+            $this->go_to_home($this->session->userdata('logged_in')['user_role']);
         }
 
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -30,13 +30,13 @@ class Login extends CI_Controller {
             $this->index();
 		} else {
 			// Go to home
-			redirect('', 'refresh');
+            $this->go_to_home($this->session->userdata('logged_in')['user_role']);
 		}
     }
 
 	public function check_database($password) {
         if ($this->session->userdata('logged_in')) {
-            redirect('', 'refresh');
+            $this->go_to_home($this->session->userdata('logged_in')['user_role']);
         }
 		// Field validation succeeded.  Validate against database
 		$username = $this->input->post('username');
@@ -54,10 +54,22 @@ class Login extends CI_Controller {
 		}
 	}
     
+    private function go_to_home($role) {
+        switch($role) {
+            case ROLE_ADMIN :
+                redirect('/admin', 'refresh');
+                break;
+                
+            default :
+                redirect('', 'refresh');
+        }
+    }
+    
     private function set_session($account) {
         $sess_array = [];
         $sess_array['user_id'] = $account->id;
-        $sess_array['username'] = $account->username;        
+        $sess_array['username'] = $account->username;
+        $sess_array['user_role'] = $account->role;
         $this->session->set_userdata('logged_in', $sess_array);
     }
  

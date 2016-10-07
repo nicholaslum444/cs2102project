@@ -1,7 +1,4 @@
 <?php
-define('ROLE_USER', 'USER');
-define('ROLE_ADMIN', 'ADMIN');
-
 class Account_model extends CI_Model {
     
     public function login($username, $password) {

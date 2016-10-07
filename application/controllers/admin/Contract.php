@@ -1,11 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Contract extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->model('task_model');
+        $this->load->model('offer_model');
     }
 
 	public function index() {
@@ -13,16 +14,21 @@ class Home extends CI_Controller {
             redirect('login', 'refresh');
             return;
         }
+        
         $session_data = $this->session->userdata('logged_in');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
         $data['username'] = $session_data['username'];
         $data['user_id'] = $session_data['user_id'];
-        $data['user_role'] = $session_data['user_role'];
-        $data['tasks'] = $this->task_model->get_user_tasks($session_data['user_id']);
         
-        $data['header'] = 'NUSMaids Home';
-        $data['page_title'] = 'Home';
-        $data['view'] = 'home_view';
-        $this->load->view('application_view', $data);
+        $data['header'] = 'My Pending Offers';
+        $data['page_title'] = 'All Contracts';
+        $data['view'] = 'admin/contract_view';
+        $this->load->view('admin/application_view', $data);
 	}
 }
 ?>

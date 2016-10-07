@@ -6,7 +6,26 @@ class Task_model extends CI_Model {
                 FROM task 
                 WHERE creator_id = ?";
 
-        return $this->db->query($task_sql, [$user_id])->result_array();  
+        return $this->db->query($task_sql, [$user_id])->result_array();
+    }
+    
+    public function get_all_tasks() {
+        $task_sql = "
+            SELECT
+                a.username,
+                t.id, 
+                t.title, 
+                t.description, 
+                t.start_datetime, 
+                t.end_datetime 
+            FROM 
+                task t,
+                account a
+            WHERE
+                t.creator_id = a.id
+            ";
+
+        return $this->db->query($task_sql)->result_array();
     }
 
     public function get_available_tasks($user_id = -1) {
