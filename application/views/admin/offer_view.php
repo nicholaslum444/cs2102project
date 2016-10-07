@@ -23,8 +23,8 @@
                 <td><?php echo '$'.$offer['price']?></td>
                 <td><?php echo $offer['offer_creator']?></td>
                 <td><?php echo $offer['task_creator']?></td>
-                <td><a href="offer/update/<?php echo $offer['offer_id'] ?>">Update</a></td>
-                <td><a href="offer/cancel/<?php echo $offer['offer_id'] ?>">Cancel</a></td>
+                <td><a href="/offer/update/<?php echo $offer['offer_id'] ?>">Update</a></td>
+                <td><a href="/offer/cancel/<?php echo $offer['offer_id'] ?>">Cancel</a></td>
               </tr> 
          <?php } ?>
          </tbody>
