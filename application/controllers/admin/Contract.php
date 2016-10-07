@@ -25,7 +25,7 @@ class Contract extends CI_Controller {
         $data['username'] = $session_data['username'];
         $data['user_id'] = $session_data['user_id'];
         
-        $data['header'] = 'My Pending Offers';
+        $data['header'] = 'All Contracts';
         $data['page_title'] = 'All Contracts';
         $data['view'] = 'admin/contract_view';
         $this->load->view('admin/application_view', $data);

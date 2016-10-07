@@ -4,7 +4,7 @@
     <?php
     if (empty($contracts)) {
     ?>
-        You have not offered to help any tasks.
+        You have no contracts made yet.
     <?php
     } else {
         foreach ($contracts as $contract) {
