@@ -9,7 +9,7 @@
             <br/>
             <input type="password" class="form_control" id="password" name="password" placeholder="Password"/>
             <br/>
-            <center><input type="submit" class="btn btn-lg btn-primary" value="Login"/></center>
+            <center><input type="submit" class="loginBtn btn-lg btn-primary" value="Login"/></center>
         <?php echo form_close('<br>'); ?>
     <p><a href="/signup"><center>No account? Click here to signup instead!</center></a></p>
 </div>

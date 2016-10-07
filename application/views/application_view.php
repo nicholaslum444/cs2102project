@@ -36,7 +36,6 @@
           <?php
             if ($this->session->userdata('logged_in'))
             {
-            echo '<li><a href="/task/create">Create task</a></li>';
             echo '<li><a href="/offer">My offers</a></li>';
             echo '<li><a href="/task/available">Make an offer</a>';
             }
@@ -70,7 +69,7 @@
             if ($this->session->userdata('logged_in'))
             {
               echo "You are logged in as " . '<b>'. $username . '</b>';
-              echo  '| <a href="/logout">Sign Out</a>';  
+              echo  ' | <a href="/logout">Sign Out</a>';  
             }
             ?>
     </div>
@@ -93,7 +92,6 @@
     
     <!-- Persistent footer goes here -->
      <div class="footer">
-        <hr> 
         <p>&copy; NUS Maids. All rights reserved.</p>
       </div>
     </div> <!-- /container -->

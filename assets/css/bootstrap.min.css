@@ -6,7 +6,7 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 html {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "Lucida Typewriter";
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%
 }
@@ -1184,7 +1184,7 @@ h6 {
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
-    color: inherit
+    color: #343477
 }
 .h1 .small,
 .h1 small,
@@ -1220,7 +1220,7 @@ h6 small {
 h1,
 h2,
 h3 {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px
 }
 .h1 .small,
@@ -2034,6 +2034,7 @@ pre code {
     }
     .col-md-6 {
         width: 100%;
+        padding-bottom: 100px;
     }
     .col-md-5 {
         width: 41.66666667%
@@ -3108,9 +3109,30 @@ textarea.input-lg {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
-    width: 400px;
-
+    width: 200px;
 }
+.loginBtn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 400px;
+}
+
 .btn.active.focus,
 .btn.active:focus,
 .btn.focus,
@@ -4681,7 +4703,7 @@ fieldset[disabled] .navbar-default .btn-link:hover {
 .navbar-inverse {
     background-color: #222;
     border-color: #080808;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: Lucida Typewriter;
 }
 .navbar-inverse .navbar-brand {
     color: #9d9d9d
@@ -5051,7 +5073,7 @@ a.badge:hover {
     padding-bottom: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #e5e5e5
+    background-color: #fff;
 }
 .jumbotron .h1,
 .jumbotron h1 {
@@ -5059,7 +5081,7 @@ a.badge:hover {
 }
 .jumbotron p {
     margin-bottom: 15px;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 200
 }
 .jumbotron>hr {
@@ -6844,40 +6866,54 @@ button.close {
     }
 }
 .form_control {   
-	display: block; margin: auto; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	display: block; margin: auto; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: Lucida Typewriter;
 } 
 
+.title_control {   
+    display: block; width: 600px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: Lucida Typewriter;
+} 
+
+.date_control {
+    display: block; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: Lucida Typewriter;
+}
+
+.time_control {
+    display: block; margin: -35px 0 0 230px; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: Lucida Typewriter;
+}
+
 .textarea_control {   
-	display: block; margin: auto; width: 400px; height: 100px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	display: block; width: 600px; height: 100px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: Lucida Typewriter;
 } 
 .errorValidation {
-    text-align: center; color: #FF0000;	 font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; font-size: 16px;
+    text-align: center; color: #FF0000;	font-family: Lucida Typewriter ; font-size: 16px;
 }  
 .alignSignUpButton {
-	margin: auto; width: 400px; height: 50px; background-color: white; color: black; border: 2px solid #555555; text-align: center; font-size: 18px; border-radius: 4px; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	margin: auto; width: 400px; height: 50px; background-color: white; color: black; border: 2px solid #555555; text-align: center; font-size: 18px; border-radius: 4px; font-family: Lucida Typewriter;
 }
 .footer {
     position: fixed;
     left:0px;
     bottom:0px;
-    background: #fff;
+    color: #eee;
+    background: #222;
     vertical-align: middle;
 	text-align: center;
 	width:100%;
-	height:80px;
-    margin-top: 100px;
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;	
+	height:35px;
+	font-family: Lucida Typewriter;	
+    font-size: 14px;
+    padding-top: 5px;
 }  
 .content {
-    padding-bottom: 80px;
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    padding-bottom: 100px;
+	font-family: Lucida Typewriter;
 	margin-top: 120px;
     font-size: 16px;
 }
 
 .alignUserbar {
 	float: right;
-	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-family: Lucida Typewriter;
 	margin-top: 60px;
 	font-size: 14px;
 }

@@ -19,7 +19,7 @@ class Task extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
-            $data['header'] = 'Create Task';   
+            $data['header'] = 'Create Your Task';   
             $data['view'] = 'task_create_view';
             $data['page_title'] = 'Task';
             $this->load->view('application_view', $data);
@@ -103,7 +103,7 @@ class Task extends CI_Controller {
                 $data['tasks']['end_date'] = $end_datetime_arr[0];
                 $data['tasks']['end_time'] = $end_datetime_arr[1];
 
-                $data['header'] = 'Update Task';   
+                $data['header'] = 'Update My Task';   
                 $data['view'] = 'task_update_view';
                 $data['page_title'] = 'Task';
                 $this->load->view('application_view', $data);

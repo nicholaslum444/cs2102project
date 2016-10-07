@@ -1,7 +1,15 @@
 <div class="content">
-    <h1><?php echo $header ?></h1>
-    <hr>
+   
+    <div class="jumbotron">
+        <center><h1><?php echo $header ?></h1>
+        <p class="lead">Hi there! NUSMaids works very simple. First, all you have to do is to create your task 
+        by submitting a request </br> on the button below. You can also pick a task by making an offer. </p>
+        <p><a class="btn btn-lg btn-success" href="/task/create" role="button">Create My Task</a></p></center>
+      </div>  
     
+    <div class="page-header">
+        <h1>My Tasks</h1>
+      </div>
     <?php
     if (!empty($tasks)) {
     ?>
