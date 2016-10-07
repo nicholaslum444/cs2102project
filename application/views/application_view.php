@@ -29,6 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          if()
           <a href="/"><img src="/assets/img/homeLogo.jpg" width="50" height="50"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

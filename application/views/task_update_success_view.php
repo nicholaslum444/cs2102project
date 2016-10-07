@@ -1,4 +1,11 @@
-<meta http-equiv="Refresh" content="1; url=<?php echo base_url() ?>">
+<?php 
+$session_data = $this->session->userdata('logged_in');
+if ($session_data['user_role'] != ROLE_ADMIN)
+   echo '<meta http-equiv="Refresh" content="1; url=/">';        
+else 
+   echo '<meta http-equiv="Refresh" content="1; url=/admin">'; 
+?>
+
 <div class="content">
 		<h1>Success!</h1>
 		<hr>
