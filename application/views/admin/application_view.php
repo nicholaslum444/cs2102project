@@ -33,13 +33,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <?php
-                        if ($this->session->userdata('logged_in')) {
-                            echo '<li><a href="/admin">All Tasks</a></li>';
-                            echo '<li><a href="/admin/offer">All Offers</a></li>';
-                            echo '<li><a href="/admin/contract">All Contracts</a>';
-                        }
-                    ?>
+                    <?php if ($this->session->userdata('logged_in')) { ?>
+                        <li><a href="/admin">All Tasks</a></li>
+                        <li><a href="/admin/offer">All Offers</a></li>
+                        <li><a href="/admin/contract">All Contracts</a>
+                        <li><a href="/home">BACK TO NORMAL USER</a>
+                    <?php } ?>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
