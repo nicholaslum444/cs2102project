@@ -6866,8 +6866,11 @@ button.close {
     }
 }
 .form_control {   
-	display: block; margin: auto; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+	display: block; margin-bottom: 20px; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
 } 
+.alignForm {
+	margin-left: 370px;
+}
 
 .title_control {   
     display: block; width: 600px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
@@ -6885,8 +6888,11 @@ button.close {
 	display: block; width: 600px; height: 100px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
 } 
 .errorValidation {
-    text-align: center; color: #FF0000;	font-family: "Proxima" ; font-size: 16px;
-}  
+    text-align: center; color: #FF0000; font-family: "Proxima" ; font-size: 16px;
+} 
+.taskErrorValidation {
+	text-align: justify; color: #FF0000; font-family: "Proxima" ; font-size: 16px;
+} 
 .alignSignUpButton {
 	margin: auto; width: 400px; height: 50px; background-color: white; color: black; border: 2px solid #555555; text-align: center; font-size: 18px; border-radius: 4px; font-family: "Proxima";
 }

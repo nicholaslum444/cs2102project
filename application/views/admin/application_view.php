@@ -73,7 +73,6 @@
         
         <!-- Persistent footer goes here -->
         <div class="footer">
-            <hr> 
             <p>&copy; NUS Maids. All rights reserved.</p>
         </div>
     </div><!-- /container -->

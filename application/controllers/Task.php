@@ -66,15 +66,16 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
 
+        $session_data = $this->session->userdata('logged_in');
+        $id = $this->input->post('id');
         if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
+            $this->update($id);
 
         } else {
             $title = $this->input->post('title');
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $id = $this->input->post('id');
 
             $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
 

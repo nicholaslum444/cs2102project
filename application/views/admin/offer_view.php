@@ -33,7 +33,7 @@
     <?php
     } 
     else { ?>
-        <p>You have not offered to help any tasks.</p>
+        <p>There are no offers at the moment.</p>
     <?php  
     } ?> 
 </div>

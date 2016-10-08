@@ -2,7 +2,7 @@
     <h1><?php echo $header ?></h1>
     <hr>
     
-    <p>YOU ARE AN ADMIN! HERE'S A LISTING OF ALL THE TASKS IN THE SYSTEM. CRUD ANYTHING YOU WANT.</p>
+    <p><center><b>You are assigned as an administrator. You can view and update all tasks, offers and contracts.</center></b></p>
     <?php
     if (!empty($tasks)) {
     ?>
@@ -37,7 +37,7 @@
     <?php
     } 
     else { ?>
-        <p>You have no tasks at the moment. Please create one.</p>
+        <p>There are no tasks at the moment.</p>
     <?php  
     } ?> 
 </div>

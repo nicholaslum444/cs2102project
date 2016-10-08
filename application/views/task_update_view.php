@@ -1,7 +1,7 @@
 <div class="content">
 		<h1><?php echo $header ?></h1>
 		<hr>
-		<span class="errorValidation"><?php echo validation_errors(); ?></span>
+		<div class="taskErrorValidation"><?php echo validation_errors(); ?></div>
 
 		<?php echo form_open('task/validate_update'); ?>
 	    <label for="text">Task Title</label>
