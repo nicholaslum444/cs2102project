@@ -37,6 +37,7 @@
             $session_data = $this->session->userdata('logged_in');
             echo '<li><a href="/offer">My offers</a></li>';
             echo '<li><a href="/task/available">Make an offer</a>';
+            echo '<li><a href="/contract">Contracts</a>';
                 if ($session_data['user_role'] == ROLE_ADMIN) 
                     echo '<li><a href="/admin">Admin Console</a>';
           ?>
