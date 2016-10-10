@@ -36,11 +36,11 @@
           <?php
             $session_data = $this->session->userdata('logged_in');
             if ($session_data)
-            {?>
-                <li><a href="/offer">My offers</a></li>;
-                <li><a href="/task/available">Make an offer</a></li>;
-				<li><a href="/contract">My contracts</a></li>;
-            <?php}
+            {
+				echo '<li><a href="/offer">My offers</a></li>';
+                echo '<li><a href="/task/available">Make an offer</a></li>';
+				echo '<li><a href="/contract">My contracts</a></li>';
+            }
             ?>
           </ul>
         </div><!--/.nav-collapse -->
