@@ -4,7 +4,7 @@
     <?php
     if (empty($contracts)) {
     ?>
-        There are no contracts made yet.
+        You have not made any contracts yet.
     <?php
     } else {
         foreach ($contracts as $contract) {

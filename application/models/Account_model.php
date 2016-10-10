@@ -1,6 +1,23 @@
 <?php
 class Account_model extends CI_Model {
     
+    public function get_all_usernames() {
+        $get_all_SQL = "
+            SELECT 
+                id,
+                username
+            FROM 
+                account
+        ";
+        
+        $get_all_result = $this->db->query($get_all_SQL)->result_array();
+        $usernames = [];
+        foreach($get_all_result as $row) {
+            $usernames[$row['id']] = $row['username'];
+        }
+        return $usernames;
+    }
+    
     public function login($username, $password) {
         $login_SQL = "
             SELECT 
@@ -46,6 +63,6 @@ class Account_model extends CI_Model {
         
         $create_acct_query = $this->db->query($create_acct_SQL, [$email, $username, $password_hash, $role]);
         
-        return $create_acct_SQL;
+        return $create_acct_query;
     }
 }
