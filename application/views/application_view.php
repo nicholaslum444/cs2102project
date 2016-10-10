@@ -35,21 +35,11 @@
           <ul class="nav navbar-nav">
           <?php
             $session_data = $this->session->userdata('logged_in');
-            if ($session_data)
-            {
-                if ($session_data['user_role'] != ROLE_ADMIN) 
-                {
-                    echo '<li><a href="/offer">My offers</a></li>';
-                    echo '<li><a href="/task/available">Make an offer</a>';
-                }
-                else 
-                {
-                    echo '<li><a href="/admin">All Tasks</a></li>';
-                    echo '<li><a href="/admin/offer">All Offers</a></li>';
-                    echo '<li><a href="/admin/contract">All Contracts</a>';
-                }
-            }
-            ?>
+            echo '<li><a href="/offer">My offers</a></li>';
+            echo '<li><a href="/task/available">Make an offer</a>';
+                if ($session_data['user_role'] == ROLE_ADMIN) 
+                    echo '<li><a href="/admin">Admin Console</a>';
+          ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
