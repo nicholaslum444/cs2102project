@@ -1,22 +1,25 @@
 <div class="content">
 		<h1><?php echo $header ?></h1>
-		<span class="errorValidation"><?php echo validation_errors(); ?></span>
+		<hr>
+		<div class="taskErrorValidation"><?php echo validation_errors(); ?></div>
 
 		<?php echo form_open('task/validate_update'); ?>
-	    <input type="input" class="form_control" name="title" placeholder="Title of your task" value="<?php echo $tasks['title'] ?>" /><br/>
+	    <label for="text">Task Title</label>
+	    <input type="input" class="title_control" name="title" value="<?php echo $tasks['title'] ?>" /><br/>
 
-	    <textarea type="input" class="textarea_control" name="description" placeholder="Description of your task"/><?php echo $tasks['description'] ?></textarea><br/>
+	    <label for="text">Task Description</label>
+	    <textarea type="input" class="textarea_control" name="description"><?php echo $tasks['description'] ?></textarea><br/>
 
-	    <center><label for="text">Enter your start date and time</label></center><br/>
-	    <input type="date" class="form_control" name="start_date" value="<?php echo $tasks['start_date'] ?>"><br/>
-	    <input type="time" class="form_control" name="start_time" value="<?php echo $tasks['start_time'] ?>"><br/>
+	    <label for="text">Start Date and Time</label><br/>
+	    <input type="date" class="date_control" name="start_date" value="<?php echo $tasks['start_date'] ?>">
+	    <input type="time" class="time_control" name="start_time" value="<?php echo $tasks['start_time'] ?>"><br/>
 
-	    <center><label for="text">Enter your end date and time</label></center><br/>
-	    <input type="date" class="form_control" name="end_date"  value="<?php echo $tasks['end_date'] ?>"><br/>
-	    <input type="time" class="form_control" name="end_time" value="<?php echo $tasks['end_time'] ?>"><br/>
+	    <label for="text">Enter your end date and time</label><br/>
+	    <input type="date" class="date_control" name="end_date"  value="<?php echo $tasks['end_date'] ?>">
+	    <input type="time" class="time_control" name="end_time" value="<?php echo $tasks['end_time'] ?>"><br/>
 
 	    <br/>
 	    <input type="hidden" name="id" value="<?php echo $tasks['id'] ?>">
-	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Task" /></center>
+	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
 	    <?php echo form_close('<br>'); ?>
 </div>

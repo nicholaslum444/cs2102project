@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-              <a href="/"><img src="/assets/img/homeLogo.jpg" width="50" height="50"></a>
+              <a href="/admin"><img src="/assets/img/homeLogo.jpg" width="50" height="50"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -50,7 +50,7 @@
             <?php
                 if ($this->session->userdata('logged_in')) {
                     echo "You are logged in as " . '<b>'. $username . '</b>';
-                    echo  '| <a href="/logout">Sign Out</a>';  
+                    echo  ' | <a href="/logout">Sign Out</a>';  
                 }
             ?>
         </div>

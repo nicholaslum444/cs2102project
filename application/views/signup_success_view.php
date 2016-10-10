@@ -1,5 +1,5 @@
-
 <meta http-equiv="Refresh" content="1; url=/login">
+
 <div class="content">
 	<h1>Account Creation Successful</h1>
 	<hr>

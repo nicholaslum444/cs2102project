@@ -3,24 +3,19 @@
 		<hr>
 		<span class="errorValidation"><?php echo validation_errors(); ?></span>
 
-		<?php echo form_open('offer/validate_update'); ?>
-	    <input type="input" class="form_control" name="title" placeholder="Title of your task" value="<?php echo $offers['title'] ?>" readonly /><br/>
+		<div class="panel">
+        <h3><strong>Task Title: </strong><?php echo $offers['title'] ?></h3>
+        <p><strong>Description: </strong><em><?php echo $offers['description'] ?></em></p>
+        <p><strong>Start: </strong><?php echo $offers['start_date']." ".$offers['start_time']; ?></p>
+        <p><strong>End: </strong><?php echo $offers['end_date']." ".$offers['end_time']; ?></p>
+    </div>
+    <center><p>Update my offer for the task above!</p></center>
+    <span class="errorValidation"><?php echo validation_errors(); ?></span>
 
-	    <textarea type="input" class="textarea_control" name="description" placeholder="Description of your task" readonly /><?php echo $offers['description'] ?></textarea><br/>
-
-	    <center><label for="text">Enter your start date and time</label></center>
-	    <input type="date" class="form_control" name="start_date" value="<?php echo $offers['start_date'] ?>" readonly ><br/>
-	    <input type="time" class="form_control" name="start_time" value="<?php echo $offers['start_time'] ?>" readonly ><br/>
-
-	    <center><label for="text">Enter your end date and time</label></center>
-	    <input type="date" class="form_control" name="end_date"  value="<?php echo $offers['end_date'] ?>" readonly ><br/>
-	    <input type="time" class="form_control" name="end_time" value="<?php echo $offers['end_time'] ?>" readonly ><br/>
-	    <br/>
-	    
-	    <center><label for="text">My Price</label></center>
-	    <input type="number" step="0.01" class="form_control" name="price" value="<?php echo $offers['price'] ?>"><br/>
-	    <input type="hidden" name="id" value="<?php echo $offers['id'] ?>">
-	    
-	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Offer" /></center>
-	    <?php echo form_close('<br>'); ?>
+    <?php echo form_open('offer/validate_update'); ?>
+        <center><label for="text">My Price</label></center>
+        <center><input type="number" step="0.01" class="date_control" name="price" value="<?php echo $offers['price'] ?>"></center><br/>
+        <input type="hidden" name="id" value="<?php echo $offers['id'] ?>">
+        <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Offer" /></center>
+    <?php echo form_close('<br>'); ?>
 </div>
