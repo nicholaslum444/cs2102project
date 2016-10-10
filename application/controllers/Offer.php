@@ -79,14 +79,14 @@ class Offer extends CI_Controller {
 
     public function validate_update() {
         $this->form_validation->set_rules('price', 'Price', 'required');
+        $session_data = $this->session->userdata('logged_in');
+        $offer_id = $this->input->post('id');
 
         if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
+            $this->update($offer_id);
 
         } else {
-            $session_data = $this->session->userdata('logged_in');
             $user_id = $session_data['user_id'];
-            $offer_id = $this->input->post('id');
             $price = $this->input->post('price');
 
             $update_offer_arr = [$price, $offer_id];

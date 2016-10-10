@@ -33,9 +33,10 @@ class Task extends CI_Controller {
     public function validate() {
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
-
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->create();
@@ -63,8 +64,10 @@ class Task extends CI_Controller {
     public function validate_update() {
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
 
         $session_data = $this->session->userdata('logged_in');
         $id = $this->input->post('id');
@@ -76,7 +79,7 @@ class Task extends CI_Controller {
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-
+ 
             $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
 
             if ($this->task_model->update($update_task_arr)) {
@@ -158,6 +161,41 @@ class Task extends CI_Controller {
             return $date . ' ' . '00:00';
         } else {
             return $date . ' ' . $time;
+        }
+    }
+
+    public function checkYear() {
+        $start_date = $this->input->post('start_date');
+        if(!empty($start_date) && $start_date < 2016) {
+             $this->form_validation->set_message('checkYear','Your start date must be 2016');
+                return false;
+        }
+        else
+            return true;
+    }
+
+    public function compareDateTime() {
+        $start_date = $this->input->post('start_date');
+        $start_time = $this->input->post('start_time');
+        $end_date = $this->input->post('end_date');
+        $end_time = $this->input->post('end_time');
+
+        if(!empty($end_date)) {
+            if($start_date > $end_date) {
+                $this->form_validation->set_message('compareDateTime','Your end date must be later than your start date.');
+                return false;
+            }
+            if(!empty($start_time) && !empty($end_time)) {
+                if ($start_time > $end_time) {
+                    $this->form_validation->set_message('compareDateTime','Your start time must be earlier than your end time.');
+                    return false;
+            }
+                elseif ($start_time == $end_time) {
+                    $this->form_validation->set_message('compareDateTime','Your start time must not be the same as the end time.');
+                    return false;
+                }
+            }
+                return true;
         }
     }
 
