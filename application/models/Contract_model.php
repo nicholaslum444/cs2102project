@@ -57,16 +57,10 @@ class Contract_model extends CI_Model {
 			UPDATE 
 				contract
             SET (
-				id, 
-				offer_id, 
-				created_datetime, 
 				last_updated_datetime, 
 				accepted_conditions, 
 				status
 			) VALUES (
-				?,
-				?,
-				now(), 
 				now(),
 				?,
 				?
