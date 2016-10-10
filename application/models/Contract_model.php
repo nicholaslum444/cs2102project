@@ -19,7 +19,7 @@ class Contract_model extends CI_Model {
 				?,
 				?
 			)";
-		return $this->db->query->($contract_sql, $array);
+		return $this->db->query($contract_sql, $array);
 	}
 	
 	// basic read function for contract (search by id)
@@ -37,7 +37,7 @@ class Contract_model extends CI_Model {
 			WHERE 
 				c.id = ?
 		";
-		return $this->db->query->($contract_sql, $contract_id)->result_array();
+		return $this->db->query($contract_sql, $contract_id)->result_array();
 	}
 	
 	// read all function for contract
@@ -48,7 +48,7 @@ class Contract_model extends CI_Model {
 			FROM 
 				contract c
 		";
-		return $this->db->query->($contract_sql)->result_array();
+		return $this->db->query($contract_sql)->result_array();
 	}
 	
 	// basic update function for contract

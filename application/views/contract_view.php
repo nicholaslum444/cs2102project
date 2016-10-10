@@ -25,7 +25,7 @@
                 <td><?php echo $contract['last_updated_datetime']?></td>
                 <td><?php echo $contract['accepted_conditions']?></td>
 				<td><?php echo $contract['status']?></td>
-                <td><a href="contract/update_contract_by_id/<?php echo $contract['contract_id'] ?>">Update</a></td>
+                <td><a href="contract/update_contract_by_id/<?php echo $contract['id'] ?>">Update</a></td>
               </tr> 
          <?php } ?>
          </tbody>
