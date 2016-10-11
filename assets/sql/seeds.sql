@@ -32,8 +32,8 @@ INSERT INTO task (
     created_datetime,
     last_updated_datetime
 ) VALUES (
-    'Important announcement. LETS SEE IF YOU NOTICE THIS', 
-    'Maximum offer price is limited to 1000 in db. So try anything funny and it will fail.',
+    'Hey admin', 
+    'Create more user accounts please',
     now(),
     now(),
     1,
@@ -82,7 +82,15 @@ INSERT INTO offer (
 ) VALUES (
     2,
     1,
-    20
+    20000000.00000
+), (
+    2, 
+    2, 
+    1985.50
+), (
+    2,
+    3,
+    10
 );
 -------------------- ENDOFFER -----------------------
 

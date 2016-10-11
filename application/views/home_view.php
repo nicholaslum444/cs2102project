@@ -32,6 +32,7 @@
                 <td><?php echo $task['end_datetime']?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>">Update</a></td>
                 <td><a href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
+                <td><a href="offer/view/<?php echo $task['id'] ?>">View Offers</a></td>
               </tr> 
             <?php } ?>
             </tbody>

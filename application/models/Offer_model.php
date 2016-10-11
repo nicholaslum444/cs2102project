@@ -10,6 +10,15 @@ class Offer_model extends CI_Model {
 
 		return $this->db->query($offer_sql, [$acceptee_id])->result_array();
 	}
+
+    public function get_offers_for_task($task_id = -1) {
+        $offer_sql = "SELECT o.acceptee_id, o.price, o.id as offer_id, p.username
+        FROM offer o, account p
+        WHERE p.id = o.acceptee_id
+        AND o.task_id = ?";
+
+        return $this->db->query($offer_sql, [$task_id])->result_array();
+    }
     
     public function get_all_offers() {
 		$offer_sql = "

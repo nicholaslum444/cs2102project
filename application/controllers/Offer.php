@@ -16,14 +16,30 @@ class Offer extends CI_Controller {
             $data['user_id'] = $session_data['user_id'];
             $data['offers'] = $this->offer_model->get_offers_by_acceptee($session_data['user_id']);
             $data['header'] = 'My Pending Offers';   
-            $data['view'] = 'offer_view';
+            $data['view'] = 'offer_from_me_view';
             $data['page_title'] = 'My Offers';
             $this->load->view('application_view', $data);
-        }
-        else {
+        
+        } else {
             redirect('login', 'refresh');
         }
 	}
+
+    public function view($task_id) {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['offers'] = $this->offer_model->get_offers_for_task($task_id);
+            $data['task'] = $this->task_model->get($task_id);
+            $data['header'] = 'Offers for this task';
+            $data['view'] = 'offer_from_others_view';
+            $data['page_title'] = 'Pending Offers';
+            $this->load->view('application_view', $data);
+
+        } else {
+            redirect('login', 'refresh');
+        }
+    }
 
     public function create($task_id) {
         if ($this->session->userdata('logged_in')) {
