@@ -53,9 +53,10 @@
     <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="alignUserbar">
-            <?php
+            <?php if ($session_data) {
               echo "You are logged in as " . '<b>'. $username . '</b>';
               echo  ' | <a href="/logout">Sign Out</a>';  
+            }
             ?>
     </div>
     <?php 
