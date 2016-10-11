@@ -186,11 +186,11 @@ class Task extends CI_Controller {
                 return false;
             }
             if(!empty($start_time) && !empty($end_time)) {
-                if ($start_time > $end_time) {
+                if ($start_date == $end_date && $start_time > $end_time) {
                     $this->form_validation->set_message('compareDateTime','Your start time must be earlier than your end time.');
                     return false;
             }
-                elseif ($start_time == $end_time) {
+                elseif ($start_date == $end_date && $start_time == $end_time) {
                     $this->form_validation->set_message('compareDateTime','Your start time must not be the same as the end time.');
                     return false;
                 }
