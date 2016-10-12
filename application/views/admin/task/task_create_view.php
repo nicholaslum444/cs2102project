@@ -3,7 +3,7 @@
 		<hr>
 		<span class="errorValidation"><?php echo validation_errors(); ?></span>
 
-		<?php echo form_open('task/validate'); ?>
+		<?php echo form_open('admin/task/validate'); ?>
 	    <input type="input" class="form_control" name="title" placeholder="Title of your task"/><br/>
 
 	    <textarea type="input" class="textarea_control" name="description" placeholder="Description of your task"/></textarea><br/>

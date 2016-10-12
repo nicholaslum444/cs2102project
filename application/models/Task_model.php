@@ -23,6 +23,8 @@ class Task_model extends CI_Model {
                 account a
             WHERE
                 t.creator_id = a.id
+            ORDER BY 
+                t.id ASC
             ";
 
         return $this->db->query($task_sql)->result_array();
@@ -42,9 +44,19 @@ class Task_model extends CI_Model {
     }
 
     public function get($task_id) {
-        $task_sql = "SELECT id, title, description, start_datetime, end_datetime
-            FROM task
-            WHERE id = ?";
+        $task_sql = "
+            SELECT 
+                id, 
+                title, 
+                description, 
+                start_datetime, 
+                end_datetime, 
+                creator_id
+            FROM 
+                task
+            WHERE 
+                id = ?
+        ";
 
         $task_query = $this->db->query($task_sql, [$task_id]);
         
@@ -62,12 +74,38 @@ class Task_model extends CI_Model {
     }
 
     public function update($array) {
-        $task_sql = "UPDATE task
-                    SET (title, description, start_datetime, end_datetime, last_updated_datetime) = 
-                    (?, ?, ?, ?, now())
-                    WHERE id = ?";
+        $task_update_SQL = '
+            UPDATE
+                task
+            SET 
+                title = ?,
+                description = ?,
+                start_datetime = ?,
+                end_datetime = ?,
+                last_updated_datetime = now()
+            WHERE 
+                id = ?
+        ';
 
-        return $this->db->query($task_sql, $array);
+        return $this->db->query($task_update_SQL, $array);
+    }
+
+    public function update_admin($array) {
+        $task_update_SQL = '
+            UPDATE
+                task
+            SET 
+                title = ?,
+                description = ?,
+                start_datetime = ?,
+                end_datetime = ?,
+                creator_id = ?,
+                last_updated_datetime = now()
+            WHERE 
+                id = ?
+        ';
+
+        return $this->db->query($task_update_SQL, $array);
     }
 
     // Check if user_id is admin or member before deleting
@@ -76,5 +114,16 @@ class Task_model extends CI_Model {
                     WHERE id=?";
 
         return $this->db->query($task_sql, $task_id);            
+    }
+    
+    public function delete_admin($task_id) {
+        $task_delete_SQL = "
+            DELETE FROM 
+                task 
+            WHERE 
+                id = ?
+        ";
+
+        return $this->db->query($task_delete_SQL, $task_id);            
     }
 }

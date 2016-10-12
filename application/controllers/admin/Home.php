@@ -28,7 +28,7 @@ class Home extends CI_Controller {
         
         $data['header'] = 'NUSMaids Admin Home';
         $data['page_title'] = 'Home';
-        $data['view'] = 'admin/home_view';
+        $data['view'] = 'admin/home/home_view';
         $this->load->view('admin/application_view', $data);
 	}
 }

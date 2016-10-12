@@ -29,7 +29,7 @@ class Task extends CI_Controller {
         
         $data['header'] = 'All Tasks';
         $data['page_title'] = 'All Tasks';
-        $data['view'] = 'admin/task_view';
+        $data['view'] = 'admin/task/task_view';
         $this->load->view('admin/application_view', $data);
 	}
 
@@ -49,10 +49,68 @@ class Task extends CI_Controller {
         
         $data['user_id'] = $session_data['user_id'];
         $data['username'] = $session_data['username'];
-        $data['header'] = 'Create A Task';   
-        $data['view'] = 'admin/task_create_view';
+        $data['header'] = 'Create A Task';
         $data['page_title'] = 'Create Task';
+        $data['view'] = 'admin/task/task_create_view';
         $this->load->view('admin/application_view', $data);
+    }
+
+    // Check that creator_id is updating this task
+    public function update($task_id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
+        
+        $session_data = $this->session->userdata('logged_in');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
+        $data['user_id'] = $session_data['user_id'];
+        $data['username'] = $session_data['username'];
+
+        if (!$data['tasks'] = $this->task_model->get($task_id)) {
+            redirect('admin/task', 'refresh');
+            return;
+        }
+        
+        $data['all_usernames'] = $this->account_model->get_all_usernames();
+        
+        // Set start and end date and time input fields 
+        // in data array
+        $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
+        $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
+        $data['tasks']['start_date'] = $start_datetime_arr[0];
+        $data['tasks']['start_time'] = $start_datetime_arr[1];
+        $data['tasks']['end_date'] = $end_datetime_arr[0];
+        $data['tasks']['end_time'] = $end_datetime_arr[1];
+        // get creator id and put in data
+
+        $data['header'] = 'Update Task';   
+        $data['page_title'] = 'Update Task';
+        $data['view'] = 'admin/task/task_update_view';
+        $this->load->view('admin/application_view', $data);
+    }
+
+    // Check that creator_id is deleting this task
+    public function delete($task_id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
+        
+        $session_data = $this->session->userdata('logged_in');
+        $user_id = $session_data['user_id'];
+
+        if ($this->task_model->delete_admin($task_id)) {
+            $this->success('deleted');
+
+        } else {
+            $this->failure('deleted');
+        }
     }
 
     // Check that start_datetime <= end_datetime
@@ -61,6 +119,7 @@ class Task extends CI_Controller {
             redirect('login', 'refresh');
             return;
         }
+        
         $session_data = $this->session->userdata('logged_in');
         
         if ($session_data['user_role'] != ROLE_ADMIN) {
@@ -84,91 +143,54 @@ class Task extends CI_Controller {
         $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
         $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
         $creator_id = $this->input->post('creator_id');
-        
-        $user_id = $session_data['user_id'];
 
-        $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime];
+        $create_task_arr = [$creator_id, $title, $description, $start_datetime, $end_datetime];
 
         if ($this->task_model->create($create_task_arr)) {
-            $this->success();
+            $this->success("created");
             return;
         }
         $this->failure();
     }
 
     public function validate_update() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
+        
+        $session_data = $this->session->userdata('logged_in');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
         $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
+        $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
 
-        if ($this->form_validation->run() === FALSE) {
+        if (!$this->form_validation->run()) {
             show_error('Please fill up the relevant fields!');
-
-        } else {
-            $title = $this->input->post('title');
-            $description = $this->input->post('description');
-            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
-            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $id = $this->input->post('id');
-
-            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
-
-            if ($this->task_model->update($update_task_arr)) {
-                $this->update_success();
-            
-            } else {
-                $this->update_failure();
-            }
-        }
-    }
-
-    // Check that creator_id is updating this task
-    public function update($task_id) {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
             return;
         }
         
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
+        $title = $this->input->post('title');
+        $description = $this->input->post('description');
+        $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
+        $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+        $creator_id = $this->input->post('creator_id');
+        $id = $this->input->post('id');
 
-        if (!$data['tasks'] = $this->task_model->get($task_id)) {
-            redirect('task', 'refresh');
-            return;
+        $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $creator_id, $id];
+
+        if ($this->task_model->update_admin($update_task_arr)) {
+            $this->success("updated");
         }
         
-        // Set start and end date and time input fields 
-        // in data array
-        $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
-        $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
-        $data['tasks']['start_date'] = $start_datetime_arr[0];
-        $data['tasks']['start_time'] = $start_datetime_arr[1];
-        $data['tasks']['end_date'] = $end_datetime_arr[0];
-        $data['tasks']['end_time'] = $end_datetime_arr[1];
-
-        $data['header'] = 'Update Task';   
-        $data['view'] = 'task_update_view';
-        $data['page_title'] = 'Task';
-        $this->load->view('application_view', $data);
-    }
-
-    // Check that creator_id is deleting this task
-    public function delete($task_id) {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-        
-        $session_data = $this->session->userdata('logged_in');
-        $user_id = $session_data['user_id'];
-
-        if ($this->task_model->delete($user_id, $task_id)) {
-            $this->delete_success();
-
-        } else {
-            $this->delete_failure();
-        }
+        $this->failure();
     }
 
     public function available() {
@@ -196,7 +218,7 @@ class Task extends CI_Controller {
         }
     }
 
-    private function success() {
+    private function success($action = 'ACTION_PERFORMED') {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
@@ -204,11 +226,12 @@ class Task extends CI_Controller {
         
         $session_data = $this->session->userdata('logged_in');
         $data['username'] = $session_data['username'];
-        $data['view'] = 'task_success_view';
+        $data['action_performed'] = $action;
+        $data['view'] = 'admin/task/task_success_view';
         $this->load->view('application_view', $data);
     }
 
-    private function update_success() {
+    private function failure($action = 'ACTION_ATTEMPTED') {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
@@ -216,52 +239,8 @@ class Task extends CI_Controller {
         
         $session_data = $this->session->userdata('logged_in');
         $data['username'] = $session_data['username'];
-        $data['view'] = 'task_update_success_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function delete_success() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-    
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-        $data['view'] = 'task_delete_success_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function failure() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-        
-        $session_data = $this->session->userdata('logged_in');
-        $data['view'] = 'task_failure_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function update_failure() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-
-        $session_data = $this->session->userdata('logged_in');
-        $data['view'] = 'task_update_failure_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function delete_failure() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-
-        $session_data = $this->session->userdata('logged_in');
-        $data['view'] = 'task_delete_failure_view';
+        $data['action_attempted'] = $action;
+        $data['view'] = 'admin/task/task_failure_view';
         $this->load->view('application_view', $data);
     }
 }
