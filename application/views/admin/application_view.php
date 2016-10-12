@@ -83,7 +83,6 @@
     <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
     <!-- Javascript -->
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/docs.min.js"></script>
 </body>
 
 </html>
