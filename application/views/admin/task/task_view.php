@@ -30,7 +30,7 @@
                 <td><?php echo $task['end_datetime']?></td>
                 <td><?php echo $task['username']?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>">Update</a></td>
-                <td><a href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete Task ID <?php echo $task['id'] ?>?')" href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
               </tr> 
             <?php } ?>
             </tbody>

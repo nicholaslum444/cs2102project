@@ -228,7 +228,7 @@ class Task extends CI_Controller {
         $data['username'] = $session_data['username'];
         $data['action_performed'] = $action;
         $data['view'] = 'admin/task/task_success_view';
-        $this->load->view('application_view', $data);
+        $this->load->view('admin/application_view', $data);
     }
 
     private function failure($action = 'ACTION_ATTEMPTED') {
@@ -241,7 +241,7 @@ class Task extends CI_Controller {
         $data['username'] = $session_data['username'];
         $data['action_attempted'] = $action;
         $data['view'] = 'admin/task/task_failure_view';
-        $this->load->view('application_view', $data);
+        $this->load->view('admin/application_view', $data);
     }
 }
 ?>
