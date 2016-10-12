@@ -1,8 +1,7 @@
 <div class="content">
 		<h1><?php echo $header ?></h1>
 		<hr>
-		<span class="errorValidation"><?php echo validation_errors(); ?></span>
-
+        
 		<div class="panel">
         <h3><strong>Task Title: </strong><?php echo $offers['title'] ?></h3>
         <p><strong>Description: </strong><em><?php echo $offers['description'] ?></em></p>

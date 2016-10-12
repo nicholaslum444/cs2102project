@@ -37,7 +37,7 @@
                         <li><a href="/admin/task">All Tasks</a></li>
                         <li><a href="/admin/offer">All Offers</a></li>
                         <li><a href="/admin/contract">All Contracts</a>
-                        <li><a href="/home">BACK TO NORMAL USER</a>
+                        <li><a href="/home">Normal User</a>
                     <?php } ?>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -72,7 +72,6 @@
         
         <!-- Persistent footer goes here -->
         <div class="footer">
-            <hr>
             <p>Admin Console | &copy; NUS Maids. All rights reserved.</p>
         </div>
     </div><!-- /container -->

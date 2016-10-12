@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS task (
     title VARCHAR(512) NOT NULL,
     description TEXT,
     start_datetime TIMESTAMP NOT NULL,
-    end_datetime TIMESTAMP NOT NULL,
+    end_datetime TIMESTAMP NOT NULL CHECK (end_datetime >= start_datetime),
     creator_id INTEGER NOT NULL,
     created_datetime TIMESTAMP NOT NULL,
     last_updated_datetime TIMESTAMP NOT NULL,

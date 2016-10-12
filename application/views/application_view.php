@@ -19,6 +19,9 @@
 </head>
 
 <body>
+<?php
+    $session_data = $this->session->userdata('logged_in');
+?>
     <!-- Navbar can go here, or anything persistent -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
      <div class="container">
@@ -33,21 +36,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-          <?php
-            $session_data = $this->session->userdata('logged_in');
-            if ($session_data)
-            {
-                if ($session_data['user_role'] != ROLE_ADMIN) 
-                {
-                    echo '<li><a href="/offer">My offers</a></li>';
-                    echo '<li><a href="/task/available">Make an offer</a>';
-                }
-                else 
-                {
-                    echo '<li><a href="/admin">All Tasks</a></li>';
-                    echo '<li><a href="/admin/offer">All Offers</a></li>';
-                    echo '<li><a href="/admin/contract">All Contracts</a>';
-                }
+          <?php if ($session_data) {
+            echo '<li><a href="/offer">My offers</a></li>';
+            echo '<li><a href="/task/available">Make an offer</a>';
+            echo '<li><a href="/offer/">View offers on my task</a>';
+            echo '<li><a href="/contract">My Contracts</a>';
+            if ($session_data['user_role'] == ROLE_ADMIN) 
+                echo '<li><a href="/admin">Admin Console</a>';
             }
             ?>
           </ul>
@@ -58,9 +53,7 @@
     <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="alignUserbar">
-            <?php
-            if ($this->session->userdata('logged_in'))
-            {
+            <?php if ($session_data) {
               echo "You are logged in as " . '<b>'. $username . '</b>';
               echo  ' | <a href="/logout">Sign Out</a>';  
             }
