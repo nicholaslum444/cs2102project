@@ -31,7 +31,8 @@
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>">Update</a></td>
-                <td><a href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
+</td>
                 <td><a href="offer/view/<?php echo $task['id'] ?>">View Offers</a></td>
               </tr> 
             <?php } ?>

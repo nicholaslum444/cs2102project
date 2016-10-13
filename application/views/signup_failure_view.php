@@ -1,4 +1,4 @@
-<meta http-equiv="Refresh" content="1; url=/signup">
+<meta http-equiv="Refresh" content="2; url=/signup">
 
 <div class="content">
 	<h1>Account Creation Unsuccessful</h1>
