@@ -5,7 +5,12 @@ Read this document before you clone the repo. Follow the steps here to set up yo
 
 ## 1. Setup
 
-### 1.1 Repository Secrets
+### 1.1. Bitnami Configuration
+Use localhost port 8081. Ensure that http://localhost:8081/ resolves to this homepage.
+
+Find the PHP config file `wappstack-xxx-x/php/php.ini` in the Bitnami root folder and open it. Search for `opcache.enable` and ensure that the line is set to `opcache.enable=0`. This disables the caching of pages so your changes in the PHP code are immediately visible.
+
+### 1.2. Repository Secrets
 The file `database.php` is where the database login information are stored i.e. the database name, username and password for the php database connection. It is found in the `/application/config/` folder. It is gitignored so the repo will not have the exact file `database.php`. 
 
 An example file `database.php.example` is provided. This file is laid out exactly like the actual `database.php`, except that it does not have sensitive data.
@@ -17,7 +22,7 @@ When committing code, ensure that sensitive data is not committed as well. Alway
 _**Note:** In the scenario you encounter PHP Startup: Unable to load dynamic library /Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll' - dlopen(/Applications/Bitnami-mappstack-5.6.25-0/php/lib/php/extensions/php_pdo_pgsql.dll, 9): error message, go to your bitnami php folder, php/etc/php.ini and comment out extension=php_pdo_mysql.dll by removing the ";" at the front. Then restart your apache server._
 
 
-### 1.2. Schema and Seed Data
+### 1.3. Schema and Seed Data
 The database schema and seed data are stored in the `sql` directory in the repository root.
 
 This is how to set the schema in `schema.sql`.
@@ -50,13 +55,13 @@ You may also create more accounts for your own usage. Do not that accounts canno
 
 ## 3. Development
 
-### 3.1 CodeIgniter
+### 3.1. CodeIgniter
 The CodeIgniter framework is built on PHP and should not require additional installation. Following the steps above is sufficient to get a running copy of the website on your local host. Please read on for more information on the development of the website.
 
-### 3.2 MVC Architecture
+### 3.2. MVC Architecture
 CodeIgniter is an MVC framework. The controllers, views and models can be found in the respective folders inside the `/application/` folder. When writing code, please stick to the MVC architecture.
 
-### 3.3 Views
+### 3.3. Views
 We improve upon the CodeIgniter way of loading views. There is a "master" view file called `application_view.php` that contains all the static code that every page should have. This view also contains a line of code that can load an additional view. This additional view is intended to be the actual view that a controller would want to load.
 
 **Example**: The Home controller wants to load its view called `home_view.php`. 
