@@ -1,4 +1,4 @@
-<meta http-equiv="Refresh" content="1; url=/task/create">
+<meta http-equiv="Refresh" content="2; url=/task/create">
 <div class="content">
 		<h1>Error encountered!</h1>
 		<hr>

@@ -1,4 +1,4 @@
-<meta http-equiv="Refresh" content="1; url=/">     
+<meta http-equiv="Refresh" content="2; url=/">     
 
 <div class="content">
 		<h1>Error Encountered!</h1>
