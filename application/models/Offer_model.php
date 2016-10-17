@@ -64,22 +64,35 @@ class Offer_model extends CI_Model {
     }
     
     public function create($array) {
+        $validate_sql = "SELECT creator_id FROM task WHERE id = ?";
+        $validate_query = $this->db->query($validate_sql, [$array[1]]);
+
+        if ($validate_query->num_rows() == 1) {
+            $creator_id = $validate_query->row()->creator_id;
+
+            if ($creator_id == $array[0]) {
+                return FALSE;
+            }
+        }
+
     	$offer_sql = "INSERT INTO offer (acceptee_id, task_id, price) VALUES (?, ?, ?)";
 
     	return $this->db->query($offer_sql, [$array[0], $array[1], $array[2]]);
     }
 
-    public function update($array) {
+    public function update($price, $offer_id, $acceptee_id) {
     	$offer_sql = "UPDATE offer
     				SET price = ?
-    				WHERE id = ?";
-    	return $this->db->query($offer_sql, $array);
+    				WHERE id = ?
+                    AND acceptee_id = ?";
+    	return $this->db->query($offer_sql, [$price, $offer_id, $acceptee_id]);
     }
 
     public function delete($acceptee_id, $offer_id) {
-    	$task_sql = "DELETE FROM offer 
-                    WHERE id=?";
+    	$offer_sql = "DELETE FROM offer 
+                    WHERE id = ?
+                    AND acceptee_id = ?";
 
-        return $this->db->query($task_sql, $offer_id);   
+        return $this->db->query($offer_sql, [$offer_id, $acceptee_id]);   
     }
 }

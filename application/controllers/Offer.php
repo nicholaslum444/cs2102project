@@ -105,9 +105,7 @@ class Offer extends CI_Controller {
             $user_id = $session_data['user_id'];
             $price = $this->input->post('price');
 
-            $update_offer_arr = [$price, $offer_id];
-
-            if ($this->offer_model->update($update_offer_arr)) {
+            if ($this->offer_model->update($price, $offer_id, $user_id)) {
                 $this->success();
 
             } else {
