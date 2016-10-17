@@ -70,6 +70,7 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
 
         $session_data = $this->session->userdata('logged_in');
+        $user_id = $session_data['user_id'];
         $id = $this->input->post('id');
         if ($this->form_validation->run() === FALSE) {
             $this->update($id);
@@ -80,7 +81,7 @@ class Task extends CI_Controller {
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
  
-            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id];
+            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id, $user_id];
 
             if ($this->task_model->update($update_task_arr)) {
                 $this->update_success();
@@ -127,7 +128,7 @@ class Task extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             $user_id = $session_data['user_id'];
 
-            if ($this->task_model->delete($user_id, $task_id)) {
+            if ($this->task_model->delete($user_id, $task_id, $user_id)) {
                 $this->delete_success();
 
             } else {

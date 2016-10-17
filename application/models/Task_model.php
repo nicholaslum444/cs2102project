@@ -85,6 +85,8 @@ class Task_model extends CI_Model {
                 last_updated_datetime = now()
             WHERE 
                 id = ?
+            AND 
+                creator_id = ?
         ';
 
         return $this->db->query($task_update_SQL, $array);
@@ -109,11 +111,12 @@ class Task_model extends CI_Model {
     }
 
     // Check if user_id is admin or member before deleting
-    public function delete($user_id, $task_id) {
+    public function delete($user_id, $task_id, $user_id) {
         $task_sql = "DELETE FROM task 
-                    WHERE id=?";
+                    WHERE id = ?
+                    AND creator_id = ?";
 
-        return $this->db->query($task_sql, $task_id);            
+        return $this->db->query($task_sql, [$task_id, $user_id]);            
     }
     
     public function delete_admin($task_id) {
