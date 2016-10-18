@@ -96,16 +96,20 @@ INSERT INTO offer (
 
 -------------------- CONTRACTS --------------------
 INSERT INTO contract (
+	employer_id,
+	employee_id,
+	task_id,
 	offer_id,
     created_datetime,
     last_updated_datetime,
-    accepted_conditions,
-    status
+    completion_status
 ) VALUES (
+	3,
 	1,
+	2,
+	3,
 	now(),
 	now(),
-	TRUE,
 	'ONGOING'
 );
 ------------------ ENDCONTRACTS -----------------
