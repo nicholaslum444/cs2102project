@@ -5,18 +5,22 @@ class Contract_model extends CI_Model {
 	public function create_contract($array){
 		$contract_sql = "
 			INSERT INTO contract(
-				id, 
+				id,
+				employer_id,
+				employee_id,
+				task_id,
 				offer_id, 
 				created_datetime, 
 				last_updated_datetime, 
-				accepted_conditions, 
 				status
 			) VALUES (
 				?,
 				?,
+				?,
+				?,
+				?,
 				now(), 
 				now(),
-				?,
 				?
 			)";
 		return $this->db->query($contract_sql, $array);
@@ -27,10 +31,12 @@ class Contract_model extends CI_Model {
 		$contract_sql = "
 			SELECT 
 				c.id, 
+				c.employer_id,
+				c.employee_id,
+				c.task_id,
 				c.offer_id, 
 				c.created_datetime, 
 				c.last_updated_datetime,
-				c.accepted_conditions,
 				c.status
 			FROM 
 				contract c
@@ -58,11 +64,9 @@ class Contract_model extends CI_Model {
 				contract
             SET (
 				last_updated_datetime, 
-				accepted_conditions, 
 				status
 			) VALUES (
 				now(),
-				?,
 				?
             WHERE id = ?";
 
