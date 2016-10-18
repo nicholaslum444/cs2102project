@@ -1,7 +1,11 @@
 <div class="content">
-	<h1>Available Tasks</h1>
-	<hr>
-	<?php 
+  <div class="jumbotron">
+        <input type="text" name="search" class="searchBox" placeholder="Search..">
+      </div>  
+
+  <h1>Available Tasks</h1>
+  <hr>
+  <?php 
     if (!empty($available_tasks)) {
 	?>
 	 <div class="col-md-6">
@@ -21,7 +25,7 @@
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
-                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>">Accept</a></td>
+                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>"><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
             <?php } ?>
             </tbody>

@@ -1,7 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    function bigImg(x) {
+    x.style.height = "40px";
+    x.style.width = "40px";
+    }   
 
+    function normalImg(x) {
+    x.style.height = "25px";
+    x.style.width = "25px";
+    }
+</script>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

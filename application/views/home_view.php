@@ -1,9 +1,8 @@
-<div class="content">
-   
+<div class="content">  
     <div class="jumbotron">
         <center><h1><?php echo $header ?></h1>
         <p class="lead">Hi there! NUSMaids works very simple. First, all you have to do is to create your task 
-        by submitting a request </br> on the button below. You can also pick a task by making an offer. </p>
+        by </br> submitting a request on the button below. You can also pick a task by making an offer. </p>
         <p><a class="btn btn-lg btn-success" href="/task/create" role="button">Create My Task</a></p></center>
       </div>  
     
@@ -30,14 +29,14 @@
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
-                <td><a href="task/update/<?php echo $task['id'] ?>">Update</a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
-</td>
-                <td><a href="offer/view/<?php echo $task['id'] ?>">View Offers</a></td>
+                <td><a href="task/update/<?php echo $task['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25">
+                </a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a href="offer/view/<?php echo $task['id'] ?>"><img src="/assets/img/viewOffer.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
             <?php } ?>
             </tbody>
-          </table>
+          </table>       
     </div>
     <?php
     } 
