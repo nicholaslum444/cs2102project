@@ -13,7 +13,7 @@
     if (!empty($tasks)) {
     ?>
     <div class="col-md-6">
-          <table class="table table-striped">
+          <table class="table table-bordered table-hover">
             <thead>
               <tr class="info">
                 <th>OFFERS/$</th>

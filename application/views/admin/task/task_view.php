@@ -9,7 +9,7 @@
     if (!empty($tasks)) {
     ?>
     <div class="col-lg-12">
-          <table class="table table-striped">
+          <table class="table table-bordered table-hover">
             <thead>
               <tr class="danger">
                 <th>TASK ID</th>
