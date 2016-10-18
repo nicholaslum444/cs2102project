@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS offer (
 
 CREATE TABLE IF NOT EXISTS contract ( 
     id SERIAL NOT NULL,
-	employer_id NOT NULL,
-	employee_id NOT NULL,
+	employer_id SERIAL NOT NULL,
+	employee_id SERIAL NOT NULL,
 	task_id SERIAL NOT NULL,
     offer_id INTEGER NOT NULL,
     created_datetime TIMESTAMP NOT NULL,
