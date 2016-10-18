@@ -37,6 +37,8 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
         $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->create();
@@ -46,11 +48,13 @@ class Task extends CI_Controller {
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+            $category = $this->convert_int_to_category($this->input->post('category'));
+            $price = $this->input->post('price');
             
             $session_data = $this->session->userdata('logged_in');
             $user_id = $session_data['user_id'];
 
-            $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime];
+            $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime, $category, $price];
 
             if ($this->task_model->create($create_task_arr)) {
                 $this->success();
@@ -68,6 +72,8 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
         $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required');
 
         $session_data = $this->session->userdata('logged_in');
         $user_id = $session_data['user_id'];
@@ -80,8 +86,10 @@ class Task extends CI_Controller {
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+            $category = $this->convert_int_to_category($this->input->post('category'));
+            $price = $this->input->post('price');
  
-            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $id, $user_id];
+            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $category, $price, $id, $user_id];
 
             if ($this->task_model->update($update_task_arr)) {
                 $this->update_success();
@@ -197,6 +205,30 @@ class Task extends CI_Controller {
                 }
             }
                 return true;
+        }
+    }
+
+    private function convert_int_to_category($category) {
+        switch ($category) {
+            case 1:
+                return 'DELIVERY';
+                break;
+
+            case 2:
+                return 'CLEANING';
+                break;
+
+            case 3:
+                return 'HANDYMAN';
+                break;
+
+            case 4:
+                return 'MOVING';
+                break;
+            
+            default:
+                return 'DELIVERY';
+                break;
         }
     }
 
