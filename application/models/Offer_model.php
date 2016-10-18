@@ -30,7 +30,8 @@ class Offer_model extends CI_Model {
                 t.end_datetime, 
                 p1.username as task_creator, 
                 p2.username as offer_creator, 
-                o.price, 
+                o.price as offer_price,
+				t.price as task_price,
                 o.id as offer_id
             FROM 
                 task t, 
