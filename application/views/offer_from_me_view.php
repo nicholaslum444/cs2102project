@@ -5,14 +5,16 @@
     if (!empty($offers)) {
     ?>
      <div class="col-md-6">
-          <table class="table table-striped">
+          <table class="table table-bordered table-hover">
             <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>  
-                <th>Price</th>  
+              <tr class="info">
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th>  
+                <th>PRICE</th>  
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -20,11 +22,11 @@
                 <?php foreach ($offers as $offer) { ?>
                 <td><?php echo $offer['title']?></td>
                 <td><?php echo $offer['description']?></td>
-                <td><?php echo $offer['start_datetime']?></td>
-                <td><?php echo $offer['end_datetime']?></td>
+                <td><?php echo date('d-M-Y g:i A', strtotime($offer['start_datetime']))?></td>
+                <td><?php echo date('d-M-Y g:i A', strtotime($offer['end_datetime']))?></td>
                 <td><?php echo $offer['price']?></td>
-                <td><a href="offer/update/<?php echo $offer['offer_id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to cancel <?php echo $offer['title'] ?>?')" href="offer/cancel/<?php echo $offer['offer_id'] ?>"><img src="/assets/img/cancel.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a href="offer/update/<?php echo $offer['offer_id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to cancel <?php echo $offer['title'] ?>?')" href="offer/cancel/<?php echo $offer['offer_id'] ?>" title="Cancel"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></td>
               </tr> 
          <?php } ?>
          </tbody>

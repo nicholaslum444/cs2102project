@@ -11,8 +11,8 @@
     ?>
         <hr>
         <p><?php echo json_encode($contract) ?></p>
-        <p><a href="contract/update/<?php echo $contract['contract_id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></p>
-        <p><a href="contract/cancel/<?php echo $contract['contract_id'] ?>"><img src="/assets/img/cancel.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></p>
+        <p><a href="contract/update/<?php echo $contract['contract_id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></a></p>
+        <p><a href="contract/cancel/<?php echo $contract['contract_id'] ?>" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></a></p>
     <?php
         }
     }

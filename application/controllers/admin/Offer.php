@@ -141,7 +141,7 @@ class Offer extends CI_Controller {
         $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
 
         if (!$this->form_validation->run()) {
-            $this->update();
+            $this->create();
             return;
         }
         

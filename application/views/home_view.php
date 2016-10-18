@@ -3,7 +3,7 @@
         <center><h1><?php echo $header ?></h1>
         <p class="lead">Hi there! NUSMaids works very simple. First, all you have to do is to create your task 
         by </br> submitting a request on the button below. You can also pick a task by making an offer. </p>
-        <p><a class="btn btn-lg btn-success" href="/task/create" role="button">Create My Task</a></p></center>
+        <p><a class="btn btn-lg btn-info" href="/task/create" role="button">Create My Task</a></p></center>
       </div>  
     
     <div class="page-header">
@@ -13,26 +13,32 @@
     if (!empty($tasks)) {
     ?>
     <div class="col-md-6">
-          <table class="table table-striped">
+          <table class="table table-bordered table-hover">
             <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>   
+              <tr class="info">
+                <th>OFFERS/$</th>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th> 
+                <th></th>
+                <th></th>
+                <th></th>  
               </tr>
             </thead>
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
+                <td><span class="badge"><?php echo $task['offer_count']?> 
+                </span><span class="badge"><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
-                <td><?php echo $task['start_datetime']?></td>
-                <td><?php echo $task['end_datetime']?></td>
-                <td><a href="task/update/<?php echo $task['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25">
+                <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
+                <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
+                <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                 </a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
-                <td><a href="offer/view/<?php echo $task['id'] ?>"><img src="/assets/img/viewOffer.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+                <td><a href="offer/view/<?php echo $task['id'] ?>" title="View Offers"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></a></td>
               </tr> 
             <?php } ?>
             </tbody>

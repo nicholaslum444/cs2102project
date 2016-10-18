@@ -9,13 +9,14 @@
     if (!empty($available_tasks)) {
 	?>
 	 <div class="col-md-6">
-          <table class="table table-striped">
+          <table class="table table-bordered table-hover">
             <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>   
+              <tr class="info">
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th>   
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -23,9 +24,9 @@
               	<?php foreach ($available_tasks as $task) { ?>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
-                <td><?php echo $task['start_datetime']?></td>
-                <td><?php echo $task['end_datetime']?></td>
-                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>"><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
+                <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
+                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>" title="Accept"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a></td>
               </tr> 
             <?php } ?>
             </tbody>

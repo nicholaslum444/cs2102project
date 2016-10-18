@@ -7,6 +7,7 @@ class Task extends CI_Controller {
         parent::__construct();
         $this->load->model('task_model');
         $this->load->model('account_model');
+        $this->load->model('category_model');
     }
 
 	public function index() {
@@ -47,6 +48,7 @@ class Task extends CI_Controller {
         }
         
         $data['all_usernames'] = $this->account_model->get_all_usernames();
+        $data['all_categories'] = array_merge([''=>'Please Select'], $this->category_model->get_all_categories());
         
         $data['user_id'] = $session_data['user_id'];
         $data['username'] = $session_data['username'];
@@ -56,8 +58,7 @@ class Task extends CI_Controller {
         $this->load->view('admin/application_view', $data);
     }
 
-    // Check that creator_id is updating this task
-    public function update($task_id) {
+    public function update($task_id = -1) {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
@@ -79,6 +80,7 @@ class Task extends CI_Controller {
         }
         
         $data['all_usernames'] = $this->account_model->get_all_usernames();
+        $data['all_categories'] = $this->category_model->get_all_categories();
         
         // Set start and end date and time input fields 
         // in data array
@@ -134,22 +136,26 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
         $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
-        $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
+        $this->form_validation->set_rules('creator_id', 'Creator', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
+        $this->form_validation->set_rules('category', 'Category', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->create();
             return;
         }
         
+        $creator_id = $this->input->post('creator_id');
         $title = $this->input->post('title');
         $description = $this->input->post('description');
         $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
         $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-        $creator_id = $this->input->post('creator_id');
+        $category = $this->input->post('category');
+        $price = $this->input->post('price');
+        
+        $args = [$creator_id, $title, $description, $start_datetime, $end_datetime, $category, $price];
 
-        $create_task_arr = [$creator_id, $title, $description, $start_datetime, $end_datetime];
-
-        if ($this->task_model->create($create_task_arr)) {
+        if ($this->task_model->create($args)) {
             $this->success("created");
         } else {
             $this->failure("created");
@@ -168,6 +174,7 @@ class Task extends CI_Controller {
             redirect('home', 'refresh');
             return;
         }
+        $id = $this->input->post('id');
         
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
@@ -176,9 +183,12 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
         $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_rules('id', 'ID', 'required');
 
         if (!$this->form_validation->run()) {
-            $this->update();
+            $this->update($id);
             return;
         }
         
@@ -187,11 +197,10 @@ class Task extends CI_Controller {
         $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
         $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
         $creator_id = $this->input->post('creator_id');
-        $id = $this->input->post('id');
+        $category = $this->input->post('category');
+        $price = $this->input->post('price');
 
-        $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $creator_id, $id];
-
-        if ($this->task_model->update_admin($update_task_arr)) {
+        if ($this->task_model->update_admin($title, $description, $category, $price, $creator_id, $start_datetime, $end_datetime, $id)) {
             $this->success("updated");
         } else {
             $this->failure("updated");

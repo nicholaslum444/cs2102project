@@ -9,14 +9,16 @@
     if (!empty($offers)) { 
         ?>
         <div class="col-lg-12">
-            <table class="table table-striped">
+            <table class="table table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th>Offer ID</th>
-                        <th>Task Title</th>
-                        <th>Task Creator</th>
-                        <th>Offer Creator</th>
-                        <th>Offered Price</th>
+                    <tr class="info">
+                        <th>OFFER ID</th>
+                        <th>TASK TITLE</th>
+                        <th>TASK CREATOR</th>
+                        <th>OFFER CREATOR</th>
+                        <th>OFFERED PRICE</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>       
@@ -29,8 +31,8 @@
                             <td><?php echo $offer['task_creator']?></td>
                             <td><?php echo $offer['offer_creator']?></td>
                             <td><?php echo '$'.$offer['price']?></td>
-                            <td><a href="/admin/offer/update/<?php echo $offer['offer_id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
-                            <td><a href="/admin/offer/cancel/<?php echo $offer['offer_id'] ?>" onClick="javascript:return confirm('Are you sure you want to cancel Offer ID <?php echo $offer['offer_id'] ?>?')"><img src="/assets/img/cancel.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                            <td><a href="/admin/offer/update/<?php echo $offer['offer_id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></td>
+                            <td><a href="/admin/offer/cancel/<?php echo $offer['offer_id'] ?>" onClick="javascript:return confirm('Are you sure you want to cancel Offer ID <?php echo $offer['offer_id'] ?>?')" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
                         </tr> 
                         <?php 
                     } 

@@ -2,11 +2,64 @@
 class Task_model extends CI_Model {
     
     public function get_user_tasks($user_id = -1) {
-        $task_sql = "SELECT id, title, description, start_datetime, end_datetime
-                FROM task 
-                WHERE creator_id = ?";
+        $task_sql = "
+        SELECT 
+            o.task_id as id,
+            max(o.price) as max_offer_price, 
+            count(o.task_id) as offer_count,
+            t.title,
+            t.description,
+            t.start_datetime, 
+            t.end_datetime
+        FROM task t, offer o 
+        WHERE t.creator_id = ?
+        AND t.id = o.task_id
+        GROUP BY 
+            o.task_id,
+            t.title,
+            t.description,
+            t.start_datetime, 
+            t.end_datetime
+        ORDER BY count(o.task_id) DESC";
 
-        return $this->db->query($task_sql, [$user_id])->result_array();
+        $with_offer_tasks = $this->db->query($task_sql, [$user_id])->result_array();
+
+        $task_sql2 = "
+        SELECT 
+            t2.id,
+            t2.title,
+            t2.description,
+            t2.start_datetime,
+            t2.end_datetime
+        FROM task t2
+        WHERE t2.id NOT IN (
+            SELECT 
+                o.task_id as id
+            FROM task t, offer o 
+            WHERE t.creator_id = ?
+            AND t.id = o.task_id
+            GROUP BY 
+                o.task_id
+        )";
+
+        $no_offer_tasks = $this->db->query($task_sql2, [$user_id])->result_array();
+        $this->add_price_and_offer_count_to_tasks($no_offer_tasks);
+
+        for($i = 0; $i < sizeof($no_offer_tasks); $i++) {
+            array_push($with_offer_tasks, $no_offer_tasks[$i]);
+        }
+
+        return $with_offer_tasks;
+    }
+
+    private function add_price_and_offer_count_to_tasks(&$array) {
+        for ($i = 0; $i < sizeof($array); $i++) {
+            $array[$i]['max_offer_price'] = 0;
+            $array[$i]['offer_count'] = 0;
+        }
+        
+        //print_r($array);
+        return $array;
     }
     
     public function get_all_tasks() {
@@ -16,6 +69,8 @@ class Task_model extends CI_Model {
                 t.id, 
                 t.title, 
                 t.description, 
+                category,
+                price,
                 t.start_datetime, 
                 t.end_datetime 
             FROM 
@@ -51,7 +106,9 @@ class Task_model extends CI_Model {
                 description, 
                 start_datetime, 
                 end_datetime, 
-                creator_id
+                creator_id,
+                category,
+                price
             FROM 
                 task
             WHERE 
@@ -68,7 +125,18 @@ class Task_model extends CI_Model {
     }
 
     public function create($array) {
-        $task_sql = "INSERT INTO task (creator_id, title, description, start_datetime, end_datetime, created_datetime, last_updated_datetime) VALUES (?, ?, ?, ?, ?, now(), now())";
+        $task_sql = "
+            INSERT INTO task (
+                creator_id, 
+                title, 
+                description, 
+                start_datetime, 
+                end_datetime, 
+                category, 
+                price, 
+                created_datetime, 
+                last_updated_datetime
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, now(), now())";
 
         return $this->db->query($task_sql, $array);
     }
@@ -82,6 +150,8 @@ class Task_model extends CI_Model {
                 description = ?,
                 start_datetime = ?,
                 end_datetime = ?,
+                category = ?,
+                price = ?,
                 last_updated_datetime = now()
             WHERE 
                 id = ?
@@ -92,22 +162,24 @@ class Task_model extends CI_Model {
         return $this->db->query($task_update_SQL, $array);
     }
 
-    public function update_admin($array) {
+    public function update_admin($title, $desc, $category, $price, $creator_id, $start, $end, $task_id) {
         $task_update_SQL = '
             UPDATE
                 task
             SET 
                 title = ?,
                 description = ?,
+                category = ?,
+                price = ?,
+                creator_id = ?,
                 start_datetime = ?,
                 end_datetime = ?,
-                creator_id = ?,
                 last_updated_datetime = now()
             WHERE 
                 id = ?
         ';
 
-        return $this->db->query($task_update_SQL, $array);
+        return $this->db->query($task_update_SQL, [$title, $desc, $category, $price, $creator_id, $start, $end, $task_id]);
     }
 
     // Check if user_id is admin or member before deleting

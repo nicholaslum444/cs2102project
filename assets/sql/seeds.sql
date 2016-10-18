@@ -29,6 +29,8 @@ INSERT INTO task (
     start_datetime,
     end_datetime,
     creator_id,
+    category,
+    price,
     created_datetime,
     last_updated_datetime
 ) VALUES (
@@ -37,6 +39,8 @@ INSERT INTO task (
     now(),
     now(),
     1,
+    'HANDYMAN',
+    43.50,
     now(),
     now()
 ), (
@@ -45,6 +49,8 @@ INSERT INTO task (
     now(),
     now(),
     1,
+    'CLEANING',
+    98.7,
     now(),
     now()
 ), (
@@ -53,6 +59,8 @@ INSERT INTO task (
     now(),
     now(),
     1,
+    'CLEANING',
+    0.2,
     now(),
     now()
 ), (
@@ -61,6 +69,8 @@ INSERT INTO task (
     now(),
     now(),
     1,
+    'MOVING',
+    3.50,
     now(),
     now()
 ), (
@@ -69,6 +79,8 @@ INSERT INTO task (
     now(),
     now(),
     2,
+    'DELIVERY',
+    450,
     now(),
     now()
 );
@@ -91,21 +103,33 @@ INSERT INTO offer (
     2,
     3,
     10
+), (
+    2,
+    3,
+    11
+), (
+    2,
+    3,
+    12
 );
 -------------------- ENDOFFER -----------------------
 
 -------------------- CONTRACTS --------------------
 INSERT INTO contract (
+	employer_id,
+	employee_id,
+	task_id,
 	offer_id,
     created_datetime,
     last_updated_datetime,
-    accepted_conditions,
-    status
+    completion_status
 ) VALUES (
+	3,
 	1,
+	2,
+	3,
 	now(),
 	now(),
-	TRUE,
 	'ONGOING'
 );
 ------------------ ENDCONTRACTS -----------------

@@ -13,7 +13,7 @@
            
         <input type="password" class="form_control" id="passwordconf" name="passwordconf" placeholder="Confirm Password"/>
              
-        <input name="submit" type="submit" class="loginBtn btn-lg btn-primary" value="Sign Up"/>
+        <center><input name="submit" type="submit" class="loginBtn btn-lg btn-primary" value="Sign Up"/></center>
         <?php echo form_close('<br>'); ?></div>
     <p><center>Already have an account? Please click <a href="/login">here</a> to login instead.</center></p>
 </div>
