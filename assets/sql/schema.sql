@@ -5,14 +5,23 @@ DROP TABLE IF EXISTS contract CASCADE;
 
 DROP TYPE IF EXISTS role_type CASCADE;
 DROP TYPE IF EXISTS status_type;
+DROP TYPE IF EXISTS category_type;
 
 -- ENUMS --
+CREATE TYPE category_type AS ENUM (
+    'DELIVERY',
+    'CLEANING',
+    'HANDYMAN',
+    'MOVING'
+);
+
 CREATE TYPE status_type AS ENUM (
     'PENDING', 
     'ONGOING', 
     'COMPLETED', 
     'CANCELLED'
 );
+
 CREATE TYPE role_type AS ENUM (
     'ADMIN',
     'USER'
@@ -38,6 +47,8 @@ CREATE TABLE IF NOT EXISTS task (
     start_datetime TIMESTAMP NOT NULL,
     end_datetime TIMESTAMP NOT NULL CHECK (end_datetime >= start_datetime),
     creator_id INTEGER NOT NULL,
+    category category_type NOT NULL,
+    price NUMERIC(1000, 2) CHECK (price > 0),
     created_datetime TIMESTAMP NOT NULL,
     last_updated_datetime TIMESTAMP NOT NULL,
     PRIMARY KEY (id),

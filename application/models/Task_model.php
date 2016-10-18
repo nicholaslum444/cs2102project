@@ -2,9 +2,25 @@
 class Task_model extends CI_Model {
     
     public function get_user_tasks($user_id = -1) {
-        $task_sql = "SELECT id, title, description, start_datetime, end_datetime
-                FROM task 
-                WHERE creator_id = ?";
+        $task_sql = "
+        SELECT 
+            o.task_id as id,
+            max(o.price) as max_price, 
+            count(o.task_id) as offer_count,
+            t.title,
+            t.description,
+            t.start_datetime, 
+            t.end_datetime
+        FROM task t, offer o 
+        WHERE t.creator_id = ?
+        AND t.id = o.task_id
+        GROUP BY 
+            o.task_id,
+            t.title,
+            t.description,
+            t.start_datetime, 
+            t.end_datetime
+        ORDER BY count(o.task_id) DESC";
 
         return $this->db->query($task_sql, [$user_id])->result_array();
     }

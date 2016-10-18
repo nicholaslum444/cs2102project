@@ -26,7 +26,7 @@
               <tr>
                 <?php foreach ($tasks as $task) { ?>
                 <td><?php echo $task['title']?></td>
-                <td><?php echo $task['description']?></td>
+                <td><?php echo $task['description'] . ', offers: ' . $task['offer_count'] . ', max_price' . $task['max_price']?></td>
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25">
