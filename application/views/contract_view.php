@@ -7,7 +7,7 @@
      <div class="col-md-6">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="info">
                 <th>CONTRACT ID</th>
 				        <th>EMPLOYER</th>
 				        <th>EMPLOYEE</th>

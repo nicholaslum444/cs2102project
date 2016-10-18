@@ -11,11 +11,12 @@
 	 <div class="col-md-6">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="info">
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>START DATE</th>
                 <th>END DATE</th>   
+                <th></th>
               </tr>
             </thead>
             <tbody>

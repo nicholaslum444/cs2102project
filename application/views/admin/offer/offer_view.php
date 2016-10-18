@@ -7,12 +7,14 @@
      <div class="col-md-6">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="danger">
                 <th>TASK ID</th>
                 <th>TASK TITLE</th>
                 <th>OFFERED PRICE</th>
                 <th>OFFER CREATOR</th>
                 <th>TASK CREATOR</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

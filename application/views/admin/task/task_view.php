@@ -11,13 +11,15 @@
     <div class="col-lg-12">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="danger">
                 <th>TASK ID</th>
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>START DATE</th>
                 <th>END DATE</th>
                 <th>CREATOR</th> 
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -42,6 +44,6 @@
         <p>You have no tasks at the moment. Please create one.</p>
     <?php  
     } ?> 
-    <center><a class="btn btn-lg btn-success" role="button" href="/admin/task/create">Create Task</a></center>
+    <center><a class="btn btn-lg btn-danger" role="button" href="/admin/task/create">Create Task</a></center>
 </div>
 

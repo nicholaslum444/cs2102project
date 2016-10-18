@@ -15,7 +15,7 @@
 	 <div class="col-md-6">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="info">
                 <th>OFFERER</th>
                 <th>PRICE</th>
                 <th></th>

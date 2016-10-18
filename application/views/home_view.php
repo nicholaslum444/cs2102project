@@ -3,7 +3,7 @@
         <center><h1><?php echo $header ?></h1>
         <p class="lead">Hi there! NUSMaids works very simple. First, all you have to do is to create your task 
         by </br> submitting a request on the button below. You can also pick a task by making an offer. </p>
-        <p><a class="btn btn-lg btn-success" href="/task/create" role="button">Create My Task</a></p></center>
+        <p><a class="btn btn-lg btn-info" href="/task/create" role="button">Create My Task</a></p></center>
       </div>  
     
     <div class="page-header">
@@ -15,12 +15,15 @@
     <div class="col-md-6">
           <table class="table table-striped">
             <thead>
-              <tr>
+              <tr class="info">
                 <th></th>
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>START DATE</th>
-                <th>END DATE</th>   
+                <th>END DATE</th> 
+                <th></th>
+                <th></th>
+                <th></th>  
               </tr>
             </thead>
             <tbody>
