@@ -23,9 +23,9 @@
               <tr>        
                 <?php foreach ($contracts as $contract) { ?>
                 <td><?php echo $contract['id']?></td>
-				<td><?php echo $contract['employer_id']?></td>
-				<td><?php echo $contract['employee_id']?></td>
-				<td><?php echo $contract['task_id']?></td>
+				<td><?php echo $contract['employer_username']?></td>
+				<td><?php echo $contract['employee_username']?></td>
+				<td><?php echo $contract['title']?></td>
                 <td><?php echo $contract['offer_id']?></td>
                 <td><?php echo $contract['created_datetime']?></td>
                 <td><?php echo $contract['last_updated_datetime']?></td>
