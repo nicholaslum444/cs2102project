@@ -16,12 +16,12 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Offerer</th>
-                <th>Price</th>
+                <th>OFFERER</th>
+                <th>PRICE</th>
                 <th></th>
                 <th></th>
                 <th></th>
-                <th>Accept Offer</th>
+                <th>ACCEPT OFFER</th>
               </tr>
             </thead>
             <tbody>

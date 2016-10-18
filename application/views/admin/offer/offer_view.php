@@ -8,11 +8,11 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Task ID</th>
-                <th>Task Title</th>
-                <th>Offered Price</th>
-                <th>Offer Creator</th>
-                <th>Task Creator</th>
+                <th>TASK ID</th>
+                <th>TASK TITLE</th>
+                <th>OFFERED PRICE</th>
+                <th>OFFER CREATOR</th>
+                <th>TASK CREATOR</th>
               </tr>
             </thead>
             <tbody>

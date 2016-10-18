@@ -133,7 +133,7 @@ class Task extends CI_Controller {
         $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
         $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
         $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
-        $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
+        $this->form_validation->set_rules('creator_id', 'Creator', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->create();

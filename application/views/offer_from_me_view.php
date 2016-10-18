@@ -8,11 +8,11 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>  
-                <th>Price</th>  
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th>  
+                <th>PRICE</th>  
               </tr>
             </thead>
             <tbody>
