@@ -32,7 +32,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><a href="" title="Accept"></a><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></td>
+                <td><a href="" title="Accept"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a></td>
                 <!-- 
                 Contract parameter keys: 
                 $offer['acceptee_id']

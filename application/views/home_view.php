@@ -29,15 +29,16 @@
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
-                <td><span class="badge"><?php echo $task['offer_count']?>  </span><span class="badge"><?php echo $task['max_offer_price']?></span></td>
+                <td><span class="badge"><?php echo $task['offer_count']?> 
+                </span><span class="badge"><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
-                <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25">
+                <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                 </a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>" title="Delete"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
-                <td><a href="offer/view/<?php echo $task['id'] ?>" title="View Offers"><img src="/assets/img/viewOffer.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete <?php echo $task['title'] ?>?')" href="task/delete/<?php echo $task['id'] ?>" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+                <td><a href="offer/view/<?php echo $task['id'] ?>" title="View Offers"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></a></td>
               </tr> 
             <?php } ?>
             </tbody>

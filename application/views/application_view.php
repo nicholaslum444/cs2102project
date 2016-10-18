@@ -1,17 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    function bigImg(x) {
-    x.style.height = "40px";
-    x.style.width = "40px";
-    }   
-
-    function normalImg(x) {
-    x.style.height = "25px";
-    x.style.width = "25px";
-    }
-</script>
 <script src="/assets/js/clearForm.js"></script>
 <head>
     <meta charset="utf-8">
@@ -24,6 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     
     <!-- Favicon -->

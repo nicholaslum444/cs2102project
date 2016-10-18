@@ -26,7 +26,7 @@
                 <td><?php echo $task['description']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
-                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>" title="Accept"><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a href="<?php echo base_url() ?>offer/create/<?php echo $task['id'] ?>" title="Accept"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a></td>
               </tr> 
             <?php } ?>
             </tbody>
