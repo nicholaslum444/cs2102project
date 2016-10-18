@@ -23,6 +23,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" href="/assets/img/homeLogo.jpg">
