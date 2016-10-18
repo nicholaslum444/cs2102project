@@ -5,6 +5,7 @@ class Offer extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('account_model');
         $this->load->model('task_model');
         $this->load->model('offer_model');
     }
@@ -32,107 +33,78 @@ class Offer extends CI_Controller {
         $this->load->view('admin/application_view', $data);
 	}
 
-    public function create($task_id) {
+    public function create() {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
         }
         
         $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-
-        if ($data['tasks'] = $this->task_model->get($task_id)) {
-            redirect('admin', 'refresh');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
             return;
         }
         
-        // Set start and end date and time input fields 
-        // in data array
-        $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
-        $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
-        $data['tasks']['start_date'] = $start_datetime_arr[0];
-        $data['tasks']['start_time'] = $start_datetime_arr[1];
-        $data['tasks']['end_date'] = $end_datetime_arr[0];
-        $data['tasks']['end_time'] = $end_datetime_arr[1];
-
+        $data['username'] = $session_data['username'];
+        $data['user_id'] = $session_data['user_id'];
+        
+        $all_tasks = $this->task_model->get_all_tasks();
+        $all_task_titles = [];
+        foreach($all_tasks as $row) {
+            $all_task_titles[$row['id']] = $row['title'];
+        }
+        
+        $data['all_task_titles'] = $all_task_titles;
+        $data['all_usernames'] = $this->account_model->get_all_usernames();
+        
         $data['header'] = 'Make An Offer';
-        $data['view'] = 'offer_create_view';
+        $data['view'] = 'admin/offer/offer_create_view';
         $data['page_title'] = 'Make An Offer';
         $this->load->view('admin/application_view', $data);
-        
-    }
-
-    public function validate() {
-        $this->form_validation->set_rules('price', 'Price', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
-
-        } else {
-            $session_data = $this->session->userdata('logged_in');
-            $user_id = $session_data['user_id'];
-            $task_id = $this->input->post('id');
-            $price = $this->input->post('price');
-
-            $create_offer_arr = [$user_id, $task_id, $price];
-
-            if ($this->offer_model->create($create_offer_arr)) {
-                $this->success();
-
-            } else {
-                $this->failure();
-            }
-        }
-    }
-
-    public function validate_update() {
-        $this->form_validation->set_rules('price', 'Price', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
-
-        } else {
-            $session_data = $this->session->userdata('logged_in');
-            $user_id = $session_data['user_id'];
-            $offer_id = $this->input->post('id');
-            $price = $this->input->post('price');
-
-            $update_offer_arr = [$price, $offer_id];
-
-            if ($this->offer_model->update($update_offer_arr)) {
-                $this->success();
-
-            } else {
-                $this->failure();
-            }
-        }
     }
 
     public function update($offer_id = -1) {
-        if ($this->session->userdata('logged_in')) {
+        if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
         }
         
         $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
+        $data['offer'] = $this->offer_model->get($offer_id);
 
-        if (!$data['offers'] = $this->offer_model->get($offer_id)) {
+        if (!$data['offer']) {
             redirect('admin/offer', 'refresh');
             return;
         }
         
-        $start_datetime_arr = explode(" ",$data['offers']['start_datetime']);
-        $end_datetime_arr = explode(" ", $data['offers']['end_datetime']);
-        $data['offers']['start_date'] = $start_datetime_arr[0];
-        $data['offers']['start_time'] = $start_datetime_arr[1];
-        $data['offers']['end_date'] = $end_datetime_arr[0];
-        $data['offers']['end_time'] = $end_datetime_arr[1];
-
+        $start_datetime_arr = explode(" ",$data['offer']['start_datetime']);
+        $end_datetime_arr = explode(" ", $data['offer']['end_datetime']);
+        $data['offer']['start_date'] = $start_datetime_arr[0];
+        $data['offer']['start_time'] = $start_datetime_arr[1];
+        $data['offer']['end_date'] = $end_datetime_arr[0];
+        $data['offer']['end_time'] = $end_datetime_arr[1];
+        
+        $all_tasks = $this->task_model->get_all_tasks();
+        $all_task_titles = [];
+        foreach($all_tasks as $row) {
+            $all_task_titles[$row['id']] = $row['title'];
+        }
+        
+        $data['all_task_titles'] = $all_task_titles;
+        $data['all_usernames'] = $this->account_model->get_all_usernames();
+        
+        $data['username'] = $session_data['username'];
         $data['header'] = 'Update Offer';   
-        $data['view'] = 'offer_update_view';
+        $data['view'] = 'admin/offer/offer_update_view';
         $data['page_title'] = 'Offer';
-        $this->load->view('application_view', $data);
+        $this->load->view('admin/application_view', $data);
     }
 
     public function cancel($offer_id = -1) {
@@ -146,14 +118,77 @@ class Offer extends CI_Controller {
         $user_id = $session_data['user_id'];
 
         if ($this->offer_model->delete($user_id, $offer_id)) {
-            $this->offer_delete_success();
+            $this->success("cancelled");
 
         } else {
-            $this->offer_delete_failure();
+            $this->failure("cancelled");
         }
     }
 
-    private function success() {
+    public function validate() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
+        
+        $session_data = $this->session->userdata('logged_in');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
+        $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
+
+        if ($this->form_validation->run() === FALSE) {
+            show_error('Some fields are missing or have incorrect values!');
+            return;
+        }
+        
+        $task_id = $this->input->post('task_id');
+        $price = $this->input->post('price');
+        $creator_id = $this->input->post('creator_id');
+
+        if ($this->offer_model->create([$creator_id, $task_id, $price])) {
+            $this->success("created");
+        } else {
+            $this->failure("created");
+        }
+    }
+
+    public function validate_update() {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
+        
+        $session_data = $this->session->userdata('logged_in');
+        
+        if ($session_data['user_role'] != ROLE_ADMIN) {
+            redirect('home', 'refresh');
+            return;
+        }
+        
+        $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
+
+        if ($this->form_validation->run() === FALSE) {
+            show_error('Some fields are missing or have incorrect values!');
+
+        } else {
+            $offer_id = $this->input->post('offer_id');
+            $task_id = $this->input->post('task_id');
+            $price = $this->input->post('price');
+            $creator_id = $this->input->post('creator_id');
+
+            if ($this->offer_model->update_admin($offer_id, $price, $task_id, $creator_id)) {
+                $this->success("updated");
+            } else {
+                $this->failure("updated");
+            }
+        }
+    }
+
+    private function success($action = 'ACTION_PERFORMED') {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
@@ -161,11 +196,12 @@ class Offer extends CI_Controller {
         
         $session_data = $this->session->userdata('logged_in');
         $data['username'] = $session_data['username'];
-        $data['view'] = 'offer_success_view';
-        $this->load->view('application_view', $data);
+        $data['action_performed'] = $action;
+        $data['view'] = 'admin/offer/offer_success_view';
+        $this->load->view('admin/application_view', $data);
     }
 
-    private function failure() {
+    private function failure($action = 'ACTION_ATTEMPTED') {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
             return;
@@ -173,32 +209,9 @@ class Offer extends CI_Controller {
         
         $session_data = $this->session->userdata('logged_in');
         $data['username'] = $session_data['username'];
-        $data['view'] = 'offer_failure_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function offer_delete_success() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-        
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-        $data['view'] = 'offer_deleted_success_view';
-        $this->load->view('application_view', $data);
-    }
-
-    private function offer_delete_failure() {
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
-        }
-        
-        $session_data = $this->session->userdata('logged_in');
-        $data['username'] = $session_data['username'];
-        $data['view'] = 'offer_deleted_failure_view';
-        $this->load->view('application_view', $data);
+        $data['action_attempted'] = $action;
+        $data['view'] = 'admin/offer/offer_failure_view';
+        $this->load->view('admin/application_view', $data);
     }
 }
 ?>

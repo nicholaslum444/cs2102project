@@ -38,10 +38,8 @@ class Offer_model extends CI_Model {
                 account p1,
                 account p2
             WHERE 
-                t.id = o.task_id
-                AND
-                p1.id = t.creator_id
-                AND
+                t.id = o.task_id AND
+                p1.id = t.creator_id AND
                 p2.id = o.acceptee_id
         ";
 
@@ -49,10 +47,23 @@ class Offer_model extends CI_Model {
     }
 
 	public function get($offer_id = -1) {
-        $offer_sql = "SELECT t.title, t.description, t.start_datetime, t.end_datetime, o.price, o.id
-            FROM task t, offer o
-            WHERE t.id = o.task_id
-            AND o.id = ?";
+        $offer_sql = "
+			SELECT 
+				t.id as task_id, 
+				t.title, 
+				t.description, 
+				t.start_datetime, 
+				t.end_datetime, 
+				o.price, 
+				o.id as offer_id, 
+				o.acceptee_id 
+            FROM 
+				task t, 
+				offer o
+            WHERE 
+				t.id = o.task_id AND 
+				o.id = ?
+		";
 
         $offer_query = $this->db->query($offer_sql, [$offer_id]);
         
@@ -64,20 +75,28 @@ class Offer_model extends CI_Model {
     }
     
     public function create($array) {
+		// this prevents you from offering on your own task
         $validate_sql = "SELECT creator_id FROM task WHERE id = ?";
         $validate_query = $this->db->query($validate_sql, [$array[1]]);
 
         if ($validate_query->num_rows() == 1) {
             $creator_id = $validate_query->row()->creator_id;
-
+			
+			// if you created the task, you should not offer to do it
             if ($creator_id == $array[0]) {
                 return FALSE;
             }
         }
 
-    	$offer_sql = "INSERT INTO offer (acceptee_id, task_id, price) VALUES (?, ?, ?)";
+    	$create_offer_SQL = "
+			INSERT INTO offer (
+				acceptee_id, 
+				task_id, 
+				price
+			) VALUES (?, ?, ?);
+		";
 
-    	return $this->db->query($offer_sql, [$array[0], $array[1], $array[2]]);
+    	return $this->db->query($create_offer_SQL, $array);
     }
 
     public function update($price, $offer_id, $acceptee_id) {
@@ -86,6 +105,20 @@ class Offer_model extends CI_Model {
     				WHERE id = ?
                     AND acceptee_id = ?";
     	return $this->db->query($offer_sql, [$price, $offer_id, $acceptee_id]);
+    }
+
+    public function update_admin($offer_id, $price, $task_id, $acceptee_id) {
+    	$update_offer_SQL = "
+			UPDATE 
+				offer
+			SET 
+				price = ?, 
+				task_id = ?,
+				acceptee_id = ?
+			WHERE 
+				id = ?
+		";
+    	return $this->db->query($update_offer_SQL, [$price, $task_id, $acceptee_id, $offer_id]);
     }
 
     public function delete($acceptee_id, $offer_id) {

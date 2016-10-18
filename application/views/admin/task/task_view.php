@@ -39,9 +39,8 @@
     <?php
     } 
     else { ?>
-        <p>You have no tasks at the moment. Please create one.</p>
+        <p>You have no tasks at the moment.</p>
     <?php  
     } ?> 
     <center><a class="btn btn-lg btn-success" role="button" href="/admin/task/create">Create Task</a></center>
 </div>
-

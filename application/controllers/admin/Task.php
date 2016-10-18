@@ -12,6 +12,7 @@ class Task extends CI_Controller {
 	public function index() {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
+            return;
         }
         
         $session_data = $this->session->userdata('logged_in');
