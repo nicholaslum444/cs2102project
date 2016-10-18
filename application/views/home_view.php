@@ -17,10 +17,10 @@
             <thead>
               <tr>
                 <th></th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>   
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th>   
               </tr>
             </thead>
             <tbody>

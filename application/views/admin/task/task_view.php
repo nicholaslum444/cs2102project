@@ -12,12 +12,12 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Task ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Creator</th> 
+                <th>TASK ID</th>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START DATE</th>
+                <th>END DATE</th>
+                <th>CREATOR</th> 
               </tr>
             </thead>
             <tbody>

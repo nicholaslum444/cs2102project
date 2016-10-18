@@ -23,4 +23,6 @@
 
 	    <br/>
 	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
+	    <input type="button" class="btn btn-lg btn-primary" onClick="clearForm(this.form);" value="Reset" />
+	    <?php echo form_close(); ?>
 </div>

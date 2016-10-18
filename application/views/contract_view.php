@@ -8,15 +8,15 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Contract ID</th>
-				        <th>Employer</th>
-				        <th>Employee</th>
-				        <th>Task ID</th>
-                <th>Offer ID</th>
-                <th>Contract Start Date</th>
-                <th>Contract Last Updated</th>  
-                <th>Contract Status</th>  
-				        <th>Completion status</th>  
+                <th>CONTRACT ID</th>
+				        <th>EMPLOYER</th>
+				        <th>EMPLOYEE</th>
+				        <th>TASK ID</th>
+                <th>OFFER ID</th>
+                <th>START DATE</th>
+                <th>LAST UPDATED</th>  
+                <th>STATUS</th>  
+				        <th>COMPLETION STATUS</th>  
               </tr>
             </thead>
             <tbody>
