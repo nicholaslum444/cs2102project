@@ -151,9 +151,9 @@ class Task extends CI_Controller {
 
         if ($this->task_model->create($create_task_arr)) {
             $this->success("created");
-            return;
+        } else {
+            $this->failure("created");
         }
-        $this->failure();
     }
 
     public function validate_update() {
@@ -193,9 +193,9 @@ class Task extends CI_Controller {
 
         if ($this->task_model->update_admin($update_task_arr)) {
             $this->success("updated");
+        } else {
+            $this->failure("updated");
         }
-        
-        $this->failure();
     }
 
     public function available() {

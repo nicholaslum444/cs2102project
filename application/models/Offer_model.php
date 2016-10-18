@@ -41,6 +41,8 @@ class Offer_model extends CI_Model {
                 t.id = o.task_id AND
                 p1.id = t.creator_id AND
                 p2.id = o.acceptee_id
+			ORDER BY
+				o.id ASC
         ";
 
 		return $this->db->query($offer_sql)->result_array();

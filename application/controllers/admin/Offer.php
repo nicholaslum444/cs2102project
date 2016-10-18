@@ -140,8 +140,8 @@ class Offer extends CI_Controller {
         
         $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
 
-        if ($this->form_validation->run() === FALSE) {
-            show_error('Some fields are missing or have incorrect values!');
+        if (!$this->form_validation->run()) {
+            $this->update();
             return;
         }
         
@@ -171,20 +171,20 @@ class Offer extends CI_Controller {
         
         $this->form_validation->set_rules('price', 'Price', 'numeric|required|greater_than[0]');
 
-        if ($this->form_validation->run() === FALSE) {
-            show_error('Some fields are missing or have incorrect values!');
+        if (!$this->form_validation->run()) {
+            $this->update();
+            return;
+        }
+        
+        $offer_id = $this->input->post('offer_id');
+        $task_id = $this->input->post('task_id');
+        $price = $this->input->post('price');
+        $creator_id = $this->input->post('creator_id');
 
+        if ($this->offer_model->update_admin($offer_id, $price, $task_id, $creator_id)) {
+            $this->success("updated");
         } else {
-            $offer_id = $this->input->post('offer_id');
-            $task_id = $this->input->post('task_id');
-            $price = $this->input->post('price');
-            $creator_id = $this->input->post('creator_id');
-
-            if ($this->offer_model->update_admin($offer_id, $price, $task_id, $creator_id)) {
-                $this->success("updated");
-            } else {
-                $this->failure("updated");
-            }
+            $this->failure("updated");
         }
     }
 
