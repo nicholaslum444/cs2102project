@@ -1,25 +1,26 @@
 <div class="content">
 		<h1><?php echo $header ?></h1>
 		<hr>
-		<span class="errorValidation"><?php echo validation_errors(); ?></span>
+		<div class="taskErrorValidation"><?php echo validation_errors(); ?></div>
 
 		<?php echo form_open('admin/task/validate'); ?>
-	    <input type="input" class="form_control" name="title" placeholder="Title of your task"/><br/>
+	    <label for="text">Task Title</label>
+	    <input type="input" class="title_control" name="title" value="<?php echo set_value('title'); ?>"/><br/>
 
-	    <textarea type="input" class="textarea_control" name="description" placeholder="Description of your task"/></textarea><br/>
+	   	<label for="text">Task Description</label>
+	    <textarea type="input" class="textarea_control" name="description"><?php echo set_value('description'); ?></textarea><br/>
 
-	    <center><label for="text">Enter your start date and time</label><br/></center>
-	    <input type="date" class="form_control" name="start_date" ><br/>
-	    <input type="time" class="form_control" name="start_time"><br/>
+	    <label for="text">Start Date and Time</label><br/>
+	    <input type="date" class="date_control" name="start_date" value="<?php echo set_value('start_date');?>">
+	    <input type="time" class="time_control" name="start_time" value="<?php echo set_value('start_time');?>"><br/>
 
-	    <center><label for="text" class="cen">Enter your end date and time</label></center>
-	    <input type="date" class="form_control" name="end_date"><br/>
-	    <input type="time" class="form_control" name="end_time"><br/>
+	    <label for="text">End Date and Time</label>
+	    <input type="date" class="date_control" name="end_date" value="<?php echo set_value('end_date');?>">
+	    <input type="time" class="time_control" name="end_time" value="<?php echo set_value('end_time');?>"><br/>
         
-        <center><label for="text" class="cen">Task Creator</label></center>
-	    <?php echo form_dropdown('creator_id', $all_usernames, $user_id, 'class="form_control"'); ?>
+        <label for="text">Task Creator</label>
+	    <?php echo form_dropdown('creator_id', $all_usernames, $user_id, 'class="date_control"'); ?>
 
 	    <br/>
-	    <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Create Task" /></center>
-	    <?php echo form_close('<br>'); ?>
+	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
 </div>

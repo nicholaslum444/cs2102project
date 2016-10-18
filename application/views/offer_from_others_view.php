@@ -1,9 +1,14 @@
 <div class="content">
-	<h1>Offers for this Task</h1>
-	<hr>
+	<h1><?php echo $header ?></h1>
+  <hr>
+  
+  <div class="panel">
+        <h3><strong>Task Title: </strong><?php echo $task['title'] ?></h3>
+        <p><strong>Description: </strong><em><?php echo $task['description'] ?></em></p>
+        <p><strong>Start: </strong><?php echo $task['start_datetime']; ?></p>
+        <p><strong>End: </strong><?php echo $task['end_datetime']; ?></p>
+    </div>
 	<?php
-    echo "task details:";
-    echo json_encode($task); 
     if (!empty($offers)) {
 	?>
 	 <div class="col-md-6">
@@ -12,7 +17,7 @@
               <tr>
                 <th>Offerer</th>
                 <th>Price</th>
-                <th>Accept?</th>
+                <th>Accept Offer</th>
               </tr>
             </thead>
             <tbody>
@@ -20,7 +25,7 @@
               	<?php foreach ($offers as $offer) { ?>
                 <td><?php echo $offer['username']?></td>
                 <td><?php echo $offer['price']?></td>
-                <td><a href="">Accept</a></td>
+                <td><a href=""></a><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></td>
                 <!-- 
                 Contract parameter keys: 
                 $offer['acceptee_id']

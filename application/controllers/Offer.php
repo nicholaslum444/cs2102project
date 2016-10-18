@@ -31,7 +31,7 @@ class Offer extends CI_Controller {
             $data['username'] = $session_data['username'];
             $data['offers'] = $this->offer_model->get_offers_for_task($task_id);
             $data['task'] = $this->task_model->get($task_id);
-            $data['header'] = 'Offers for this task';
+            $data['header'] = 'Offers For This Task';
             $data['view'] = 'offer_from_others_view';
             $data['page_title'] = 'Pending Offers';
             $this->load->view('application_view', $data);

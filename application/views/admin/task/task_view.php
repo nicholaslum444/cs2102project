@@ -29,8 +29,8 @@
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
                 <td><?php echo $task['username']?></td>
-                <td><a href="task/update/<?php echo $task['id'] ?>">Update</a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to delete Task ID <?php echo $task['id'] ?>?')" href="task/delete/<?php echo $task['id'] ?>">Delete</a></td>
+                <td><a href="task/update/<?php echo $task['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete Task ID <?php echo $task['id'] ?>?')" href="task/delete/<?php echo $task['id'] ?>"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
             <?php } ?>
             </tbody>
@@ -42,6 +42,6 @@
         <p>You have no tasks at the moment. Please create one.</p>
     <?php  
     } ?> 
-    <a class="btn btn-success" href="/admin/task/create">Create Task</a>
+    <center><a class="btn btn-lg btn-success" role="button" href="/admin/task/create">Create Task</a></center>
 </div>
 

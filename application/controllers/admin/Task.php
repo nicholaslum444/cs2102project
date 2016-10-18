@@ -129,12 +129,14 @@ class Task extends CI_Controller {
         
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
         $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            show_error('Please fill up the relevant fields!');
+            $this->create();
             return;
         }
         
@@ -168,12 +170,14 @@ class Task extends CI_Controller {
         
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
         $this->form_validation->set_rules('creator_id', 'Creator ID', 'required');
 
         if (!$this->form_validation->run()) {
-            show_error('Please fill up the relevant fields!');
+            $this->update();
             return;
         }
         
@@ -242,6 +246,41 @@ class Task extends CI_Controller {
         $data['action_attempted'] = $action;
         $data['view'] = 'admin/task/task_failure_view';
         $this->load->view('admin/application_view', $data);
+    }
+
+    public function checkYear() {
+        $start_date = $this->input->post('start_date');
+        if(!empty($start_date) && $start_date < 2016) {
+             $this->form_validation->set_message('checkYear','Your start date must be 2016');
+                return false;
+        }
+        else
+            return true;
+    }
+
+    public function compareDateTime() {
+        $start_date = $this->input->post('start_date');
+        $start_time = $this->input->post('start_time');
+        $end_date = $this->input->post('end_date');
+        $end_time = $this->input->post('end_time');
+
+        if(!empty($end_date)) {
+            if($start_date > $end_date) {
+                $this->form_validation->set_message('compareDateTime','Your end date must be later than your start date.');
+                return false;
+            }
+            if(!empty($start_time) && !empty($end_time)) {
+                if ($start_date == $end_date && $start_time > $end_time) {
+                    $this->form_validation->set_message('compareDateTime','Your start time must be earlier than your end time.');
+                    return false;
+            }
+                elseif ($start_date == $end_date && $start_time == $end_time) {
+                    $this->form_validation->set_message('compareDateTime','Your start time must not be the same as the end time.');
+                    return false;
+                }
+            }
+                return true;
+        }
     }
 }
 ?>

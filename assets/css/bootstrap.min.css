@@ -6,7 +6,7 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 html {
-    font-family: "Proxima";
+    font-family: "Segoe UI";
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%
 }
@@ -4703,7 +4703,7 @@ fieldset[disabled] .navbar-default .btn-link:hover {
 .navbar-inverse {
     background-color: #222;
     border-color: #080808;
-    font-family: "Proxima";
+    font-family: "Segoe UI";
 }
 .navbar-inverse .navbar-brand {
     color: #9d9d9d
@@ -6103,7 +6103,7 @@ button.close {
     position: absolute;
     z-index: 1070;
     display: block;
-    font-family: "Proxima";
+    font-family: "Segoe UI";
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -6866,35 +6866,35 @@ button.close {
     }
 }
 .form_control {   
-	display: block; margin: auto; margin-bottom: 20px; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+	display: block; margin: auto; margin-bottom: 20px; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Segoe UI";
 } 
 .alignForm {
     margin: auto;
 }
 
 .title_control {   
-    display: block; width: 600px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+    display: block; width: 600px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Segoe UI";
 } 
 
 .date_control {
-    display: block; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+    display: block; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Segoe UI";
 }
 
 .time_control {
-    display: block; margin: -35px 0 0 230px; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+    display: block; margin: -35px 0 0 230px; width: 200px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Segoe UI";
 }
 
 .textarea_control {   
-	display: block; width: 600px; height: 100px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+	display: block; width: 600px; height: 100px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Segoe UI";
 } 
 .errorValidation {
-    text-align: center; color: #FF0000; font-family: "Proxima" ; font-size: 16px;
+    text-align: center; color: #FF0000; font-family: "Segoe UI" ; font-size: 16px;
 } 
 .taskErrorValidation {
-	text-align: justify; color: #FF0000; font-family: "Proxima" ; font-size: 16px;
+	text-align: justify; color: #FF0000; font-family: "Segoe UI" ; font-size: 16px;
 } 
 .alignSignUpButton {
-	margin: auto; width: 400px; height: 50px; background-color: white; color: black; border: 2px solid #555555; text-align: center; font-size: 18px; border-radius: 4px; font-family: "Proxima";
+	margin: auto; width: 400px; height: 50px; background-color: white; color: black; border: 2px solid #555555; text-align: center; font-size: 18px; border-radius: 4px; font-family: "Segoe UI";
 }
 .footer {
     position: fixed;
@@ -6906,27 +6906,26 @@ button.close {
 	text-align: center;
 	width:100%;
 	height:35px;
-	font-family: "Proxima";	
+	font-family: "Segoe UI";	
     font-size: 14px;
     padding-top: 5px;
 }  
 .content {
     padding-bottom: 100px;
-	font-family: "Proxima";
+	font-family: "Segoe UI";
 	margin-top: 120px;
     font-size: 16px;
 }
 
 .alignUserbar {
 	float: right;
-	font-family: "Proxima";
+	font-family: "Segoe UI";
 	margin-top: 60px;
 	font-size: 14px;
 }
 
-
 .searchBox{
-    width: 300px;
+    width: 100%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -6941,7 +6940,4 @@ button.close {
     transition: width 0.4s ease-in-out;
 }
 
-.searchBox:focus {
-    width: 100%;
-}
 /*# sourceMappingURL=bootstrap.min.css.map */

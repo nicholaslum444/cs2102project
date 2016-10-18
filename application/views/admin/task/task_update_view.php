@@ -19,7 +19,7 @@
 	    <input type="time" class="time_control" name="end_time" value="<?php echo $tasks['end_time'] ?>"><br/>
         
         <label for="text">Task Creator</label>
-	    <?php echo form_dropdown('creator_id', $all_usernames, $tasks['creator_id'], 'class="form_control"'); ?>
+	    <?php echo form_dropdown('creator_id', $all_usernames, $tasks['creator_id'], 'class="date_control"'); ?>
 
 	    <br/>
 	    <input type="hidden" name="id" value="<?php echo $tasks['id'] ?>">

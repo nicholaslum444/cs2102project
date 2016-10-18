@@ -10,9 +10,9 @@
               <tr>
                 <th>Contract ID</th>
                 <th>Offer ID</th>
-                <th>Contract start date</th>
-                <th>Contract last updated</th>  
-                <th>Contract status</th>  
+                <th>Contract Start Date</th>
+                <th>Contract Last Updated</th>  
+                <th>Contract Status</th>  
 				<th>Completion status</th>  
               </tr>
             </thead>
@@ -25,7 +25,7 @@
                 <td><?php echo $contract['last_updated_datetime']?></td>
                 <td><?php echo $contract['accepted_conditions']?></td>
 				<td><?php echo $contract['status']?></td>
-                <td><a href="contract/update_contract_by_id/<?php echo $contract['id'] ?>">Update</a></td>
+                <td><a href="contract/update_contract_by_id/<?php echo $contract['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
          <?php } ?>
          </tbody>

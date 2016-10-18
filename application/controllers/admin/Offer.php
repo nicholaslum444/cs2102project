@@ -28,7 +28,7 @@ class Offer extends CI_Controller {
         
         $data['header'] = 'All Offers';
         $data['page_title'] = 'All Offers';
-        $data['view'] = 'admin/offer_view';
+        $data['view'] = 'admin/offer/offer_view';
         $this->load->view('admin/application_view', $data);
 	}
 
