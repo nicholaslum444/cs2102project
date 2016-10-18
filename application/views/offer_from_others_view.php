@@ -5,8 +5,8 @@
   <div class="panel">
         <h3><strong>Task Title: </strong><?php echo $task['title'] ?></h3>
         <p><strong>Description: </strong><em><?php echo $task['description'] ?></em></p>
-        <p><strong>Start: </strong><?php echo $task['start_datetime']; ?></p>
-        <p><strong>End: </strong><?php echo $task['end_datetime']; ?></p>
+        <p><strong>Start: </strong><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></p>
+        <p><strong>End: </strong><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></p>
     </div>
 	<?php
     if (!empty($offers)) {

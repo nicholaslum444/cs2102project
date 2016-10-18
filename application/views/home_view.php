@@ -16,7 +16,7 @@
           <table class="table table-striped">
             <thead>
               <tr class="info">
-                <th></th>
+                <th>OFFERS/$</th>
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>START DATE</th>
@@ -29,9 +29,9 @@
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
-                <td><span class="badge"><?php echo $task['offer_count']?></span></td>
+                <td><span class="badge"><?php echo $task['offer_count']?>  </span><span class="badge"><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
-                <td><?php echo $task['description'] .'' . $task['max_offer_price']?></td>
+                <td><?php echo $task['description']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25">
