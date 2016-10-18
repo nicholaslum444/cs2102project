@@ -3114,7 +3114,7 @@ textarea.input-lg {
 .loginBtn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;
@@ -6866,10 +6866,10 @@ button.close {
     }
 }
 .form_control {   
-	display: block; margin-bottom: 20px; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
+	display: block; margin: auto; margin-bottom: 20px; width: 400px; height: 35px; padding: 6px 12px; font-size: 16px; line-height: 1.42857143; color: #555; background-color: #fff; border: 1px solid #000; border-radius: 4px; font-family: "Proxima";
 } 
 .alignForm {
-	margin-left: 370px;
+    margin: auto;
 }
 
 .title_control {   
@@ -6923,4 +6923,5 @@ button.close {
 	margin-top: 60px;
 	font-size: 14px;
 }
+
 /*# sourceMappingURL=bootstrap.min.css.map */
