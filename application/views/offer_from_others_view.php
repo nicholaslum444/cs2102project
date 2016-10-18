@@ -11,12 +11,16 @@
 	<?php
     if (!empty($offers)) {
 	?>
+   <div class="offer_table">
 	 <div class="col-md-6">
           <table class="table table-striped">
             <thead>
               <tr>
                 <th>Offerer</th>
                 <th>Price</th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th>Accept Offer</th>
               </tr>
             </thead>
@@ -25,7 +29,10 @@
               	<?php foreach ($offers as $offer) { ?>
                 <td><?php echo $offer['username']?></td>
                 <td><?php echo $offer['price']?></td>
-                <td><a href=""></a><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="" title="Accept"></a><img src="/assets/img/tick.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></td>
                 <!-- 
                 Contract parameter keys: 
                 $offer['acceptee_id']
@@ -35,10 +42,11 @@
             </tbody>
           </table>
     </div>
+    </div>
 
 	<?php
 	} else { ?>
-		<p>There are no tasks available at the moment. Please check back again soon!</p>
+		<p>There are no offers available at the moment. Please check back again soon!</p>
 	<?php	
 	} ?>     
 </div>

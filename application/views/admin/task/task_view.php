@@ -29,8 +29,8 @@
                 <td><?php echo $task['start_datetime']?></td>
                 <td><?php echo $task['end_datetime']?></td>
                 <td><?php echo $task['username']?></td>
-                <td><a href="task/update/<?php echo $task['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
-                <td><a onClick="javascript:return confirm('Are you sure you want to delete Task ID <?php echo $task['id'] ?>?')" href="task/delete/<?php echo $task['id'] ?>"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a onClick="javascript:return confirm('Are you sure you want to delete Task ID <?php echo $task['id'] ?>?')" href="task/delete/<?php echo $task['id'] ?>" title="Delete"><img src="/assets/img/delete.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
             <?php } ?>
             </tbody>
