@@ -10,6 +10,12 @@
 		<label for="text">Description</label>
 		<textarea type="input" class="textarea_control" name="description"><?php echo set_value('description'); ?></textarea><br/>
 		
+		<label for="text">Category</label>
+		<?php echo form_dropdown('category', $all_categories, '', 'class="date_control"'); ?><br/>
+		
+		<label for="text">Price</label>
+		<?php echo form_input(['name'=>'price', 'value'=>'1.00', 'type'=>'number', 'step'=>'0.01', 'class'=>'date_control']); ?><br/>
+		
 		<label for="text">Start Date and Time</label><br/>
 		<input type="date" class="date_control" name="start_date" value="<?php echo set_value('start_date');?>">
 		<input type="time" class="time_control" name="start_time" value="<?php echo set_value('start_time');?>"><br/>

@@ -16,7 +16,7 @@
 		<?php echo form_dropdown('category', $all_categories, $tasks['category'], 'class="date_control"'); ?><br/>
 		
 		<label for="text">Price</label>
-		<?php echo form_input(['name'=>'price', 'value'=>'1.00', 'type'=>'number', 'step'=>'0.01', 'class'=>'date_control']); ?><br/>
+		<?php echo form_input(['name'=>'price', 'value'=>$tasks['price'], 'type'=>'number', 'step'=>'0.01', 'class'=>'date_control']); ?><br/>
 		
 	    <label for="text">Start Date and Time</label><br/>
 	    <input type="date" class="date_control" name="start_date" value="<?php echo $tasks['start_date'] ?>">
