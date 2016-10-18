@@ -68,14 +68,22 @@ CREATE TABLE IF NOT EXISTS offer (
         ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS contract (
+CREATE TABLE IF NOT EXISTS contract ( 
     id SERIAL NOT NULL,
+	employer_id SERIAL NOT NULL,
+	employee_id SERIAL NOT NULL,
+	task_id SERIAL NOT NULL,
     offer_id INTEGER NOT NULL,
     created_datetime TIMESTAMP NOT NULL,
     last_updated_datetime TIMESTAMP NOT NULL,
-    accepted_conditions BOOLEAN NOT NULL,
-    status status_type NOT NULL,
+    completion_status status_type NOT NULL,
     PRIMARY KEY (id),
+	FOREIGN KEY (task_id) REFERENCES task(id)
+		ON DELETE CASCADE,
+	FOREIGN KEY (employer_id) REFERENCES account(id)
+		ON DELETE CASCADE,
+	FOREIGN KEY (employee_id) REFERENCES account(id)
+		ON DELETE CASCADE,	
     FOREIGN KEY (offer_id) REFERENCES offer(id)
         ON DELETE CASCADE
 );
