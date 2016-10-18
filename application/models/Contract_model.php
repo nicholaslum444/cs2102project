@@ -109,14 +109,14 @@ class Contract_model extends CI_Model {
 	
 	// restrict rights to admin
 	// basic delete function for contract
-	public function delete_contract($user_id, $contract_id){
-		$contract_sql = "
-			DELETE FROM 
-				contract
-			WHERE
-				id=?
-		";
-		return $this->db->query($contract_sql, $contract_id);  
-	}
+	// public function delete_contract($user_id, $contract_id){
+		// $contract_sql = "
+			// DELETE FROM 
+				// contract
+			// WHERE
+				// id=?
+		// ";
+		// return $this->db->query($contract_sql, $contract_id);  
+	// }
 	
 }
