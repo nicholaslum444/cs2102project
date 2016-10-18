@@ -9,6 +9,9 @@
             <thead>
               <tr>
                 <th>Contract ID</th>
+				<th>Employer</th>
+				<th>Employee</th>
+				<th>Task ID</th>
                 <th>Offer ID</th>
                 <th>Contract Start Date</th>
                 <th>Contract Last Updated</th>  
@@ -20,11 +23,13 @@
               <tr>        
                 <?php foreach ($contracts as $contract) { ?>
                 <td><?php echo $contract['id']?></td>
+				<td><?php echo $contract['employer_id']?></td>
+				<td><?php echo $contract['employee_id']?></td>
+				<td><?php echo $contract['task_id']?></td>
                 <td><?php echo $contract['offer_id']?></td>
                 <td><?php echo $contract['created_datetime']?></td>
                 <td><?php echo $contract['last_updated_datetime']?></td>
-                <td><?php echo $contract['accepted_conditions']?></td>
-				<td><?php echo $contract['status']?></td>
+				<td><?php echo $contract['completion_status']?></td>
                 <td><a href="contract/update_contract_by_id/<?php echo $contract['id'] ?>"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
               </tr> 
          <?php } ?>
