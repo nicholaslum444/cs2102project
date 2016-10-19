@@ -19,6 +19,56 @@ INSERT INTO account (
     'admin',
     '$2y$10$PfriHQjK7cQnj98IIpmf0eoo4yEiVxfwMO9wNjaVbtaKP9lTPcjm6', -- password is "admin"
     'ADMIN'
+), (
+    'johntan@dummy.dum',
+    'johntan',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'jackng@dummy.dum',
+    'jackng',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'petersee@dummy.dum',
+    'petersee',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'alvinloo@dummy.dum',
+    'alvinloo',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'benlim@dummy.dum',
+    'benlim',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'cherryyeo@dummy.dum',
+    'cherryyeo',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'janeong@dummy.dum',
+    'janeong',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'claricelee@dummy.dum',
+    'claricelee',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'marysue@dummy.dum',
+    'marysue',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'sharontoh@dummy.dum',
+    'sharontoh',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
 );
 ------------------ ENDACCOUNTS ------------------
 
