@@ -46,12 +46,17 @@ Please inform the other developers if either file is updated.
 
 ## 2. Usage
 The website now requires user login to access. There are two default user accounts provided in the database seed file:
+
 1. Username: "asd", Password: "asd"
 2. Username: "qwe", Password: "qwe"
 
-Log in to the website using either one of these accounts. _**Note:** Login credentials do not include quotemarks._
+The website can also handle administrator logins. The following default administrator account is provided in the seed file as well:
 
-You may also create more accounts for your own usage. Do not that accounts cannot be deleted except via the database itself. Delete unwanted accounts through pgadmin.
+1. Username: "admin", Password: "admin"
+
+Log in to the website using any of these accounts. _**Note:** Login credentials do not include quotemarks._
+
+Additional normal user accounts can be created via the website itself. Additional administrator accounts can only be created via raw database input; it is not possible to create an administrator account through the website. Use your local pgadmin interface to add, modify or delete accounts as needed.
 
 ## 3. Development
 
