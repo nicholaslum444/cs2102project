@@ -25,6 +25,30 @@ class Contract_model extends CI_Model {
 			)";
 		return $this->db->query($contract_sql, $array);
 	}
+        
+	// basic create function for contract
+    // non-buggy. this one does not specify the id
+	public function create($array){
+		$contract_sql = "
+			INSERT INTO contract(
+				employer_id,
+				employee_id,
+				task_id,
+				offer_id, 
+				created_datetime, 
+				last_updated_datetime, 
+				completion_status
+			) VALUES (
+				?,
+				?,
+				?,
+				?,
+				now(), 
+				now(),
+				?
+			)";
+		return $this->db->query($contract_sql, $array);
+	}
 	
 	// basic read function for contract (search by id)
 	public function get_contract_by_id($contract_id){
@@ -74,6 +98,7 @@ class Contract_model extends CI_Model {
 		$contract_sql = "
 			SELECT 
 				c.id,
+                o.price,
 				a1.username as employer_username,
 				a2.username as employee_username,
 				t.title,
@@ -82,11 +107,16 @@ class Contract_model extends CI_Model {
 				c.last_updated_datetime,
 				c.completion_status
 			FROM 
-				contract c, account a1, account a2, task t
+				contract c, 
+                account a1, 
+                account a2, 
+                task t,
+                offer o
 			WHERE
-				a1.id=c.employer_id AND
-				a2.id=c.employee_id AND
-				t.id=c.task_id
+				a1.id = c.employer_id AND
+				a2.id = c.employee_id AND
+				t.id = c.task_id AND 
+                o.id = c.offer_id
 		";
 		return $this->db->query($contract_sql)->result_array();
 	}

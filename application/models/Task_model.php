@@ -201,4 +201,18 @@ class Task_model extends CI_Model {
 
         return $this->db->query($task_delete_SQL, $task_id);            
     }
+    
+    public function get_creator_id($task_id) {
+    	$get_creator_SQL = "
+			SELECT 
+				creator_id
+			FROM 
+				task 
+            WHERE 
+				id = ?
+			LIMIT 1
+		";
+
+        return $this->db->query($get_creator_SQL, $task_id)->result_array()[0];
+    }
 }

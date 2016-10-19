@@ -131,4 +131,35 @@ class Offer_model extends CI_Model {
 
         return $this->db->query($offer_sql, [$offer_id, $acceptee_id]);   
     }
+	
+	public function is_offered_for_task($offer_id, $task_id) {
+		$get_offer_SQL = '
+			SELECT
+				*
+			FROM
+				offer
+			WHERE
+				id = ? AND
+				task_id = ?
+		';
+		if ($this->db->query($get_offer_SQL, [$offer_id, $task_id])->result_array()) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	
+	public function get_acceptee_id($offer_id) {
+    	$get_acceptee_SQL = "
+			SELECT 
+				acceptee_id
+			FROM 
+				offer 
+            WHERE 
+				id = ?
+			LIMIT 1
+		";
+
+        return $this->db->query($get_acceptee_SQL, $offer_id)->result_array()[0];  
+	}
 }
