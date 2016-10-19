@@ -32,7 +32,8 @@ class Task_model extends CI_Model {
             t2.start_datetime,
             t2.end_datetime
         FROM task t2
-        WHERE t2.id NOT IN (
+        WHERE t2.creator_id = ?
+        AND t2.id NOT IN (
             SELECT 
                 o.task_id as id
             FROM task t, offer o 
@@ -42,7 +43,7 @@ class Task_model extends CI_Model {
                 o.task_id
         )";
 
-        $no_offer_tasks = $this->db->query($task_sql2, [$user_id])->result_array();
+        $no_offer_tasks = $this->db->query($task_sql2, [$user_id, $user_id])->result_array();
         $this->add_price_and_offer_count_to_tasks($no_offer_tasks);
 
         for($i = 0; $i < sizeof($no_offer_tasks); $i++) {
