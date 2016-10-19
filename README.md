@@ -44,6 +44,12 @@ This is how to seed the database with `seeds.sql` after the schema is created.
 When schema or seeds are updated, you'll have to run both `schema.sql` and `seeds.sql` again to update the local copy.
 Please inform the other developers if either file is updated.
 
+If you're running from command line on linux, use the following commands:
+```bash
+psql -d nusmaids -a -f assets/sql/schema.sql
+psql -d nusmaids -a -f assets/sql/seeds.sql
+```
+
 ## 2. Usage
 The website now requires user login to access. There are two default user accounts provided in the database seed file:
 
