@@ -49,5 +49,5 @@
         <?php 
     } 
     ?> 
-    <center><a class="btn btn-lg btn-success" role="button" href="/admin/offer/create">Create Offer</a></center>
+    <center><a class="btn btn-lg btn-info" role="button" href="/admin/offer/create">Create Offer</a></center>
 </div>

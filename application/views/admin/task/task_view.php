@@ -54,5 +54,5 @@
         <?php  
     } 
     ?> 
-    <center><a class="btn btn-lg btn-danger" role="button" href="/admin/task/create">Create Task</a></center>
+    <center><a class="btn btn-lg btn-info" role="button" href="/admin/task/create">Create Task</a></center>
 </div>
