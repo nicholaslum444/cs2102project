@@ -52,22 +52,29 @@ class Contract_model extends CI_Model {
 	
 	// basic read function for contract (search by id)
 	public function get_contract_by_id($contract_id){
-		$contract_sql = "
+		$get_SQL = "
 			SELECT 
-				c.id, 
-				c.employer_id,
-				c.employee_id,
-				c.task_id,
-				c.offer_id, 
-				c.created_datetime, 
-				c.last_updated_datetime,
-				c.completion_status
+				id, 
+				employer_id,
+				employee_id,
+				task_id,
+				offer_id, 
+				created_datetime, 
+				last_updated_datetime,
+				completion_status
 			FROM 
-				contract c
+				contract
 			WHERE 
-				c.id = ?
+				id = ?
+            LIMIT 1
 		";
-		return $this->db->query($contract_sql, $contract_id)->result_array();
+		$get_query = $this->db->query($get_SQL, $contract_id);
+        
+        if ($get_query->num_rows() == 1) {
+            return $get_query->row_array();
+        } else {
+            return FALSE;
+        }
 	}
 	
 	// read all contracts by a user (both as employee and employer)
@@ -117,6 +124,8 @@ class Contract_model extends CI_Model {
 				a2.id = c.employee_id AND
 				t.id = c.task_id AND 
                 o.id = c.offer_id
+            ORDER BY
+                c.id ASC
 		";
 		return $this->db->query($contract_sql)->result_array();
 	}
@@ -136,6 +145,26 @@ class Contract_model extends CI_Model {
 
         return $this->db->query($contract_sql, $array);
 	}
+    
+    public function update_admin($contract_id, $employer_id, $employee_id, $task_id, $offer_id, $completion_status) {
+        $update_SQL = '
+            UPDATE
+                contract
+            SET 
+                employer_id = ?,
+                employee_id = ?,
+                task_id = ?,
+                offer_id = ?,
+                completion_status = ?,
+                last_updated_datetime = now()
+            WHERE 
+                id = ?
+        ';
+        
+        $args = [$employer_id, $employee_id, $task_id, $offer_id, $completion_status, $contract_id];
+
+        return $this->db->query($update_SQL, $args);
+    }
 	
 	// restrict rights to admin
 	// basic delete function for contract
