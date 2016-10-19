@@ -51,5 +51,5 @@
         <?php 
     } 
     ?> 
-    <center><a class="btn btn-lg btn-success" role="button" href="/admin/contract/create">Create Contract</a></center>
+    <center><a class="btn btn-lg btn-info" role="button" href="/admin/contract/create">Create Contract</a></center>
 </div>
