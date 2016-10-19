@@ -34,7 +34,7 @@
                             <td><?php echo '$'.$contract['price']?></td>
                             <td><?php echo $contract['completion_status']?></td>
                             <td><a href="/admin/contract/update/<?php echo $contract['id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></td>
-                            <td><a href="/admin/contract/delete/<?php echo $contract['id'] ?>" onClick="javascript:return confirm('Are you sure you want to cancel Contract ID <?php echo $contract['id'] ?>?')" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+                            <td><a href="/admin/contract/delete/<?php echo $contract['id'] ?>" onClick="javascript:return confirm('Are you sure you want to delete Contract ID <?php echo $contract['id'] ?>?')" title="Delete"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
                         </tr> 
                         <?php 
                     } 

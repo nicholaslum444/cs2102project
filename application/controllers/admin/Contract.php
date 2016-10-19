@@ -122,8 +122,20 @@ class Contract extends CI_Controller {
         $this->load->view('admin/application_view', $data);
     }
     
-    public function delete() {
+    public function delete($contract_id = -1) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+            return;
+        }
         
+        $session_data = $this->session->userdata('logged_in');
+        $user_id = $session_data['user_id'];
+
+        if ($this->contract_model->delete_admin($contract_id)) {
+            $this->success('deleted');
+        } else {
+            $this->failure('deleted');
+        }
     }
     
     public function validate() {
