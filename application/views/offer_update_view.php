@@ -5,8 +5,8 @@
 		<div class="panel">
         <h3><strong>Task Title: </strong><?php echo $offers['title'] ?></h3>
         <p><strong>Description: </strong><em><?php echo $offers['description'] ?></em></p>
-        <p><strong>Start: </strong><?php echo date('d-M-Y', strtotime($offers['start_date']))." ".date('g:i A', strtotime($tasks['start_time'])) ?></p>
-        <p><strong>End: </strong><?php echo date('d-M-Y', strtotime($offers['end_date']))." ".date('g:i A', strtotime($tasks['end_time'])) ?></p>
+        <p><strong>Start: </strong><?php echo date('d-M-Y', strtotime($offers['start_date']))." ".date('g:i A', strtotime($offers['start_time'])) ?></p>
+        <p><strong>End: </strong><?php echo date('d-M-Y', strtotime($offers['end_date']))." ".date('g:i A', strtotime($offers['end_time'])) ?></p>
     </div>
     <center><p>Update my offer for the task above!</p></center>
     <span class="errorValidation"><?php echo validation_errors(); ?></span>

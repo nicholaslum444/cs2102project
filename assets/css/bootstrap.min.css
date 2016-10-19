@@ -3229,7 +3229,6 @@ fieldset[disabled] .btn-default:hover {
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
-    margin-right: 15px;
 }
 .btn-primary.focus,
 .btn-primary:focus {
@@ -6916,10 +6915,6 @@ button.close {
 	font-family: 'Lato', sans-serif;
 	margin-top: 120px;
     font-size: 16px;
-}
-
-.offer_table {
-    margin: auto;
 }
 
 .alignUserbar {
