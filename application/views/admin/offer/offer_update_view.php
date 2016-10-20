@@ -18,6 +18,6 @@
 	    <?php echo form_dropdown('creator_id', $all_usernames, $offer['acceptee_id'], 'class="date_control"'); ?>
 		
 	    <br/>
-	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
+	    <input type="submit" class="btn btn-lg btn-success" name="submit" value="Submit" />
 	<?php echo form_close(); ?>
 </div>

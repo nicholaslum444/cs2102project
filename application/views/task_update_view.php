@@ -26,6 +26,6 @@
 
 	    <br/>
 	    <input type="hidden" name="id" value="<?php echo $tasks['id'] ?>">
-	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
+	    <input type="submit" class="btn btn-lg btn-success" name="submit" value="Submit" />
 	    <?php echo form_close('<br>'); ?>
 </div>

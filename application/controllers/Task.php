@@ -59,10 +59,10 @@ class Task extends CI_Controller {
             $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime, $category, $price];
 
             if ($this->task_model->create($create_task_arr)) {
-                $this->success();
+                $this->success("created");
             
             } else {
-                $this->failure();
+                $this->failure("created");
             }
         }
     }
@@ -94,10 +94,10 @@ class Task extends CI_Controller {
             $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $category, $price, $id, $user_id];
 
             if ($this->task_model->update($update_task_arr)) {
-                $this->update_success();
+                $this->success("updated");
             
             } else {
-                $this->update_failure();
+                $this->failure("updated");
             }
         }
     }
@@ -140,10 +140,10 @@ class Task extends CI_Controller {
             $user_id = $session_data['user_id'];
 
             if ($this->task_model->delete($user_id, $task_id, $user_id)) {
-                $this->delete_success();
+                $this->success("deleted");
 
             } else {
-                $this->delete_failure();
+                $this->failure("deleted");
             }
 
         } else {
@@ -235,10 +235,11 @@ class Task extends CI_Controller {
         }
     }
 
-    private function success() {
+    private function success($action = 'ACTION_PERFORMED') {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
+            $data['action_performed'] = $action;
             $data['view'] = 'task_success_view';
             $this->load->view('application_view', $data);
         }
@@ -247,56 +248,12 @@ class Task extends CI_Controller {
         }
     }
 
-    private function update_success() {
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['username'] = $session_data['username'];
-            $data['view'] = 'task_update_success_view';
-            $this->load->view('application_view', $data);
-        }
-        else {
-        redirect('login', 'refresh');
-        }
-    }
-
-    private function delete_success() {
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['username'] = $session_data['username'];
-            $data['view'] = 'task_delete_success_view';
-            $this->load->view('application_view', $data);
-        }
-        else {
-        redirect('login', 'refresh');
-        }
-    }
-
-    private function failure() {
+    private function failure($action = 'ACTION_ATTEMPTED') {
          if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+            $data['action_attempted'] = $action;
             $data['view'] = 'task_failure_view';
-            $this->load->view('application_view', $data);
-         }
-        else {
-        redirect('login', 'refresh');
-        }
-    }
-
-    private function update_failure() {
-         if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['view'] = 'task_update_failure_view';
-            $this->load->view('application_view', $data);
-         }
-        else {
-        redirect('login', 'refresh');
-        }
-    }
-
-    private function delete_failure() {
-         if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['view'] = 'task_delete_failure_view';
             $this->load->view('application_view', $data);
          }
         else {
