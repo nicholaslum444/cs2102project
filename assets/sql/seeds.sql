@@ -5,13 +5,13 @@ INSERT INTO account (
     password_hash,
     role
 ) VALUES (
-    'asd@asd.asd', 
-    'asd', 
+    'sammytan@dummy.dum', 
+    'sammytan', 
     '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd" 
     'USER'
 ), (
-    'qwe@qwe.qwe',
-    'qwe',
+    'jessicalim@dummy.dum',
+    'jessicalim',
     '$2y$10$3mSKzPDzzGSL7hHBxYR6pufyx/YGtd3vQb9qRLGtIwY/cBnmhBCzK', -- password is "qwe"
     'USER'
 ), (
@@ -570,8 +570,29 @@ INSERT INTO offer (
     7,
     24,
     300
-);
+),
 --end of alvinloo offers--
+
+--add on johntan offer 2 more for 2 default user--
+( 
+    1,
+    1,
+    20
+),(
+    2,
+    5,
+    300
+),
+--add on jackng offer 2 more for 2 default user--
+( 
+    1,
+    1,
+    20
+),(
+    2,
+    5,
+    300
+);
 -------------------- ENDOFFER -----------------------
 
 -------------------- CONTRACTS --------------------
@@ -837,6 +858,46 @@ INSERT INTO contract (
     now(),
     now(),
     'ONGOING'
-);
+),
 --end of alvinloo contract--
+
+--add on 2 contract for johntan--
+(
+    1,
+    4,
+    1,
+    52,
+    now(),
+    now(),
+    'ONGOING'
+),(
+    2,
+    4,
+    5,
+    53,
+    now(),
+    now(),
+    'ONGOING'
+),
+
+--add on 2 contract for jackng--
+(
+    1,
+    5,
+    1,
+    54,
+    now(),
+    now(),
+    'ONGOING'
+),(
+    2,
+    5,
+    5,
+    55,
+    now(),
+    now(),
+    'ONGOING'
+);
+--end of add on contract--
+
 ------------------ ENDCONTRACTS -----------------
