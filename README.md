@@ -54,7 +54,7 @@ psql -d nusmaids -a -f assets/sql/seeds.sql
 The website now requires user login to access. There are two default user accounts provided in the database seed file:
 
 1. Username: "sammytan", Password: "asd"
-2. Username: "jessicalim", Password: "asd"
+2. Username: "jessicalim", Password: "qwe"
 
 The website can also handle administrator logins. The following default administrator account is provided in the seed file as well:
 
