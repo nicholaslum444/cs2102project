@@ -1,5 +1,5 @@
 <div class="content">
-	<h1><?php echo $header ?></h1>
+	<h1><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;<?php echo $header ?></h1>
 	<hr>
 	<div class="taskErrorValidation"><?php echo validation_errors(); ?></div>
 	

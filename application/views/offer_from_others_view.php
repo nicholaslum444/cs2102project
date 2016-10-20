@@ -1,5 +1,5 @@
 <div class="content">
-	<h1><?php echo $header ?></h1>
+	<h1><i class="fa fa-users" aria-hidden="true"></i>&nbsp;<?php echo $header ?></h1>
   <hr>
   
   <div class="panel">

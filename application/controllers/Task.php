@@ -6,6 +6,7 @@ class Task extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('task_model');
+        $this->load->model('category_model');
     }
 
 	public function index() {
@@ -18,6 +19,7 @@ class Task extends CI_Controller {
     public function create() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
+            $data['all_categories'] = array_merge([''=>'Please Select'], $this->category_model->get_all_categories());
             $data['username'] = $session_data['username'];
             $data['header'] = 'Create Your Task';   
             $data['view'] = 'task_create_view';
@@ -48,7 +50,7 @@ class Task extends CI_Controller {
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $category = $this->convert_int_to_category($this->input->post('category'));
+            $category = $this->input->post('category');
             $price = $this->input->post('price');
             
             $session_data = $this->session->userdata('logged_in');
@@ -86,7 +88,7 @@ class Task extends CI_Controller {
             $description = $this->input->post('description');
             $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
             $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $category = $this->convert_int_to_category($this->input->post('category'));
+            $category = $this->input->post('category');
             $price = $this->input->post('price');
  
             $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $category, $price, $id, $user_id];
@@ -109,6 +111,7 @@ class Task extends CI_Controller {
             if ($data['tasks'] = $this->task_model->get($task_id)) {
                 // Set start and end date and time input fields 
                 // in data array
+                $data['all_categories'] = array_merge([''=>'Please Select'], $this->category_model->get_all_categories());
                 $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
                 $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
                 $data['tasks']['start_date'] = $start_datetime_arr[0];

@@ -1,6 +1,6 @@
 <div class="content">
     <div class="col-lg-12">
-        <h1><?php echo $header ?></h1>
+        <h1><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;<?php echo $header ?></h1>
         <hr>
         
         <p>YOU ARE AN ADMIN! HERE'S A LISTING OF ALL THE CONTRACTS IN THE SYSTEM. <strong>CRUD</strong> ANYTHING YOU WANT.</p>

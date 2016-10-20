@@ -1,5 +1,5 @@
 <div class="content">
-		<h1><?php echo $header ?></h1>
+		<h1><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;<?php echo $header ?></h1>
 		<hr>
         
 		<div class="panel">
@@ -14,7 +14,7 @@
     <?php echo form_open('offer/validate_update'); ?>
         <center><label for="text">My Price</label></center>
         <center><input type="number" step="0.01" class="date_control" name="price" value="<?php echo $offers['price'] ?>"></center><br/>
-        <input type="hidden" name="id" value="<?php echo $offers['id'] ?>">
+        <input type="hidden" name="id" value="<?php echo $offers['offer_id'] ?>">
         <center><input type="submit" class="btn btn-lg btn-primary" name="submit" value="Update Offer" /></center>
     <?php echo form_close('<br>'); ?>
 </div>

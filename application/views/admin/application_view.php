@@ -52,7 +52,7 @@
             <?php
                 if ($this->session->userdata('logged_in')) {
                     echo "You are logged in as " . '<b>'. $username . '</b>';
-                    echo  ' | <a href="/logout">Sign Out</a>';  
+                    echo  ' | <a title="Sign out" href="/logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>';  
                 }
             ?>
         </div>

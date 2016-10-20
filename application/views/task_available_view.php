@@ -3,7 +3,7 @@
         <input type="text" name="search" class="searchBox" placeholder="Search..">
       </div>  
 
-  <h1>Available Tasks</h1>
+  <h1><i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;Available Tasks</h1>
   <hr>
   <?php 
     if (!empty($available_tasks)) {

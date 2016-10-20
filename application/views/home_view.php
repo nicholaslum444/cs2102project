@@ -1,13 +1,13 @@
 <div class="content">  
     <div class="jumbotron">
-        <center><h1><?php echo $header ?></h1>
+        <center><h1><i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;<?php echo $header ?></h1>
         <p class="lead">Hi there! NUSMaids works very simple. First, all you have to do is to create your task 
         by </br> submitting a request on the button below. You can also pick a task by making an offer. </p>
         <p><a class="btn btn-lg btn-info" href="/task/create" role="button">Create My Task</a></p></center>
       </div>  
     
     <div class="page-header">
-        <h1>My Tasks</h1>
+        <h1><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;My Tasks</h1>
       </div>
     <?php
     if (!empty($tasks)) {
@@ -30,7 +30,7 @@
               <tr>
                 <?php foreach ($tasks as $task) { ?>
                 <td><span class="badge"><?php echo $task['offer_count']?> 
-                </span><span class="badge"><?php echo $task['max_offer_price']?></span></td>
+                </span></br><span class="badge"><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
