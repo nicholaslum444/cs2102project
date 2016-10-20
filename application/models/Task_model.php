@@ -9,6 +9,8 @@ class Task_model extends CI_Model {
             count(o.task_id) as offer_count,
             t.title,
             t.description,
+            t.category,
+            t.price,
             t.start_datetime, 
             t.end_datetime
         FROM task t, offer o 
@@ -18,6 +20,8 @@ class Task_model extends CI_Model {
             o.task_id,
             t.title,
             t.description,
+            t.category,
+            t.price,
             t.start_datetime, 
             t.end_datetime
         ORDER BY count(o.task_id) DESC";
@@ -29,6 +33,8 @@ class Task_model extends CI_Model {
             t2.id,
             t2.title,
             t2.description,
+            t2.category,
+            t2.price,
             t2.start_datetime,
             t2.end_datetime
         FROM task t2

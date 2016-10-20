@@ -16,9 +16,11 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr class="info">
-                <th>OFFERS/$</th>
+                <th>OFFERERS</th>
+                <th>MAX $</th>
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
+                <th>CATEGORY</th>
                 <th>START DATE</th>
                 <th>END DATE</th> 
                 <th></th>
@@ -29,10 +31,11 @@
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
-                <td><span class="badge"><?php echo $task['offer_count']?> 
-                </span></br><span class="badge"><?php echo $task['max_offer_price']?></span></td>
+                <td><span class="badge"><?php echo $task['offer_count']?></span></td>
+                <td><span class="badge"><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
+                <td><?php echo $task['category']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
                 <td><a href="task/update/<?php echo $task['id'] ?>" title="Update"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
