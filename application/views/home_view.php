@@ -31,8 +31,8 @@
             <tbody>
               <tr>
                 <?php foreach ($tasks as $task) { ?>
-                <td><span class="badge"><?php echo $task['offer_count']?></span></td>
-                <td><span class="badge"><?php echo $task['max_offer_price']?></span></td>
+                <td><span class="badge badge-inverse"><?php echo $task['offer_count']?></span></td>
+                <td><?php echo $task['max_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['category']?></td>

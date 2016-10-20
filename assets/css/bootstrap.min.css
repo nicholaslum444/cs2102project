@@ -5036,6 +5036,9 @@ a.label:hover {
     background-color: #777;
     border-radius: 10px
 }
+.badge-inverse {
+    background-color: #333333;
+}
 .badge:empty {
     display: none
 }
