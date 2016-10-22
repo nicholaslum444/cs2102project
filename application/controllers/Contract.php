@@ -52,7 +52,7 @@ class Contract extends CI_Controller {
             $user_id = $session_data['user_id'];
             $status = $this->input->post('status');
 
-            if ($this->offer_model->update($status, $contract_id, $user_id)) {
+            if ($this->contract_model->update_contract_by_id($status, $contract_id)) {
                 $this->success("updated");
 
             } else {
