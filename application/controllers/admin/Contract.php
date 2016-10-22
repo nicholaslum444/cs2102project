@@ -68,7 +68,7 @@ class Contract extends CI_Controller {
         $data['all_offers_options'] = $all_offers_options;
         
         // completion status
-        $data['completion_status'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
+        $data['completion_status_options'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
         
         $data['header'] = 'Create Contract';
         $data['page_title'] = 'Create Contract';
@@ -114,7 +114,7 @@ class Contract extends CI_Controller {
         $data['all_offers_options'] = $all_offers_options;
         
         // completion status
-        $data['completion_status'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
+        $data['completion_status_options'] = $this->status_model->get_all_statuses();
         
         $data['header'] = 'Create Contract';
         $data['page_title'] = 'Create Contract';

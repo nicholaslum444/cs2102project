@@ -12,7 +12,7 @@
 	    <?php echo form_dropdown('offer_id', $all_offers_options, 1, 'class="date_control"'); ?><br/>
 		
 		<label for="text">Completion Status</label>
-	    <?php echo form_dropdown('completion_status', $completion_status, '', 'class="date_control"'); ?><br/>
+	    <?php echo form_dropdown('completion_status', $completion_status_options, '', 'class="date_control"'); ?><br/>
 		
 	    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit" />
 	<?php echo form_close(); ?>
