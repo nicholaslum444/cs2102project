@@ -13,7 +13,7 @@
 	<?php echo form_open('contract/validate_update');?>
         <center>
 			<label for="text">Choose a new status:</label>
-			<?php echo form_dropdown('status', $all_status, $contract['status'], 'class="date_control"'); ?><br/>
+			<?php echo form_dropdown('completion_status', $completion_status, $contract['completion_status'], 'class="date_control"'); ?><br/>
 			<br>
 		</center>
         <center>
