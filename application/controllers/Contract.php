@@ -5,6 +5,7 @@ class Contract extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
+		$this->load->model('status_model');
         $this->load->model('contract_model');
     }
 	
@@ -67,6 +68,7 @@ class Contract extends CI_Controller {
             $data['username'] = $session_data['username'];
 
             if ($data['contract'] = $this->contract_model->get_contract_by_id($contract_id)) {
+				$data['all_status'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
                 $created_datetime_arr = explode(" ",$data['contract']['created_datetime']);
                 $last_updated_datetime_arr = explode(" ", $data['contract']['last_updated_datetime']);
                 $data['contract']['created_date'] = $created_datetime_arr[0];

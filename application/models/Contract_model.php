@@ -136,18 +136,18 @@ class Contract_model extends CI_Model {
 	
 	// basic update function for contract
 	public function update_contract_by_id($status, $contract_id){
-		$contract_sql = "
+		$contract_sql = '
 			UPDATE 
 				contract
-            SET (
-				last_updated_datetime, 
-				completion_status
-			) VALUES (
-				now(),
-				?
-            WHERE id = ?";
+            SET 
+				completion_status = ?,
+				last_updated_datetime = now()
+            WHERE 
+				id = ?';
 
-        return $this->db->query($contract_sql, [$status, $contract_id]);
+		$args = [$status, $contract_id];
+			
+        return $this->db->query($contract_sql, $args);
 	}
     
     public function update_admin($contract_id, $employer_id, $employee_id, $task_id, $offer_id, $completion_status) {
@@ -192,5 +192,4 @@ class Contract_model extends CI_Model {
 		// ";
 		// return $this->db->query($contract_sql, $contract_id);  
 	// }
-	
 }

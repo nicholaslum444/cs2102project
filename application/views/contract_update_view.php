@@ -13,17 +13,11 @@
 	<?php echo form_open('contract/validate_update');?>
         <center>
 			<label for="text">Choose a new status:</label>
+			<?php echo form_dropdown('status', $all_status, $contract['status'], 'class="date_control"'); ?><br/>
+			<br>
 		</center>
         <center>
-			<select status="completion_status">
-				<option value="PENDING">PENDING</option>
-				<option value="ONGOING">ONGOING</option>
-				<option value="COMPLETED">COMPLETED</option>
-				<option value="CANCELLED">CANCELLED</option>
-			</select>
-			<br><br>
 			<input type="submit" 
-					step="0.01" 
 					name="status" 
 					value="SUBMIT"
 			>
