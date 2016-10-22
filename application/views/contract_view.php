@@ -9,14 +9,14 @@
             <thead>
               <tr class="info">
                 <th>CONTRACT ID</th>
-				        <th>EMPLOYER</th>
-				        <th>EMPLOYEE</th>
-				        <th>TASK ID</th>
+				<th>EMPLOYER</th>
+				<th>EMPLOYEE</th>
+				<th>TASK ID</th>
                 <th>OFFER ID</th>
                 <th>START DATE</th>
                 <th>LAST UPDATED</th>  
-                <th>STATUS</th>  
-				        <th>COMPLETION STATUS</th>  
+                <th>COMPLETION STATUS</th>  
+				<th>UPDATE STATUS</th>  
               </tr>
             </thead>
             <tbody>

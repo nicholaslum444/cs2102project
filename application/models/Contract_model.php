@@ -131,7 +131,7 @@ class Contract_model extends CI_Model {
 	}
 	
 	// basic update function for contract
-	public function update_contract_by_id($array){
+	public function update_contract_by_id($string){
 		$contract_sql = "
 			UPDATE 
 				contract
@@ -143,7 +143,7 @@ class Contract_model extends CI_Model {
 				?
             WHERE id = ?";
 
-        return $this->db->query($contract_sql, $array);
+        return $this->db->query($contract_sql, $string);
 	}
     
     public function update_admin($contract_id, $employer_id, $employee_id, $task_id, $offer_id, $completion_status) {
