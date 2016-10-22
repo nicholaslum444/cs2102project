@@ -12,29 +12,21 @@
 	<span class="errorValidation"><?php echo validation_errors(); ?></span>
 	<?php echo form_open('contract/validate_update');?>
         <center>
-			<label for="text">New Status</label>
+			<label for="text">Choose a new status:</label>
 		</center>
         <center>
-			<input type="text" 
-					step="0.01" 
-					class="date_control" 
-					name="price" 
-					value="<?php echo $contract['completion_status'] ?>" />
-		</center>
-		<br/>
-        <input type="hidden" 
-				name="id" 
-				value="<?php echo $contract['contract_id'] ?>"
-		>
-		<input type="hidden" 
-				name="last_updated" 
-				value="<?php echo $contract['last_updated_datetime'] ?>"
-		>
-        <center>
+			<select status="completion_status">
+				<option value="PENDING">PENDING</option>
+				<option value="ONGOING">ONGOING</option>
+				<option value="COMPLETED">COMPLETED</option>
+				<option value="CANCELLED">CANCELLED</option>
+			</select>
+			<br><br>
 			<input type="submit" 
-				class="btn btn-lg btn-success" 
-				name="submit" 
-				value="Update Offer" />
+					step="0.01" 
+					name="status" 
+					value="SUBMIT"
+			>
 		</center>
     <?php echo form_close('<br>'); ?>
 </div>

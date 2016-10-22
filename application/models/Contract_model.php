@@ -54,18 +54,22 @@ class Contract_model extends CI_Model {
 	public function get_contract_by_id($contract_id){
 		$get_SQL = "
 			SELECT 
-				id, 
-				employer_id,
-				employee_id,
-				task_id,
-				offer_id, 
-				created_datetime, 
-				last_updated_datetime,
-				completion_status
+				c.id, 
+				a1.username as employer_username,
+				a2.username as employee_username,
+				t.title,
+				t.description,
+				c.offer_id, 
+				c.created_datetime, 
+				c.last_updated_datetime,
+				c.completion_status
 			FROM 
-				contract
+				contract c, account a1, account a2, task t
 			WHERE 
-				id = ?
+				c.id = ? AND
+				a1.id=c.employer_id AND
+				a2.id=c.employee_id AND
+				t.id=c.task_id
             LIMIT 1
 		";
 		$get_query = $this->db->query($get_SQL, $contract_id);
@@ -131,7 +135,7 @@ class Contract_model extends CI_Model {
 	}
 	
 	// basic update function for contract
-	public function update_contract_by_id($string){
+	public function update_contract_by_id($status, $contract_id){
 		$contract_sql = "
 			UPDATE 
 				contract
@@ -143,7 +147,7 @@ class Contract_model extends CI_Model {
 				?
             WHERE id = ?";
 
-        return $this->db->query($contract_sql, $string);
+        return $this->db->query($contract_sql, [$status, $contract_id]);
 	}
     
     public function update_admin($contract_id, $employer_id, $employee_id, $task_id, $offer_id, $completion_status) {
