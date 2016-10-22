@@ -1,7 +1,9 @@
 <div class="content">
   <div class="jumbotron">
-        <input type="text" name="search" class="searchBox" placeholder="Search..">
-      </div>  
+    <?php echo form_open('task/search_available_task') ?>
+    <input type="text" name="search" class="searchBox" placeholder="Search...">
+    <?php echo form_close() ?>
+  </div>  
 
   <h1><i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;Available Tasks</h1>
   <hr>

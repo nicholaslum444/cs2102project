@@ -93,7 +93,7 @@ class Task_model extends CI_Model {
     }
 
     public function get_available_tasks($user_id = -1) {
-        $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, p.username
+        $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, t.category, p.username
                     FROM task t, account p
                     WHERE t.creator_id = p.id
                     AND t.creator_id != ?
@@ -104,6 +104,43 @@ class Task_model extends CI_Model {
 
         return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
     }
+
+    public function search_available_tasks($user_id = -1, $search) {
+        $task_sql = "SELECT t.id, t.title, t.description, 
+                t.start_datetime, t.end_datetime, t.category, p.username
+                    FROM task t, account p
+                    WHERE t.creator_id = p.id
+                    AND t.creator_id != ?
+                    AND (
+                        t.title ~* '.*$search.*'
+                    OR t.description ~* '.*$search.*'
+                        )
+                    AND t.id NOT IN (
+                        SELECT task_id
+                        FROM offer
+                        WHERE acceptee_id = ?)";
+
+        return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
+    }
+
+    // public function search_available_tasks_by_category($user_id = -1, $category = 1) {
+    //     if ($category) {
+    //         return $this->get_available_tasks($user_id);
+        
+    //     } else {
+    //         $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, t.category, p.username
+    //                 FROM task t, account p
+    //                 WHERE t.creator_id = p.id
+    //                 AND t.creator_id != ?
+    //                 AND t.category = ?
+    //                 AND t.id NOT IN (
+    //                     SELECT task_id
+    //                     FROM offer
+    //                     WHERE acceptee_id = ?)";
+
+    //         return $this->db->query($task_sql, [$user_id, $category, $user_id])->result_array();
+    //     }
+    // }
 
     public function get($task_id) {
         $task_sql = "
