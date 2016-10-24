@@ -87,38 +87,77 @@ class Task_model extends CI_Model {
                 t.creator_id = a.id
             ORDER BY 
                 t.id ASC
-            ";
+        ";
 
         return $this->db->query($task_sql)->result_array();
     }
 
     public function get_available_tasks($user_id = -1) {
-        $task_sql = "SELECT t.id, t.title, t.description, t.start_datetime, t.end_datetime, t.category, p.username
-                    FROM task t, account p
-                    WHERE t.creator_id = p.id
-                    AND t.creator_id != ?
-                    AND t.id NOT IN (
-                        SELECT task_id
-                        FROM offer
-                        WHERE acceptee_id = ?)";
+        $task_sql = "
+            SELECT 
+                t.id, 
+                t.title, 
+                t.description, 
+                t.start_datetime, 
+                t.end_datetime, 
+                t.category, 
+                p.username as task_creator
+            FROM 
+                task t, 
+                account p
+            WHERE 
+                t.creator_id = p.id AND 
+                t.creator_id != ? AND 
+                t.id NOT IN (
+                    SELECT 
+                        task_id
+                    FROM 
+                        offer
+                    WHERE 
+                        acceptee_id = ?
+                )
+        ";
 
         return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
     }
 
-    public function search_available_tasks($user_id = -1, $search) {
-        $task_sql = "SELECT t.id, t.title, t.description, 
-                t.start_datetime, t.end_datetime, t.category, p.username
-                    FROM task t, account p
-                    WHERE t.creator_id = p.id
-                    AND t.creator_id != ?
-                    AND (
-                        t.title ~* '.*$search.*'
-                    OR t.description ~* '.*$search.*'
-                        )
-                    AND t.id NOT IN (
-                        SELECT task_id
-                        FROM offer
-                        WHERE acceptee_id = ?)";
+    public function search_available_tasks($user_id = -1, $search_term, $search_in) {
+        // search_in logic is 
+            // 0=search all, 
+            // 1=search title/desc only, 
+            // 2=search username only
+        $task_sql = "
+            SELECT 
+                t.id, 
+                t.title, 
+                t.description, 
+                t.start_datetime, 
+                t.end_datetime, 
+                t.category, 
+                p.username as task_creator
+            FROM 
+                task t, 
+                account p
+            WHERE 
+                t.creator_id = p.id AND 
+                t.creator_id != ? AND (
+                    (($search_in = 0 OR $search_in = 1) AND 
+                        (t.title ~* '.*$search_term.*' OR t.description ~* '.*$search_term.*')) 
+                    OR 
+                    (($search_in = 0 OR $search_in = 2) AND 
+                        (p.username ~* '.*$search_term.*'))
+                ) AND 
+                t.id NOT IN (
+                    SELECT 
+                        task_id
+                    FROM 
+                        offer
+                    WHERE 
+                        acceptee_id = ?
+                )
+            ORDER BY 
+                p.username
+        ";
 
         return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
     }

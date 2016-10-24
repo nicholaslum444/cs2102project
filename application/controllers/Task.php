@@ -152,38 +152,37 @@ class Task extends CI_Controller {
     }
 
     public function available() {
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['username'] = $session_data['username'];
-            $user_id = $session_data['user_id'];
-            $data['available_tasks'] = $this->task_model->get_available_tasks($user_id);
-
-            $data['header'] = 'NUSMaids Available Tasks';
-            $data['view'] = 'task_available_view';
-            $data['page_title'] = 'Available Tasks';
-            $this->load->view('application_view', $data);
-
-        } else {
+        if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
+            return;
         }
-    }
+        
+        $search_in_options = ['All Fields', 'Title &amp; Description', 'Task Creator'];
+        
+        $session_data = $this->session->userdata('logged_in');
+        $data['username'] = $session_data['username'];
+        $user_id = $session_data['user_id'];
+        
+        $search = html_escape($this->input->post('search'));
+        $search_in = $this->input->post('search-in');
+        // if no value then is defaults to 0
+        // $search_in logic is 
+            // 0=search all, 
+            // 1=search title/desc only, 
+            // 2=search username only
+        $search_in = $search_in ? $search_in : 0;
+        
+        $data['search_term'] = $search;
+        $data['search_in_options'] = $search_in_options;
+        $data['search_in'] = $search_in;
+        
+        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search, $search_in);
 
-    public function search_available_task() {
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $data['username'] = $session_data['username'];
-            $user_id = $session_data['user_id'];
-            $search = $this->input->post('search');
-            $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search);
+        $data['header'] = 'NUSMaids Available Tasks';
+        $data['view'] = 'task_available_view';
+        $data['page_title'] = 'Available Tasks';
+        $this->load->view('application_view', $data);
 
-            $data['header'] = 'NUSMaids Available Tasks';
-            $data['view'] = 'task_available_view';
-            $data['page_title'] = 'Search';
-            $this->load->view('application_view', $data);
-
-        } else {
-            redirect('login', 'refresh');
-        }
     }
 
     private function get_datetime($date, $time) {
