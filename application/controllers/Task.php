@@ -163,8 +163,13 @@ class Task extends CI_Controller {
         $data['username'] = $session_data['username'];
         $user_id = $session_data['user_id'];
         
-        $search = html_escape($this->input->post('search'));
-        $search_in = $this->input->post('search-in');
+        $search_term = html_escape($this->input->post('search_term'));
+        $search_in = $this->input->post('search_in');
+        $search_start_date = $this->input->post('start_date');
+        $search_start_time = $this->input->post('start_time');
+        $search_end_date = $this->input->post('end_date');
+        $search_end_time = $this->input->post('end_time');
+        
         // if no value then is defaults to 0
         // $search_in logic is 
             // 0=search all, 
@@ -172,11 +177,16 @@ class Task extends CI_Controller {
             // 2=search username only
         $search_in = $search_in ? $search_in : 0;
         
-        $data['search_term'] = $search;
+        // to get values for start and end, then search them
+        // either build another search query of use the same query
+        // but if same query then the logic will be very big
+        
+        
+        $data['search_term'] = $search_term;
         $data['search_in_options'] = $search_in_options;
         $data['search_in'] = $search_in;
         
-        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search, $search_in);
+        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search_term, $search_in);
 
         $data['header'] = 'NUSMaids Available Tasks';
         $data['view'] = 'task_available_view';

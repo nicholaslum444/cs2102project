@@ -1,14 +1,22 @@
 <div class="content">
   <div class="jumbotron">
     <?php echo form_open('task/available') ?>
-        <input type="text" required name="search" class="searchBox" placeholder="Search for tasks..." value="<?php echo $search_term ?>">
+        <input type="text" name="search_term" class="searchBox" placeholder="Search for tasks..." value="<?php echo $search_term ?>">
         <br>
-        <a role="button" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Advanced Search</strong></a>
+        <a role="button" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Search Options</strong></a>
         <div class="collapse" id="advanced-search">
             <div class="well">
-        	    <label for="text">Search in:</label>
-                <?php echo form_dropdown('search-in', $search_in_options, $search_in ? $search_in : 0, 'class="date_control" required'); ?>
-                <br>
+        	    <label for="text">Search text in:</label>
+                <?php echo form_dropdown('search_in', $search_in_options, set_value('search_in', 0), 'class="date_control" required'); ?><br>
+                
+        	    <label for="text">From <small>(Date and Time)</small></label><br/>
+        	    <input type="date" class="date_control" name="start_date" value="<?php echo set_value('start_date');?>">
+        	    <input type="time" class="time_control" name="start_time" value="<?php echo set_value('start_time');?>"><br/>
+                
+        	    <label for="text">To <small>(Date and Time)</small></label><br/>
+        	    <input type="date" class="date_control" name="end_date" value="<?php echo set_value('end_date');?>">
+        	    <input type="time" class="time_control" name="end_time" value="<?php echo set_value('end_time');?>"><br/>
+                
                 <input type="submit" class="btn btn-success" name="submit" value="Search" />
             </div>
         </div>
