@@ -6,6 +6,7 @@ class Contract extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('status_model');
+		$this->load->model('offer_model');
         $this->load->model('contract_model');
     }
 	
@@ -25,20 +26,56 @@ class Contract extends CI_Controller {
         }
 	}
 	
-	public function create($contract_id){
-		if (!$this->session->userdata('logged_in')) {
-            redirect('login', 'refresh');
-            return;
+	public function validate(){
+		$this->form_validation->set_rules('completion_status', 'Completion Status', 'required');
+		$session_data = $this->session->userdata('logged_in');
+        $task_id = $this->input->post('id');
+		
+        if ($this->form_validation->run() === false) {
+            $this->create($task_id);
+
+        } else {
+            $user_id = $session_data['user_id'];
+            $completion_status = $this->input->post('completion_status');
+			$employer_id = $this->input->post('employer_id');
+			$employee_id = $this->input->post('acceptee_id');
+			$task_id = $this->input->post('task_id');
+			$offer_id = $this->input->post('offer_id');
+
+            if ($this->contract_model->create($employer_id, $employee_id, $task_id, $offer_id, $completion_status)) {
+                $this->success("created");
+
+            } else {
+                $this->failure("created");
+            }
         }
-        $session_data = $this->session->userdata('logged_in');
-        
-        $data['user_id'] = $session_data['user_id'];
-        $data['username'] = $session_data['username'];
-        $data['header'] = 'Accept an offer';
-        $data['page_title'] = 'Accept an offer';
-        // TODO add accept offer view
-		$data['view'] = '';
-        $this->load->view('', $data);
+	}
+	
+	public function create($offer_id){
+		if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+			$data['completion_status'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
+			
+            if ($data['offer'] = $this->offer_model->get($offer_id)) {
+                // Set start and end date and time input fields 
+                // in data array
+                $start_datetime_arr = explode(" ",$data['offer']['start_datetime']);
+                $end_datetime_arr = explode(" ", $data['offer']['end_datetime']);
+                $data['offer']['start_date'] = $start_datetime_arr[0];
+                $data['offer']['start_time'] = $start_datetime_arr[1];
+                $data['offer']['end_date'] = $end_datetime_arr[0];
+                $data['offer']['end_time'] = $end_datetime_arr[1];
+
+                $data['header'] = 'Accept an offer';
+				$data['page_title'] = 'Accept an offer';
+				$data['view'] = 'contract_create_view';
+				$this->load->view('application_view', $data);
+			} 
+			
+		} else {
+            redirect('login', 'refresh');
+        }
 	}
     
     public function validate_update() {
@@ -85,6 +122,31 @@ class Contract extends CI_Controller {
             redirect('login', 'refresh');
         }
     }
+	
+	public function confirm_create($offer_id){
+		if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data['username'] = $session_data['username'];
+			
+			if ($data['offer'] = $this->offer_model->get($offer_id)) {
+				$data['completion_status'] = array_merge([''=>'Please Select'], $this->status_model->get_all_statuses());
+                $start_datetime_arr = explode(" ",$data['offer']['start_datetime']);
+                $end_datetime_arr = explode(" ", $data['offer']['end_datetime']);
+                $data['offer']['created_date'] = $start_datetime_arr[0];
+                $data['offer']['created_time'] = $start_datetime_arr[1];
+                $data['offer']['end_date'] = $end_datetime_arr[0];
+                $data['offer']['end_time'] = $end_datetime_arr[1];
+
+                $data['header'] = 'Accept this offer';   
+				$data['view'] = 'contract_create_view';
+				$data['page_title'] = 'Accept this offer';
+				$this->load->view('application_view', $data);
+            }
+			
+		} else {
+            redirect('login', 'refresh');
+        }
+	}
 	
 	// TODO CREATE CONTRACT SUCCESS
 	private function success($action = 'ACTION_PERFORMED') {

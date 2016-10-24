@@ -59,12 +59,18 @@ class Offer_model extends CI_Model {
 				t.end_datetime, 
 				o.price, 
 				o.id as offer_id, 
-				o.acceptee_id 
+				o.acceptee_id,
+				a1.username as employee_username,
+				a2.id as employer_id
             FROM 
 				task t, 
-				offer o
+				offer o,
+				account a1,
+				account a2
             WHERE 
-				t.id = o.task_id AND 
+				t.id = o.task_id AND
+                a1.id = o.acceptee_id AND
+				a2.id = t.creator_id AND
 				o.id = ?
 		";
 

@@ -15,8 +15,8 @@
         <center>
 			<label for="text">Choose a new status:</label>
 			<?php echo form_dropdown('completion_status', $completion_status, $contract['completion_status']); ?><br/>
-		</center>
 		
+		</center>
 	    <input type="submit" class="btn btn-lg btn-success" name="submit" value="Submit" />
     <?php echo form_close('<br>'); ?>
 </div>

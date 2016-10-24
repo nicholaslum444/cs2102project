@@ -28,7 +28,7 @@ class Contract_model extends CI_Model {
         
 	// basic create function for contract
     // non-buggy. this one does not specify the id
-	public function create($array){
+	public function create($employer_id, $employee_id, $task_id, $offer_id, $completion_status){
 		$contract_sql = "
 			INSERT INTO contract(
 				employer_id,
@@ -47,6 +47,7 @@ class Contract_model extends CI_Model {
 				now(),
 				?
 			)";
+		$array = [$employer_id, $employee_id, $task_id, $offer_id, $completion_status];
 		return $this->db->query($contract_sql, $array);
 	}
 	
