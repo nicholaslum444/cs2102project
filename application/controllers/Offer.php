@@ -7,6 +7,7 @@ class Offer extends CI_Controller {
         parent::__construct();
         $this->load->model('task_model');
         $this->load->model('offer_model');
+		$this->load->model('status_model');
     }
 
 	public function index() {

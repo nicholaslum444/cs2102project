@@ -32,8 +32,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><a href="" title="Accept"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a></td>
-                <!-- 
+				<td><a href="/contract/confirm_create/<?php echo $offer['offer_id'] ?>" title="Accept"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a></td>
+				<!-- 
                 Contract parameter keys: 
                 $offer['acceptee_id']
                 $offer['offer_id'] -->
