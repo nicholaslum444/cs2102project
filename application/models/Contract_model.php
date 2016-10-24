@@ -28,7 +28,7 @@ class Contract_model extends CI_Model {
         
 	// basic create function for contract
     // non-buggy. this one does not specify the id
-	public function create($array){
+	public function create($employer_id, $employee_id, $task_id, $offer_id, $completion_status){
 		$contract_sql = "
 			INSERT INTO contract(
 				employer_id,
@@ -47,6 +47,7 @@ class Contract_model extends CI_Model {
 				now(),
 				?
 			)";
+		$array = [$employer_id, $employee_id, $task_id, $offer_id, $completion_status];
 		return $this->db->query($contract_sql, $array);
 	}
 	
@@ -54,18 +55,22 @@ class Contract_model extends CI_Model {
 	public function get_contract_by_id($contract_id){
 		$get_SQL = "
 			SELECT 
-				id, 
-				employer_id,
-				employee_id,
-				task_id,
-				offer_id, 
-				created_datetime, 
-				last_updated_datetime,
-				completion_status
+				c.id, 
+				a1.username as employer_username,
+				a2.username as employee_username,
+				t.title,
+				t.description,
+				c.offer_id, 
+				c.created_datetime, 
+				c.last_updated_datetime,
+				c.completion_status
 			FROM 
-				contract
+				contract c, account a1, account a2, task t
 			WHERE 
-				id = ?
+				c.id = ? AND
+				a1.id=c.employer_id AND
+				a2.id=c.employee_id AND
+				t.id=c.task_id
             LIMIT 1
 		";
 		$get_query = $this->db->query($get_SQL, $contract_id);
@@ -125,25 +130,25 @@ class Contract_model extends CI_Model {
 				t.id = c.task_id AND 
                 o.id = c.offer_id
             ORDER BY
-                c.id ASC
+                c.id
 		";
 		return $this->db->query($contract_sql)->result_array();
 	}
 	
 	// basic update function for contract
-	public function update_contract_by_id($array){
-		$contract_sql = "
+	public function update_contract_by_id($status, $contract_id){
+		$contract_sql = '
 			UPDATE 
 				contract
-            SET (
-				last_updated_datetime, 
-				completion_status
-			) VALUES (
-				now(),
-				?
-            WHERE id = ?";
+            SET 
+				completion_status = ?,
+				last_updated_datetime = now()
+            WHERE 
+				id = ?';
 
-        return $this->db->query($contract_sql, $array);
+		$args = [$status, $contract_id];
+			
+        return $this->db->query($contract_sql, $args);
 	}
     
     public function update_admin($contract_id, $employer_id, $employee_id, $task_id, $offer_id, $completion_status) {
@@ -188,5 +193,4 @@ class Contract_model extends CI_Model {
 		// ";
 		// return $this->db->query($contract_sql, $contract_id);  
 	// }
-	
 }
