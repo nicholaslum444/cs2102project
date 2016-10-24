@@ -16,7 +16,7 @@
                 <th>START DATE</th>
                 <th>LAST UPDATED</th>  
                 <th>COMPLETION STATUS</th>  
-				<th>UPDATE STATUS</th>  
+				        <th></th>  
               </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
                 <td><?php echo date('d-M-Y g:i A', strtotime($contract['created_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($contract['last_updated_datetime']))?></td>
                 <td><?php echo $contract['completion_status']?></td>
-                <td><a href="contract/update/<?php echo $contract['id'] ?>" title="Update"><img src="/assets/img/update.png" onMouseOver="bigImg(this)" onMouseOut="normalImg(this)" width="25" height="25"></a></td>
+                <td><a href="contract/update/<?php echo $contract['id'] ?>" title="Update Status"><i class="fa fa-pencil fa-lg" aria-hidden="true"></a></td>
 
               </tr> 
          <?php } ?>

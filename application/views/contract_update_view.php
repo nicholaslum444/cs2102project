@@ -12,11 +12,10 @@
 	<span class="errorValidation"><?php echo validation_errors(); ?></span>
 	<?php echo form_open('contract/validate_update');?>
 		<input type="hidden" name="id" value="<?php echo $contract['id'] ?>">
-        <center>
+        <center><br/>
 			<label for="text">Choose a new status:</label>
 			<?php echo form_dropdown('completion_status', $completion_status, $contract['completion_status']); ?><br/>
-		
-		</center>
+		</center><br/>
 	    <input type="submit" class="btn btn-lg btn-success" name="submit" value="Submit" />
     <?php echo form_close('<br>'); ?>
 </div>
