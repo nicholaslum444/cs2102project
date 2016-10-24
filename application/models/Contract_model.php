@@ -129,7 +129,7 @@ class Contract_model extends CI_Model {
 				t.id = c.task_id AND 
                 o.id = c.offer_id
             ORDER BY
-                c.id ASC
+                c.id
 		";
 		return $this->db->query($contract_sql)->result_array();
 	}

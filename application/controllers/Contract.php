@@ -42,18 +42,18 @@ class Contract extends CI_Controller {
 	}
     
     public function validate_update() {
-        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('completion_status', 'Completion Status', 'required');
         $session_data = $this->session->userdata('logged_in');
         $contract_id = $this->input->post('id');
 
-        if ($this->form_validation->run() === FALSE) {
-            $this->update($contract_id);
+        if ($this->form_validation->run() === false) {
+           $this->update($contract_id);
 
         } else {
             $user_id = $session_data['user_id'];
-            $status = $this->input->post('status');
+            $completion_status = $this->input->post('completion_status');
 
-            if ($this->contract_model->update_contract_by_id($status, $contract_id)) {
+            if ($this->contract_model->update_contract_by_id($completion_status, $contract_id)) {
                 $this->success("updated");
 
             } else {

@@ -11,16 +11,12 @@
 	<center><p>Update this contract</p><center>
 	<span class="errorValidation"><?php echo validation_errors(); ?></span>
 	<?php echo form_open('contract/validate_update');?>
+		<input type="hidden" name="id" value="<?php echo $contract['id'] ?>">
         <center>
 			<label for="text">Choose a new status:</label>
-			<?php echo form_dropdown('completion_status', $completion_status, $contract['completion_status'], 'class="date_control"'); ?><br/>
-			<br>
+			<?php echo form_dropdown('completion_status', $completion_status, $contract['completion_status']); ?><br/>
 		</center>
-        <center>
-			<input type="submit" 
-					name="status" 
-					value="SUBMIT"
-			>
-		</center>
+		
+	    <input type="submit" class="btn btn-lg btn-success" name="submit" value="Submit" />
     <?php echo form_close('<br>'); ?>
 </div>
