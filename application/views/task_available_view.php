@@ -17,8 +17,6 @@
         	    <input type="date" class="date_control" name="end_date" value="<?php echo set_value('end_date');?>">
         	    <input type="time" class="time_control" name="end_time" value="<?php echo set_value('end_time');?>"><br/>
                 
-                <p><?php echo "debug $msg" ?></p>
-                
                 <input type="submit" class="btn btn-success" name="submit" value="Search" />
             </div>
         </div>
