@@ -9,6 +9,9 @@
         	    <label for="text">Search text in:</label>
                 <?php echo form_dropdown('search_in', $search_in_options, set_value('search_in', 0), 'class="date_control" required'); ?><br>
                 
+        	    <label for="text">Category:</label>
+                <?php echo form_dropdown('category', $category_options, set_value('category', ''), 'class="date_control"'); ?><br>
+            
         	    <label for="text">From <small>(Date and Time)</small></label><br/>
         	    <input type="date" class="date_control" name="start_date" value="<?php echo set_value('start_date');?>">
         	    <input type="time" class="time_control" name="start_time" value="<?php echo set_value('start_time');?>"><br/>
@@ -60,7 +63,7 @@
         <?php 
         if ($search_term) { 
             ?>
-            <p>No results for <?php echo $search_term ?>! Refine your search terms and try again.</p>
+            <p>No results for your search terms! Refine your search terms and try again. Check out the search options as well!</p>
             <?php 
         } else { 
             ?>        

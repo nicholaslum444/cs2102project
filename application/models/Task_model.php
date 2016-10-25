@@ -121,12 +121,13 @@ class Task_model extends CI_Model {
         return $this->db->query($task_sql, [$user_id, $user_id])->result_array();
     }
 
-    public function search_available_tasks($user_id = -1, $search_term, $search_in, $search_start_dt, $search_end_dt) {
+    public function search_available_tasks($user_id = -1, $search_term, $search_in, $search_start_dt, $search_end_dt, $search_category) {
         // search_in logic is 
             // 0=search all, 
             // 1=search title/desc only, 
             // 2=search username only
         $search_in = $search_in ? $search_in : 0;
+        $category_SQL_partial = empty($search_category) ? "1 = 1" : "t.category = '$search_category'";
         
         $task_sql = "
             SELECT 
@@ -151,7 +152,8 @@ class Task_model extends CI_Model {
                         (p.username ~* '.*$search_term.*'))
                 ) AND
                 t.start_datetime >= ? AND
-                t.end_datetime <= ? AND
+                t.end_datetime <= ? AND 
+                $category_SQL_partial AND
                 t.id NOT IN (
                     SELECT 
                         task_id
@@ -164,7 +166,8 @@ class Task_model extends CI_Model {
                 p.username
         ";
 
-        return $this->db->query($task_sql, [$user_id, $search_start_dt, $search_end_dt, $user_id])->result_array();
+        $args = [$user_id, $search_start_dt, $search_end_dt, $user_id];
+        return $this->db->query($task_sql, $args)->result_array();
     }
 
     // public function search_available_tasks_by_category($user_id = -1, $category = 1) {

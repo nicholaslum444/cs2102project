@@ -40,7 +40,7 @@ class Task extends CI_Controller {
             if ($data['tasks'] = $this->task_model->get($task_id)) {
                 // Set start and end date and time input fields 
                 // in data array
-                $data['all_categories'] = array_merge([''=>'Please Select'], $this->category_model->get_all_categories());
+                $data['all_categories'] = $this->category_model->get_all_categories();
                 $start_datetime_arr = explode(" ",$data['tasks']['start_datetime']);
                 $end_datetime_arr = explode(" ", $data['tasks']['end_datetime']);
                 $data['tasks']['start_date'] = $start_datetime_arr[0];
@@ -87,6 +87,7 @@ class Task extends CI_Controller {
         }
         
         $search_in_options = ['All Fields', 'Title &amp; Description', 'Task Creator'];
+        $category_options = $data['all_categories'] = array_merge([''=>'Please Select'], $this->category_model->get_all_categories());
         
         $session_data = $this->session->userdata('logged_in');
         $data['username'] = $session_data['username'];
@@ -94,6 +95,7 @@ class Task extends CI_Controller {
         
         $search_term = html_escape($this->input->post('search_term'));
         $search_in = $this->input->post('search_in');
+        $search_category = $this->input->post('category');
         $search_start_date = $this->input->post('start_date');
         $search_start_time = $this->input->post('start_time');
         $search_end_date = $this->input->post('end_date');
@@ -101,10 +103,11 @@ class Task extends CI_Controller {
         $search_start_dt = $this->get_datetime($search_start_date, $search_start_time);
         $search_end_dt = $this->get_end_datetime($search_end_date, $search_end_time);
         
-        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search_term, $search_in, $search_start_dt, $search_end_dt);
+        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search_term, $search_in, $search_start_dt, $search_end_dt, $search_category);
         
         $data['search_term'] = $search_term;
         $data['search_in_options'] = $search_in_options;
+        $data['category_options'] = $category_options;
         
         $data['header'] = 'NUSMaids Available Tasks';
         $data['view'] = 'task_available_view';
