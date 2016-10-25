@@ -1,9 +1,9 @@
 <div class="content">
   <div class="jumbotron">
     <?php echo form_open('task/available') ?>
-        <input type="text" name="search_term" class="searchBox" placeholder="Search for tasks..." value="<?php echo $search_term ?>">
-        <br>
-        <a role="button" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Search Options</strong></a>
+        <?php echo form_input('search_term', set_value('search_term', ''), 'class="searchBox", placeholder="Search for tasks..."'); ?><br/>
+        
+        <a role="button" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Search Options <i class="fa fa-chevron-down" aria-hidden="true"></i></strong></a>
         <div class="collapse" id="advanced-search">
             <div class="well">
         	    <label for="text">Search text in:</label>
@@ -16,6 +16,8 @@
         	    <label for="text">To <small>(Date and Time)</small></label><br/>
         	    <input type="date" class="date_control" name="end_date" value="<?php echo set_value('end_date');?>">
         	    <input type="time" class="time_control" name="end_time" value="<?php echo set_value('end_time');?>"><br/>
+                
+                <p><?php echo "debug $msg" ?></p>
                 
                 <input type="submit" class="btn btn-success" name="submit" value="Search" />
             </div>

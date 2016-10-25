@@ -31,77 +31,6 @@ class Task extends CI_Controller {
         }
     }
 
-    // Check that start_datetime <= end_datetime
-    public function validate() {
-        $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
-        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
-        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
-        $this->form_validation->set_rules('price', 'Price', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->create();
-
-        } else {
-            $title = $this->input->post('title');
-            $description = $this->input->post('description');
-            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
-            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $category = $this->input->post('category');
-            $price = $this->input->post('price');
-            
-            $session_data = $this->session->userdata('logged_in');
-            $user_id = $session_data['user_id'];
-
-            $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime, $category, $price];
-
-            if ($this->task_model->create($create_task_arr)) {
-                $this->success("created");
-            
-            } else {
-                $this->failure("created");
-            }
-        }
-    }
-
-    public function validate_update() {
-        $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
-        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
-        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
-        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
-        $this->form_validation->set_rules('price', 'Price', 'required');
-
-        $session_data = $this->session->userdata('logged_in');
-        $user_id = $session_data['user_id'];
-        $id = $this->input->post('id');
-        if ($this->form_validation->run() === FALSE) {
-            $this->update($id);
-
-        } else {
-            $title = $this->input->post('title');
-            $description = $this->input->post('description');
-            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
-            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
-            $category = $this->input->post('category');
-            $price = $this->input->post('price');
- 
-            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $category, $price, $id, $user_id];
-
-            if ($this->task_model->update($update_task_arr)) {
-                $this->success("updated");
-            
-            } else {
-                $this->failure("updated");
-            }
-        }
-    }
-
     // Check that creator_id is updating this task
     public function update($task_id) {
         if ($this->session->userdata('logged_in')) {
@@ -169,25 +98,14 @@ class Task extends CI_Controller {
         $search_start_time = $this->input->post('start_time');
         $search_end_date = $this->input->post('end_date');
         $search_end_time = $this->input->post('end_time');
+        $search_start_dt = $this->get_datetime($search_start_date, $search_start_time);
+        $search_end_dt = $this->get_end_datetime($search_end_date, $search_end_time);
         
-        // if no value then is defaults to 0
-        // $search_in logic is 
-            // 0=search all, 
-            // 1=search title/desc only, 
-            // 2=search username only
-        $search_in = $search_in ? $search_in : 0;
-        
-        // to get values for start and end, then search them
-        // either build another search query of use the same query
-        // but if same query then the logic will be very big
-        
+        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search_term, $search_in, $search_start_dt, $search_end_dt);
         
         $data['search_term'] = $search_term;
         $data['search_in_options'] = $search_in_options;
-        $data['search_in'] = $search_in;
         
-        $data['available_tasks'] = $this->task_model->search_available_tasks($user_id, $search_term, $search_in);
-
         $data['header'] = 'NUSMaids Available Tasks';
         $data['view'] = 'task_available_view';
         $data['page_title'] = 'Available Tasks';
@@ -195,12 +113,94 @@ class Task extends CI_Controller {
 
     }
 
-    private function get_datetime($date, $time) {
-        if (empty($time)) {
-            return $date . ' ' . '00:00';
+    // Check that start_datetime <= end_datetime
+    public function validate() {
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->create();
+
         } else {
-            return $date . ' ' . $time;
+            $title = $this->input->post('title');
+            $description = $this->input->post('description');
+            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
+            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+            $category = $this->input->post('category');
+            $price = $this->input->post('price');
+            
+            $session_data = $this->session->userdata('logged_in');
+            $user_id = $session_data['user_id'];
+
+            $create_task_arr = [$user_id, $title, $description, $start_datetime, $end_datetime, $category, $price];
+
+            if ($this->task_model->create($create_task_arr)) {
+                $this->success("created");
+            
+            } else {
+                $this->failure("created");
+            }
         }
+    }
+
+    public function validate_update() {
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('start_date', 'Starting Date', 'required|callback_checkYear');
+        $this->form_validation->set_rules('end_date', 'Ending Date', 'required|callback_compareDateTime');
+        $this->form_validation->set_rules('start_time', 'Starting Time', 'required');
+        $this->form_validation->set_rules('end_time', 'Ending Time', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required');
+
+        $session_data = $this->session->userdata('logged_in');
+        $user_id = $session_data['user_id'];
+        $id = $this->input->post('id');
+        if ($this->form_validation->run() === FALSE) {
+            $this->update($id);
+
+        } else {
+            $title = $this->input->post('title');
+            $description = $this->input->post('description');
+            $start_datetime = $this->get_datetime($this->input->post('start_date'), $this->input->post('start_time'));
+            $end_datetime = $this->get_datetime($this->input->post('end_date'), $this->input->post('end_time'));
+            $category = $this->input->post('category');
+            $price = $this->input->post('price');
+ 
+            $update_task_arr = [$title, $description, $start_datetime, $end_datetime, $category, $price, $id, $user_id];
+
+            if ($this->task_model->update($update_task_arr)) {
+                $this->success("updated");
+            } else {
+                $this->failure("updated");
+            }
+        }
+    }
+
+    private function get_datetime($date, $time) {
+        if (empty($date)) {
+            $date = '1970-01-01';
+        }
+        if (empty($time)) {
+            $time = '00:00';
+        }
+        return $date . ' ' . $time;
+    }
+
+    private function get_end_datetime($date, $time) {
+        if (empty($date)) {
+            $date = '99999-12-31';
+        }
+        if (empty($time)) {
+            $time = '23:59';
+        }
+        return $date . ' ' . $time;
     }
 
     public function checkYear() {
