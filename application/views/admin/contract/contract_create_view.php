@@ -5,11 +5,11 @@
 
 	<?php echo form_open('admin/contract/validate'); ?>
 	    <label for="text">Task</label>
-	    <?php echo form_dropdown('task_id', $all_task_titles, 1, 'class="date_control"'); ?><br/>
+	    <?php echo form_dropdown('task_id', $all_task_titles, 1, 'class="date_control" style="width:inherit"'); ?><br/>
 		
 		<label for="text">Corresponding Offer</label>
 		<small>[offer id]: (offer creator, price) => (task creator, task)</small>
-	    <?php echo form_dropdown('offer_id', $all_offers_options, 1, 'class="date_control"'); ?><br/>
+	    <?php echo form_dropdown('offer_id', $all_offers_options, 1, 'class="date_control" style="width:inherit"'); ?><br/>
 		
 		<label for="text">Completion Status</label>
 	    <?php echo form_dropdown('completion_status', $completion_status_options, '', 'class="date_control"'); ?><br/>

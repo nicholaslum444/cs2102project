@@ -37,6 +37,8 @@
               <tr class="info">
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
+                <th>CATEGORY</th>
+                <th>PRICE</th>
                 <th>START DATE</th>
                 <th>END DATE</th>
                 <th>CREATOR</th>
@@ -48,6 +50,8 @@
               	<?php foreach ($available_tasks as $task) { ?>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
+                <td><?php echo $task['category']?></td>
+                <td><?php echo $task['price']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
                 <td><?php echo $task['task_creator']?></td>

@@ -63,7 +63,8 @@ class Contract_model extends CI_Model {
 				c.offer_id, 
 				c.created_datetime, 
 				c.last_updated_datetime,
-				c.completion_status
+				c.completion_status,
+                c.task_id
 			FROM 
 				contract c, account a1, account a2, task t
 			WHERE 

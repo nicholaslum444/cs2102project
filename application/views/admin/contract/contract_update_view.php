@@ -7,11 +7,11 @@
 		<?php echo form_hidden('contract_id', $contract['id']) ?>
 		
 	    <label for="text">Task</label>
-	    <?php echo form_dropdown('task_id', $all_task_titles, $contract['task_id'], 'class="date_control"'); ?><br/>
+	    <?php echo form_dropdown('task_id', $all_task_titles, $contract['task_id'], 'class="date_control" style="width:inherit"'); ?><br/>
 		
 		<label for="text">Corresponding Offer</label>
 		<small>[offer id]: (offer creator, price) => (task creator, task)</small>
-	    <?php echo form_dropdown('offer_id', $all_offers_options, $contract['offer_id'], 'class="date_control"'); ?><br/>
+	    <?php echo form_dropdown('offer_id', $all_offers_options, $contract['offer_id'], 'class="date_control" style="width:inherit"'); ?><br/>
 		
 		<label for="text">Completion Status</label>
 	    <?php echo form_dropdown('completion_status', $completion_status_options, $contract['completion_status'], 'class="date_control"'); ?><br/>

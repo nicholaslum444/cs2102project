@@ -137,6 +137,7 @@ class Task_model extends CI_Model {
                 t.start_datetime, 
                 t.end_datetime, 
                 t.category, 
+                t.price,
                 p.username as task_creator
             FROM 
                 task t, 
@@ -163,7 +164,7 @@ class Task_model extends CI_Model {
                         acceptee_id = ?
                 )
             ORDER BY 
-                p.username
+                t.title
         ";
 
         $args = [$user_id, $search_start_dt, $search_end_dt, $user_id];
