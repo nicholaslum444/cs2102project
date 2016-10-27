@@ -5,7 +5,7 @@ class Task_model extends CI_Model {
         $task_sql = "
         SELECT 
             o.task_id as id,
-            max(o.price) as max_offer_price, 
+            min(o.price) as min_offer_price, 
             count(o.task_id) as offer_count,
             t.title,
             t.description,
@@ -15,6 +15,7 @@ class Task_model extends CI_Model {
             t.end_datetime
         FROM task t, offer o 
         WHERE t.creator_id = ?
+        AND t.is_accepted = 0
         AND t.id = o.task_id
         GROUP BY 
             o.task_id,
@@ -27,7 +28,7 @@ class Task_model extends CI_Model {
         UNION
         SELECT 
             t2.id,
-            0 as max_offer_price,
+            0 as min_offer_price,
             0 as offer_count,
             t2.title,
             t2.description,
@@ -37,6 +38,7 @@ class Task_model extends CI_Model {
             t2.end_datetime
         FROM task t2
         WHERE t2.creator_id = ?
+        AND t2.is_accepted = 0
         AND t2.id NOT IN (
             SELECT 
                 o.task_id as id

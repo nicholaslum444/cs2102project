@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS task (
     creator_id INTEGER NOT NULL,
     category category_type NOT NULL,
     price NUMERIC(1000, 2) CHECK (price > 0),
+    is_accepted INTEGER NOT NULL DEFAULT 0,
     created_datetime TIMESTAMP NOT NULL,
     last_updated_datetime TIMESTAMP NOT NULL,
     PRIMARY KEY (id),

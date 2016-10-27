@@ -12,12 +12,24 @@ class Offer_model extends CI_Model {
 	}
 
     public function get_offers_for_task($task_id = -1) {
-        $offer_sql = "SELECT o.acceptee_id, o.price, o.id as offer_id, p.username
-        FROM offer o, account p
-        WHERE p.id = o.acceptee_id
-        AND o.task_id = ?";
+        $offer_sql = "
+        	SELECT 
+	        	o.acceptee_id, 
+	        	o.price, 
+	        	o.id as offer_id, 
+	        	p.username
+			FROM offer o, account p
+			WHERE p.id = o.acceptee_id
+			AND o.task_id = ?
+			AND NOT EXISTS(
+				SELECT * 
+				FROM contract c
+				WHERE c.task_id = ?
+				AND c.offer_id = o.id
+			)
+			ORDER BY o.price";
 
-        return $this->db->query($offer_sql, [$task_id])->result_array();
+        return $this->db->query($offer_sql, [$task_id, $task_id])->result_array();
     }
     
     public function get_all_offers() {
