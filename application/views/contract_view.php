@@ -7,12 +7,10 @@
      <div class="col-md-6">
           <table class="table table-bordered table-hover">
             <thead>
-              <tr class="info">
-                <th>CONTRACT ID</th>
-				<th>EMPLOYER</th>
-				<th>EMPLOYEE</th>
-				<th>TASK TITLE</th>
-                <th>OFFER ID</th>
+              <tr class="info">             
+        				<th>EMPLOYER</th>
+        				<th>EMPLOYEE</th>
+        				<th>TASK TITLE</th>
                 <th>START DATE</th>
                 <th>LAST UPDATED</th>  
                 <th>COMPLETION STATUS</th>  
@@ -21,12 +19,10 @@
             </thead>
             <tbody>
               <tr>        
-                <?php foreach ($contracts as $contract) { ?>
-                <td><?php echo $contract['id']?></td>
+                <?php foreach ($contracts as $contract) { ?>      
 				        <td><?php echo $contract['employer_username']?></td>
 				        <td><?php echo $contract['employee_username']?></td>
 				        <td><?php echo $contract['title']?></td>
-                <td><?php echo $contract['offer_id']?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($contract['created_datetime']))?></td>
                 <td><?php echo date('d-M-Y g:i A', strtotime($contract['last_updated_datetime']))?></td>
                 <td><?php echo $contract['completion_status']?></td>

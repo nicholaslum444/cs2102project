@@ -147,6 +147,40 @@ INSERT INTO task (
     5.0,
     '2016-09-03 00:30:36',
     '2016-09-03 00:30:36'
+), (
+-- Create category: HANDYMAN tasks; Created by user_id 7;
+-- task 7
+    'Fix basin',
+    'Water keeps flowing. Currently experiencing flooding',
+    '2016-09-03 00:00:00',
+    '2016-09-13 00:00:00',
+    7,
+    'HANDYMAN',
+    3.0,
+    '2016-09-03 00:00:00',
+    '2016-09-03 00:00:00'
+), (
+    'Fix toilet',
+    'Poop is spilling across the toilet floor',
+    '2016-09-03 00:00:00',
+    '2016-09-13 00:00:00',
+    7,
+    'HANDYMAN',
+    50.0,
+    '2016-09-03 00:00:00',
+    '2016-09-03 00:00:00'
+), (
+-- Create category: MOVING tasks; Created by user_id 8;
+-- task 9
+    'Move mattress',
+    'We are an old couple, looking for fit youngsters to help us move our posturepedic mattress',
+    '2016-09-03 00:00:00',
+    '2016-09-13 00:00:00',
+    8,
+    'MOVING',
+    76.0,
+    '2016-09-03 00:00:00',
+    '2016-09-03 00:00:00'
 );
 
 
@@ -188,9 +222,25 @@ INSERT INTO offer (
 ), (
 --acceptee_id: 6, accepts creator_id: 5; tasks--
 --offered all delivery tasks--
-    5,
+    6,
     5,
     22
+), (
+    6,
+    6,
+    25
+), (
+-- acceptee_id: 2, accepts creator_id: 5; tasks
+-- offered delivery tasks
+    2,
+    5,
+    19
+), (
+-- acceptee_id: 2, accepts creator_id: 8
+-- offered MOVING tasks
+    2,
+    9,
+    100
 );
 -------------------- ENDOFFER -----------------------
 

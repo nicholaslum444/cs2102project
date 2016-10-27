@@ -92,6 +92,7 @@ class Task_model extends CI_Model {
                 account p
             WHERE 
                 t.creator_id = p.id AND 
+                t.is_accepted = 0 AND
                 t.creator_id != ? AND 
                 t.id NOT IN (
                     SELECT 

@@ -17,7 +17,7 @@
             <thead>
               <tr class="info">
                 <th>OFFERERS</th>
-                <th>MAX $</th>
+                <th>MIN $</th>
                 <th>TITLE</th>
                 <th>DESCRIPTION</th>
                 <th>CATEGORY</th>
@@ -32,7 +32,7 @@
               <tr>
                 <?php foreach ($tasks as $task) { ?>
                 <td><span class="badge badge-inverse"><?php echo $task['offer_count']?></span></td>
-                <td><?php echo $task['max_offer_price']?></span></td>
+                <td><?php echo $task['min_offer_price']?></span></td>
                 <td><?php echo $task['title']?></td>
                 <td><?php echo $task['description']?></td>
                 <td><?php echo $task['category']?></td>
