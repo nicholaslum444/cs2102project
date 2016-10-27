@@ -24,13 +24,11 @@ class Task_model extends CI_Model {
             t.price,
             t.start_datetime, 
             t.end_datetime
-        ORDER BY count(o.task_id) DESC";
-
-        $with_offer_tasks = $this->db->query($task_sql, [$user_id])->result_array();
-
-        $task_sql2 = "
+        UNION
         SELECT 
             t2.id,
+            0 as max_offer_price,
+            0 as offer_count,
             t2.title,
             t2.description,
             t2.category,
@@ -47,26 +45,11 @@ class Task_model extends CI_Model {
             AND t.id = o.task_id
             GROUP BY 
                 o.task_id
-        )";
+        )
+        ORDER BY offer_count DESC
+        ";
 
-        $no_offer_tasks = $this->db->query($task_sql2, [$user_id, $user_id])->result_array();
-        $this->add_price_and_offer_count_to_tasks($no_offer_tasks);
-
-        for($i = 0; $i < sizeof($no_offer_tasks); $i++) {
-            array_push($with_offer_tasks, $no_offer_tasks[$i]);
-        }
-
-        return $with_offer_tasks;
-    }
-
-    private function add_price_and_offer_count_to_tasks(&$array) {
-        for ($i = 0; $i < sizeof($array); $i++) {
-            $array[$i]['max_offer_price'] = 0;
-            $array[$i]['offer_count'] = 0;
-        }
-        
-        //print_r($array);
-        return $array;
+        return $this->db->query($task_sql, [$user_id, $user_id, $user_id])->result_array();
     }
     
     public function get_all_tasks() {
