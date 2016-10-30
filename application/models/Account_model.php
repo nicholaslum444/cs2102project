@@ -65,4 +65,16 @@ class Account_model extends CI_Model {
         
         return $create_acct_query;
     }
+    
+    public function get_all_rounders() {
+        $all_rounder_SQL = "SELECT a.username
+            FROM account a, offer o, task t
+            WHERE t.category IN ('DELIVERY', 'CLEANING', 'HANDYMAN', 'MOVING')
+            AND a.id = o.acceptee_id
+            AND t.id = o.task_id
+            GROUP BY a.username
+            HAVING COUNT(DISTINCT t.category) = 4";
+        
+        return $this->db->query($all_rounder_SQL)->result_array();
+    }
 }

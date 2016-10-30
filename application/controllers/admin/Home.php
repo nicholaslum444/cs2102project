@@ -6,6 +6,7 @@ class Home extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('task_model');
+        $this->load->model('account_model');
     }
 
 	public function index() {
@@ -24,7 +25,7 @@ class Home extends CI_Controller {
         $data['user_id'] = $session_data['user_id'];
         $data['user_role'] = $session_data['user_role'];
         
-        $data['tasks'] = $this->task_model->get_all_tasks($session_data['user_id']);
+        $data['all_rounders'] = $this->account_model->get_all_rounders();
         
         $data['header'] = 'NUSMaids Admin Home';
         $data['page_title'] = 'Home';
