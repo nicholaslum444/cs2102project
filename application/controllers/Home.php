@@ -19,6 +19,8 @@ class Home extends CI_Controller {
         $data['user_role'] = $session_data['user_role'];
         $data['tasks'] = $this->task_model->get_user_tasks($session_data['user_id']);
         
+        $data['closed_tasks'] = $this->task_model->get_user_closed_tasks($session_data['user_id']);
+        
         $data['header'] = 'NUSMaids Home';
         $data['page_title'] = 'Home';
         $data['view'] = 'home_view';

@@ -15,7 +15,7 @@ class Task_model extends CI_Model {
             t.end_datetime
         FROM task t, offer o 
         WHERE t.creator_id = ?
-        AND t.is_accepted = 0
+        AND t.is_accepted = FALSE
         AND t.id = o.task_id
         GROUP BY 
             o.task_id,
@@ -38,7 +38,7 @@ class Task_model extends CI_Model {
             t2.end_datetime
         FROM task t2
         WHERE t2.creator_id = ?
-        AND t2.is_accepted = 0
+        AND t2.is_accepted = FALSE
         AND t2.id NOT IN (
             SELECT 
                 o.task_id as id
@@ -52,6 +52,27 @@ class Task_model extends CI_Model {
         ";
 
         return $this->db->query($task_sql, [$user_id, $user_id, $user_id])->result_array();
+    }
+    
+    public function get_user_closed_tasks($user_id) {
+        $get_closed_task_SQL = "
+            SELECT
+                t.title,
+                t.description,
+                t.category,
+                t.price,
+                t.start_datetime, 
+                t.end_datetime
+            FROM 
+                task t
+            WHERE
+                t.creator_id = ? AND
+                t.is_accepted = TRUE
+            ORDER BY
+                t.title ASC
+        ";
+        
+        return $this->db->query($get_closed_task_SQL, [$user_id])->result_array();
     }
     
     public function get_all_tasks() {
@@ -92,7 +113,7 @@ class Task_model extends CI_Model {
                 account p
             WHERE 
                 t.creator_id = p.id AND 
-                t.is_accepted = 0 AND
+                t.is_accepted = FALSE AND
                 t.creator_id != ? AND 
                 t.id NOT IN (
                     SELECT 
@@ -131,6 +152,7 @@ class Task_model extends CI_Model {
             WHERE 
                 t.creator_id = p.id AND 
                 t.creator_id != ? AND 
+                t.is_accepted = FALSE AND 
                 (
                     (($search_in = 0 OR $search_in = 1) AND 
                         (t.title ~* '.*$search_term.*' OR t.description ~* '.*$search_term.*')) 
@@ -292,5 +314,19 @@ class Task_model extends CI_Model {
 		";
 
         return $this->db->query($get_creator_SQL, $task_id)->result_array()[0];
+    }
+    
+    public function close_task($task_id) {
+        $close_task_SQL = "
+            UPDATE 
+                task
+            SET
+                last_updated_datetime = now(),
+                is_accepted = TRUE
+            WHERE
+                id = ?
+        ";
+        
+        return $this->db->query($close_task_SQL, [$task_id]);
     }
 }

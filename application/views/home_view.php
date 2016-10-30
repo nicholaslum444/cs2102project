@@ -50,8 +50,44 @@
     <?php
     } 
     else { ?>
-        <p>You have no tasks at the moment. Please create one.</p>
+        <p>You have no open tasks at the moment. Please create one.</p>
     <?php  
     } ?> 
+  
+  <div class="page-header">
+      <h1><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Tasks With Contracts</h1>
+    </div>
+  <?php
+  if (!empty($closed_tasks)) {
+  ?>
+  <div class="col-md-6">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="info">
+              <th>TITLE</th>
+              <th>DESCRIPTION</th>
+              <th>CATEGORY</th>
+              <th>START DATE</th>
+              <th>END DATE</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <?php foreach ($closed_tasks as $task) { ?>
+              <td><?php echo $task['title']?></td>
+              <td><?php echo $task['description']?></td>
+              <td><?php echo $task['category']?></td>
+              <td><?php echo date('d-M-Y g:i A', strtotime($task['start_datetime']))?></td>
+              <td><?php echo date('d-M-Y g:i A', strtotime($task['end_datetime']))?></td>
+            </tr> 
+          <?php } ?>
+          </tbody>
+        </table>       
+  </div>
+  <?php
+  } 
+  else { ?>
+      <p>You have no tasks with contracts.</p>
+  <?php  
+  } ?> 
 </div>
-

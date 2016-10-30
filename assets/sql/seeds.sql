@@ -82,10 +82,11 @@ INSERT INTO task (
     category,
     price,
     created_datetime,
-    last_updated_datetime
+    last_updated_datetime,
+    is_accepted
 ) VALUES (
-    'Hey admin', 
-    'Create more user accounts please',
+    'Build cupboard', 
+    'Build my ikea cupboard',
     '2016-09-01 08:00:00',
     '2016-09-01 20:00:00',
     1,
@@ -114,8 +115,8 @@ INSERT INTO task (
     '2016-09-01 10:15:30',
     '2016-09-01 10:15:30'
 ), (
-    'Fail your midterms?', 
-    'No worries! Just cry and try harder next time ;)',
+    'Walk my dog', 
+    'Move my dog',
     '2016-09-02 23:30:36',
     '2016-09-04 00:10:00',
     1,
@@ -124,12 +125,12 @@ INSERT INTO task (
     '2016-09-03 00:30:36',
     '2016-09-03 00:30:36'
 ), (
-    'Try and Try and Cry and Cry', 
-    'Crying and trying and bleeding and dying. For user 2',
+    'Data entry', 
+    'Many excel files to fill up',
     '2016-09-03 08:30:33',
     '2016-09-05 18:30:00',
     2,
-    'DELIVERY',
+    'HANDYMAN',
     450,
     '2016-09-03 10:27:12',
     '2016-09-03 10:27:12'
@@ -204,7 +205,7 @@ INSERT INTO task (
     '2016-09-14 13:23:56',
     '2016-09-14 13:23:56'
 ),(
-    'Hai Di Lao', 
+    'Deliver Hai Di Lao', 
     'I want the freshest !',
     '2016-09-16 12:20:17',
     '2016-09-17 23:20:00',
@@ -214,7 +215,7 @@ INSERT INTO task (
     '2016-09-16 20:08:22',
     '2016-09-16 20:08:22'
 ), (
-    'My antique Chair is SPOIL !', 
+    'My antique Chair is SPOIL, please fix!', 
     'MUST Fix it',
     '2016-09-05 11:18:11',
     '2016-09-11 00:00:00',
@@ -304,7 +305,7 @@ INSERT INTO task (
     '2016-10-02 00:15:18',
     '2016-10-02 00:15:18'
 ),(
-    'F1 Cars', 
+    'Polish my F1 Cars', 
     'Make sure i can see my teeth',
     '2016-10-03 00:34:51',
     '2016-10-07 23:00:00',

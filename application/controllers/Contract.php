@@ -5,6 +5,7 @@ class Contract extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
+        $this->load->model('task_model');
 		$this->load->model('status_model');
 		$this->load->model('offer_model');
         $this->load->model('contract_model');
@@ -40,6 +41,7 @@ class Contract extends CI_Controller {
 			$completion_status = $this->input->post('completion_status');
 
             if ($this->contract_model->create($employer_id, $employee_id, $task_id, $offer_id, $completion_status)) {
+				$this->task_model->close_task($task_id);
                 $this->success("created");
 
             } else {

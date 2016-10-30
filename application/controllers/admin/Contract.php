@@ -168,7 +168,8 @@ class Contract extends CI_Controller {
         $employer_id = $this->task_model->get_creator_id($task_id);
         $employee_id = $this->offer_model->get_acceptee_id($offer_id);
 
-        if ($this->contract_model->create([$employer_id, $employee_id, $task_id, $offer_id, $completion_status])) {
+        if ($this->contract_model->create($employer_id, $employee_id, $task_id, $offer_id, $completion_status)) {
+            $this->task_model->close_task($task_id);
             $this->success("created");
         } else {
             $this->failure("created");
