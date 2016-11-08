@@ -23,7 +23,7 @@ INSERT INTO account (
     'johntan@dummy.dum',
     'johntan',
     '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
-    'USER'
+    'ADMIN'
 ), (
     'jackng@dummy.dum',
     'jackng',
@@ -69,6 +69,16 @@ INSERT INTO account (
     'sharontoh',
     '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
     'USER'
+),(
+    'andysue@dummy.dum',
+    'andysue',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
+), (
+    'sallyswee@dummy.dum',
+    'sallyswee',
+    '$2y$10$A0qCafrS/gA64.93YenH4ORn5ODsfIxEZ9TsOp8NHOsL5qMUB2Us6', -- password is "asd"
+    'USER'
 );
 ------------------ ENDACCOUNTS ------------------
 
@@ -82,8 +92,8 @@ INSERT INTO task (
     category,
     price,
     created_datetime,
-    last_updated_datetime,
-    is_accepted
+    last_updated_datetime
+
 ) VALUES (
     'Build cupboard', 
     'Build my ikea cupboard',
@@ -344,6 +354,26 @@ INSERT INTO task (
     50,
     '2016-10-18 00:54:22',
     '2016-10-18 00:54:22'
+),(
+    'WASH MY NEW HOUSE', 
+    'Make it bling bling',
+    '2016-11-08 10:25:56',
+    '2016-11-12 00:46:00',
+    14,
+    'CLEANING',
+    180,
+    '2016-10-30 07:55:13',
+    '2016-10-30 07:55:13'
+),(
+    'VACUUM MY DOGGY HOUSE', 
+    'MAKE SURE ITS DUST FREE !',
+    '2016-11-08 17:11:43',
+    '2016-11-11 22:00:00',
+    14,
+    'CLEANING',
+    58,
+    '2016-10-30 00:54:22',
+    '2016-10-30 00:54:22'
 );
 
 
@@ -603,6 +633,24 @@ INSERT INTO offer (
     2,
     5,
     300
+),
+--add on of sallyswee and marysue offers--
+( 
+    12,
+    27,
+    48
+),(
+    15,
+    27,
+    90
+),( 
+    4,
+    28,
+    22
+),(
+    15,
+    28,
+    34
 );
 -------------------- ENDOFFER -----------------------
 
@@ -910,7 +958,16 @@ INSERT INTO contract (
     '2016-09-03 10:27:12',
     '2016-09-03 10:27:12',
     'ONGOING'
-);
+),
 --end of add on contract--
+(
+    14,
+    15,
+    27,
+    56,
+    '2016-11-08 11:00:12',
+    '2016-11-12 12:45:12',
+    'ONGOING'
+);
 
 ------------------ ENDCONTRACTS -----------------
